@@ -1,0 +1,12 @@
+dx-scroll-view {
+  height: calc(100vh - 212px);
+  padding: 5px 5px 0 5px;
+  .field:nth-child(n){
+      margin-bottom: .5rem;
+      label {
+          margin-bottom: 0;
+          margin-right: 5px;
+          font-weight: bold;
+      }
+  }
+}

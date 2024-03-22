@@ -5,11 +5,15 @@ import { CommonModule } from '@angular/common';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { DMcauhoiComponent } from './dm-cauhoi/dm-cauhoi.component';
 import { FormCauhoiComponent } from './dm-cauhoi/form-cauhoi/form-cauhoi.component';
+import { DMtopicComponent } from './dm-topic/dm-topic.component';
+import { FormTopicComponent } from './dm-topic/form-topic/form-topic.component';
 
 @NgModule({
   declarations: [
     DMcauhoiComponent,
     FormCauhoiComponent,
+    DMtopicComponent,
+    FormTopicComponent
   ],
   imports: [
     CommonModule,

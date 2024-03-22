@@ -1,0 +1,35 @@
+<dx-scroll-view>
+  <dx-validation-group #validationEntity>
+    <div class="field">
+      <label>TopicId:</label>
+      <app-topic-selectbox [readOnly]="readOnly" [(topicId)]="entity.TopicId"></app-topic-selectbox>
+    </div>
+    <div class="field">
+      <label>Question:</label>
+      <dx-text-box [readOnly]="readOnly" [(value)]="entity.Question">
+        <dx-validator>
+          <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+        </dx-validator>
+      </dx-text-box>
+    </div>
+    <div class="field">
+      <label>Thứ tự:</label>
+      <dx-number-box [readOnly]="readOnly" [min]="0" [step]="0" format="#0" [(value)]="entity.STT">
+      </dx-number-box>
+    </div>
+    <!-- <div class="field">
+      <label>Diễn giải:</label>
+      <dx-text-area [readOnly]="readOnly" [maxHeight]="400" [autoResizeEnabled]="true" [(value)]="entity.DienGiai">
+      </dx-text-area>
+    </div> -->
+    <div class="field">
+      <label>Ghi chú:</label>
+      <dx-text-area [readOnly]="readOnly" [maxHeight]="400" [autoResizeEnabled]="true" [(value)]="entity.GhiChu">
+      </dx-text-area>
+    </div>
+    <div class="field">
+      <label>Hiển thị:</label>
+      <dx-check-box [readOnly]="readOnly" [(value)]="entity.HienThi"></dx-check-box>
+    </div>
+  </dx-validation-group>
+</dx-scroll-view>
