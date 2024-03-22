@@ -12,8 +12,8 @@ import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 })
 export class DMtopicComponent implements OnInit {
   @ViewChild('detail', { static: false }) detail: any;
-  placeholderSearch = 'Type a question name ...';
-  title = 'List question';
+  placeholderSearch = 'Type a topic name ...';
+  title = 'List topic';
   optionsBtnFilter = {
     icon: 'find',
     type: 'default',
@@ -63,7 +63,7 @@ export class DMtopicComponent implements OnInit {
             // this.listData = response.Data;
             // this.paging();
             this.currentEntity = this.allData[0];
-            this.focusKey = this.currentEntity.Matopic;
+            this.focusKey = this.currentEntity.TopicId;
           } else {
             this.focusKey = '';
             this.currentEntity = {};
@@ -209,15 +209,7 @@ export class DMtopicComponent implements OnInit {
         (response: ResponseData) => {
           if (response.Status.Code == 1) {
             this.notificationService.showSuccess('Update successfully!');
-            // const index1 = this.listData.findIndex(
-            //   (o) => o.Matopic == response.Data
-            // );
-            // this.listData[index1] = this.detail.entity;
-            const index2 = this.allData.findIndex(
-              (o) => o.Matopic == response.Data
-            );
-            this.allData[index2] = this.detail.entity;
-            this.state = 'detail';
+            this.router.navigate(['categories/dm-topic']).then(() => this.getInitial());
           } else {
             this.notificationService.showError('Error!' + response.Status.Message);
           }

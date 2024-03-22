@@ -6,30 +6,42 @@
     </div>
     <div class="field">
       <label>Question:</label>
-      <dx-text-box [readOnly]="readOnly" [(value)]="entity.Question">
+      <dx-text-area [autoResizeEnabled]="true" [readOnly]="readOnly" [(value)]="entity.Question">
         <dx-validator>
           <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
         </dx-validator>
-      </dx-text-box>
+      </dx-text-area>
     </div>
     <div class="field">
-      <label>Thứ tự:</label>
+      <label>GraphUrl:</label>
       <dx-number-box [readOnly]="readOnly" [min]="0" [step]="0" format="#0" [(value)]="entity.STT">
       </dx-number-box>
     </div>
-    <!-- <div class="field">
-      <label>Diễn giải:</label>
-      <dx-text-area [readOnly]="readOnly" [maxHeight]="400" [autoResizeEnabled]="true" [(value)]="entity.DienGiai">
-      </dx-text-area>
-    </div> -->
     <div class="field">
-      <label>Ghi chú:</label>
-      <dx-text-area [readOnly]="readOnly" [maxHeight]="400" [autoResizeEnabled]="true" [(value)]="entity.GhiChu">
-      </dx-text-area>
-    </div>
-    <div class="field">
-      <label>Hiển thị:</label>
-      <dx-check-box [readOnly]="readOnly" [(value)]="entity.HienThi"></dx-check-box>
+      <label for="">Choices: <button *ngIf="!readOnly" class="add-btn" (click)="handleAddChoice()"><i class="icon fa fa-plus" title="Add new choice"></i></button></label>
+      <table class="table table-bordered table-hover text-center">
+        <thead class="font-weight-bold">
+          <tr>
+            <td>Answer</td>
+            <td [width]="50">IsCorrect</td>
+            <td *ngIf="!readOnly" [width]="50"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of this.entity.ChoiceList; index as i;">
+            <td>
+              <dx-text-area [readOnly]="readOnly" [autoResizeEnabled]="true" [(value)]="it.Answer"></dx-text-area>
+            </td>
+            <td>
+              <dx-check-box [readOnly]="readOnly" [(value)]="it.IsCorrect"></dx-check-box>
+            </td>
+            <td *ngIf="!readOnly">
+              <button class="delete-btn" (click)="handleDeleteChoice(it)"><i class="icon fa fa-trash fa-lg" title="Delete choice"></i></button>
+              <!-- <i class="fa fa-trash table-del-button" style="cursor: pointer;" title="Xoá" (click)="handleDeleteQuaTrinhDaoTao(item)"></i> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </dx-validation-group>
 </dx-scroll-view>

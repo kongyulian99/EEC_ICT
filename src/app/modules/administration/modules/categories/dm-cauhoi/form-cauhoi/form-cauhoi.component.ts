@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { clone } from 'src/app/shared';
+import { NotificationService, clone } from 'src/app/shared';
 import { DMCauhoiService } from 'src/app/shared/services/dm-cauhoi.service';
+import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 @Component({
   selector: 'app-form-cauhoi',
   templateUrl: './form-cauhoi.component.html',
@@ -31,7 +32,9 @@ export class FormCauhoiComponent implements OnInit {
   readOnly: boolean = true;
 
   constructor(
-    private service: DMCauhoiService
+    private service: DMCauhoiService,
+    private dMTopicService: DMTopicService,
+    private notificationService: NotificationService
   ) {
     this.validationAsync = this.validationAsync.bind(this);
   }
@@ -47,5 +50,27 @@ export class FormCauhoiComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  tempAnswerId = 0;
+  handleAddChoice() {
+    if(!this.entity.ChoiceList) this.entity.ChoiceList = [];
+    this.entity.ChoiceList.push({TempAnswerId: this.tempAnswerId++});
+  }
+
+  handleDeleteChoice(it) {
+    // debugger;
+    this.notificationService.showConfirmation("Chắc chắn xoá?", () => {
+      if(it.AnswerId > 0) {
+        this.entity.ChoiceList = this.entity.ChoiceList.filter(o => o.AnswerId != it.AnswerId);
+        if (this.entity.ChoiceList_Delete) {
+          this.entity.ChoiceList_Delete.push(it);
+        } else {
+          this.entity.ChoiceList_Delete = [it];
+        }
+      } else {
+        this.entity.ChoiceList = this.entity.ChoiceList.filter(o => o.TempAnswerId != it.TempAnswerId);
+      }
+    })
   }
 }

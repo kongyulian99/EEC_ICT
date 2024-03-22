@@ -64,7 +64,7 @@
   <!-- Detail Extend -->
   <div *ngIf="isShowDetail" class="card-detail">
     <div class="detail-header">
-      <p>{{ state === 'detail' ? 'CHI TIẾT' : state === 'insert' ? 'THÊM MỚI' : 'CẬP NHẬT' }}</p>
+      <p>{{ state === 'detail' ? 'Details' : state === 'insert' ? 'THÊM MỚI' : 'CẬP NHẬT' }}</p>
       <dx-button [icon]="dxButtonConfig.close_icon" [type]="dxButtonConfig.cancel_type" (click)="toggleDetail()">
       </dx-button>
     </div>
@@ -74,11 +74,11 @@
     </div>
     <div class="detail-footer">
       <dx-button *ngIf="state=='detail'"
-        [icon]="dxButtonConfig.edit_icon" [type]="dxButtonConfig.edit_type" text="Sửa" (click)="edit()"></dx-button>
-      <dx-button *ngIf="state!='detail'" [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type" text="Lưu"
+        [icon]="dxButtonConfig.edit_icon" [type]="dxButtonConfig.edit_type" text="Edit" (click)="edit()"></dx-button>
+      <dx-button *ngIf="state!='detail'" [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type" text="Save"
         (click)="save()"></dx-button>
       <dx-button *ngIf="state!='detail'" [icon]="dxButtonConfig.cancel_icon" [type]="dxButtonConfig.cancel_type"
-        text="Hủy" (click)="cancel()"></dx-button>
+        text="Cancel" (click)="cancel()"></dx-button>
     </div>
   </div>
   <!-- End Detail Extend -->

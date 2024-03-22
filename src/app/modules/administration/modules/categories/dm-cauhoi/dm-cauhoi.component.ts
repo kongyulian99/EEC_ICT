@@ -63,7 +63,7 @@ export class DMcauhoiComponent implements OnInit {
             // this.listData = response.Data;
             // this.paging();
             this.currentEntity = this.allData[0];
-            this.focusKey = this.currentEntity.Macauhoi;
+            this.focusKey = this.currentEntity.QuestionId;
           } else {
             this.focusKey = '';
             this.currentEntity = {};
@@ -184,6 +184,12 @@ export class DMcauhoiComponent implements OnInit {
       this.notificationService.showError('Thông tin nhập không hợp lệ!');
       return;
     }
+
+    if(this.detail.entity.ChoiceList.length < 4) {
+      this.notificationService.showError("One question must have more than 4 choices!");
+      return;
+    }
+
     const body = clone(this.detail.entity);
 
     if (this.state == 'insert') {
@@ -205,6 +211,7 @@ export class DMcauhoiComponent implements OnInit {
         }
       );
     } else {
+      // debugger;
       this.dMcauhoiService.update(body).subscribe(
         (response: ResponseData) => {
           if (response.Status.Code == 1) {

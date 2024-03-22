@@ -38,19 +38,19 @@ export class SidebarComponent implements OnInit {
         {IsActive: true, Id: 2, IconCss: 'fa-caret-light', Name: 'System'},
         {IsActive: true, Id: 3, IconCss: 'fa-caret-light', Name: 'System'},
       ]
-    }
+    },
+    {
+      IsActive: true, Id: 4, IconCss: 'fa-bars', Name: 'Categories', Children: [
+        {IsActive: true, Id: 5, IconCss: 'fa-caret-light', Name: 'Topic', Url: 'categories/topic'},
+        {IsActive: true, Id: 6, IconCss: 'fa-caret-light', Name: 'Question bank', Url: 'categories/cauhoi'},
+      ]
+    },
   ]
   userFunctions: any[] = [
     {
-      IsActive: true, Id: 4, IconCss: 'fa-bars', Name: 'Categories', Children: [
-        {IsActive: true, Id: 5, IconCss: 'fa-caret-light', Name: 'Câu hỏi', Url: 'categories/cauhoi'},
-        {IsActive: true, Id: 6, IconCss: 'fa-caret-light', Name: 'Bài học', Url: '/'},
-      ]
-    },
-    {
       IsActive: true, Id: 7, IconCss: 'fa-bars', Name: 'Quiz', Children: [
         {IsActive: true, Id: 8, IconCss: 'fa-caret-light', Name: 'Do a quiz', Url: 'categories/cauhoi'},
-        {IsActive: true, Id: 9, IconCss: 'fa-caret-light', Name: 'Bài học', Url: '/'},
+        {IsActive: true, Id: 9, IconCss: 'fa-caret-light', Name: 'Courses', Url: '/'},
       ]
     }
   ]
@@ -77,8 +77,9 @@ export class SidebarComponent implements OnInit {
       //       .filter((o: any) => permissions.indexOf(o.Id + '_' + SystemConstants.VIEW_ACTION) !== -1);
       //   }
       // }
-      data.unshift(...this.sysFunctions);
+
       data.unshift(...this.userFunctions);
+      data.unshift(...this.sysFunctions);
     }
     this.functions = data;
     this.checkActiveParent();
