@@ -1,0 +1,39 @@
+{
+ 
+  "/tms/*": {
+    "target": "http://192.168.10.75:8112",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/*": {
+    "target": "http://localhost:44314",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/signalr": {
+    "target": "http://localhost:44314",
+    "secure": false
+  },
+  "/Uploads/*": {
+    "target": "http://localhost:44314",
+    "secure": false,
+    "changeOrigin": true
+  },
+  
+  "/Reports/*": {
+    "target": "http://localhost:44314",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api1/*": {
+    "target": "http://192.168.10.75:8105",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/Uploads1/*": {
+    "target": "http://192.168.10.75:8105",
+    "secure": false,
+    "changeOrigin": true
+  }
+ 
+}

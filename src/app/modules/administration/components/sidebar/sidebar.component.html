@@ -1,0 +1,28 @@
+<nav [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }" class="sidebar">
+  <div class="list-group">
+    <div class="nested-menu" *ngFor="let item of functions">
+      <a class="list-group-item" [ngClass]="{ 'parent-active': item.IsActive }" (click)="addExpandClass(item.Id)">
+        <ng-container>
+          <ng-container>
+            <i class="fa {{ item.IconCss }}"></i>&nbsp;
+            <span>{{ item.Name }}</span>
+          </ng-container>
+        </ng-container>
+      </a>
+      <li class="nested" [ngClass]="{ expand: showMenu === item.Id}">
+        <ul class="submenu" [class.expand]="showMenu === item.Id" style="margin-bottom: 0px;">
+          <li *ngFor="let subItem of item.Children">
+            <a href="javascript:void(0)" routerLink="{{ subItem.Url }}" [routerLinkActive]="['router-link-active']">
+              <!-- <i class="fa {{subItem.IconCss}}"></i>&nbsp; -->
+              <span>{{ subItem.Name }}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </div>
+  </div>
+  <div (click)="toggleCollapsed()" [ngClass]="{ collapsed: collapsed }" class="toggle-button" style="margin-left: 0px;">
+    <i class="fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>&nbsp;
+    <span>{{ 'THU NHỎ MENU'}}</span>
+  </div>
+</nav>

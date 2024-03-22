@@ -1,0 +1,141 @@
+<dx-tab-panel
+  #tabPanel
+  [dataSource]="types"
+  [(selectedIndex)]="indexTab"
+  [loop]="false"
+  height="100%"
+  [animationEnabled]="false"
+  [swipeEnabled]="false"
+>
+  <div *dxTemplate="let type of 'title'">
+    <span>{{ type.Text}}</span>
+  </div>
+  <div *dxTemplate="let type of 'item'">
+    <div class="tabpanel-item">
+      <dx-scroll-view>
+        <ng-container [ngSwitch]="type.Index">
+          <dx-validation-group #validationEntity *ngSwitchCase="0">
+            <div class="field" >
+                <label>Mã chức năng:</label>
+                <dx-text-box 
+                    [readOnly]="readOnly || state=='edit'"
+                    [(value)]="entity.Id">
+                    <dx-validator *ngIf="state!='detail'">
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                        <dxi-validation-rule type="async" message="Mã này đã tồn tại!" [ignoreEmptyValue]="true" [validationCallback]="validationAsync"></dxi-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+            <div class="field" >
+                <label>Tên:</label>
+                <dx-text-box 
+                    [readOnly]="readOnly"
+                    [(value)]="entity.Name">
+                    <dx-validator>
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+            <div class="field" >
+                <label>URL:</label>
+                <dx-text-box 
+                    [readOnly]="readOnly"
+                    [(value)]="entity.Url">
+                    <dx-validator>
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+            <div class="field" >
+                <label>IconCss:</label>
+                <dx-text-box 
+                    [readOnly]="readOnly"
+                    [(value)]="entity.IconCss">
+                    <dx-validator>
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+            <div class="field" >
+                <label>Thứ tự:</label>
+                <dx-number-box 
+                    [readOnly]="readOnly"
+                    [(value)]="entity.SortOrder">
+                    <dx-validator>
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                    </dx-validator>
+                </dx-number-box>
+            </div>
+            <div class="field" >
+                <label>Chức năng cha:</label>
+                <dx-select-box 
+                    [readOnly]="readOnly"
+                    [dataSource]="ListParentFunction"
+                    valueExpr="Id"
+                    displayExpr="Name"
+                    [(value)]="entity.ParentId">
+                    <dx-validator>
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                    </dx-validator>
+                </dx-select-box>
+            </div>
+            <div class="field" >
+                <dx-check-box 
+                    [readOnly]="readOnly"
+                    [(value)]="entity.Status">
+                </dx-check-box>
+                <label>Kích hoạt:</label>
+            </div>
+          </dx-validation-group>
+          <div *ngSwitchCase="1" >
+            <span style="font-weight: 500; margin-bottom: 8px; margin-top: 10px;">Danh sách hành động: </span>
+            <ul>
+              <li *ngFor="let item of listCommands; let i = index">
+                <span>{{item.Name}}</span><i class="fa fa-trash" (click)="removeCommands(item.Id)"></i>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+      </dx-scroll-view>
+    </div>
+  </div>
+</dx-tab-panel>
+<dx-popup
+    [width]="300"
+    [height]="400"
+    [showTitle]="true"
+    title="Danh sách hành động"
+    [dragEnabled]="false"
+    [hideOnOutsideClick]="false"
+    [showCloseButton]="false"
+    [(visible)]="popupVisible"
+  >
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="before"
+      [options]="addRoleButtonOptions"
+    >
+    </dxi-toolbar-item>
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="closeRoleButtonOptions"
+    >
+    </dxi-toolbar-item>
+    <dxo-position at="center" my="center"> </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+        <dx-list
+        #list
+        [dataSource]="existingCommands"
+        noDataText="Không có dữ liệu"
+        displayExpr="Name"
+        valueExpr="Id"
+        [selectionMode]="'multiple'"
+        [selectAllMode]="'page'"
+        [showSelectionControls]="true"
+        [(selectedItemKeys)]="selectedCommands"
+        ></dx-list>
+    </div>
+  </dx-popup>

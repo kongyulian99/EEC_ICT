@@ -1,0 +1,48 @@
+dx-validation-group {
+    padding: 5px 5px 0 5px;
+    .field:nth-child(n){
+        margin-bottom: .5rem;
+        label {
+            margin-bottom: 2px;
+            font-weight: 500;
+        }
+        .labelCheckbox {
+            margin-left: 5px;
+        }
+    }
+}
+.tabpanel-item {
+    height: 100%;
+}
+ul {
+    margin-top: 10px;
+    li {
+        margin-right: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        &:hover {
+            span {
+                color: red;
+            }
+        }
+        span {
+            color: blue;
+            &::before {
+                content: "\2023";
+                margin-right: 5px;
+                color: black;
+            }
+        }
+        i {
+            color: red;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 3px;
+            &:hover {
+                background-color: #dedede;
+            }
+        }
+    }
+}

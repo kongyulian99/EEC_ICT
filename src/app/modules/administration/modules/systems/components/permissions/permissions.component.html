@@ -1,0 +1,171 @@
+<div class="container-permission">
+    <div class="widget-header">
+        <dx-toolbar>
+            <dxi-item location="before" widget="dxButton" locateInMenu="never">
+                <div *dxTemplate>
+                    <div class="toolbar-label">
+                        {{ title | uppercase }}
+                    </div>
+                </div>
+            </dxi-item>
+            <dxi-item
+                location="after"
+                widget="dxButton"
+                locateInMenu="never"
+            >
+                <div *dxTemplate>
+                    <dx-button text="Lưu" [icon]="'fa fa-floppy-o'" [type]="'default'" (click)="savePermission()"></dx-button>
+                </div>
+            </dxi-item>
+            <dxi-item
+                location="after"
+                widget="dxButton"
+                locateInMenu="never"
+            >
+                <div *dxTemplate>
+                    <dx-button text="Hủy" [icon]="dxButtonConfig.cancel_icon" [type]="dxButtonConfig.cancel_type" (click)="loadData(roleId)"></dx-button>
+                </div>
+            </dxi-item>
+        </dx-toolbar>
+    </div>
+    <div class="view-card-body">
+        <div class="role-selection">
+            <p class="label">
+                <label >Nhóm quyền </label>
+            </p>
+
+            <dx-list
+                [dataSource]="roles"
+                displayExpr="Name"
+                keyExpr="Id"
+                [(selectedItemKeys)]="roleIds"
+                selectionMode="single"
+                [showSelectionControls]="true"
+            >
+            </dx-list>
+        </div>
+
+        <div class="permission-content">
+            <dx-tree-list
+                id="permissions"
+                [dataSource]="functions"
+                [rootValue]="'0'"
+                [loadPanel]="{ enabled: false}"
+                keyExpr="Id"
+                parentIdExpr="ParentId"
+                [showRowLines]="false"
+                [showColumnLines]="true"
+                [showBorders]="true"
+                [columnAutoWidth]="true"
+                [autoExpandAll]="true"
+                [hoverStateEnabled]="true"
+                [paging]="{ enabled: false }"
+                >
+                <dxo-scrolling
+                    mode="standard"> <!-- or "virtual" -->
+                </dxo-scrolling>
+                <dxo-header-filter [visible]="false"></dxo-header-filter>
+                <dxo-scrolling mode="standard" rowRenderingMode="standard"></dxo-scrolling>
+                <dxo-selection mode="none"></dxo-selection>
+
+                <!-- <dxi-column cellTemplate="cellId" caption="ID"></dxi-column> -->
+                <dxi-column cellTemplate="cellName" caption="Tên chức năng"></dxi-column>
+                <dxi-column cellTemplate="cellHasView" caption="Xem" alignment="center" width="100"></dxi-column>
+                <dxi-column cellTemplate="cellHasCreate" caption="Thêm" alignment="center" width="100"></dxi-column>
+                <dxi-column cellTemplate="cellHasUpdate" caption="Sửa" alignment="center" width="100"></dxi-column>
+                <dxi-column cellTemplate="cellHasDelete" caption="Xóa" alignment="center" width="100"></dxi-column>
+                <dxi-column cellTemplate="cellHasDownload" caption="Tải xuống" alignment="center" width="100"></dxi-column>
+                <dxi-column cellTemplate="cellHasUpload" caption="Tải lên" alignment="center" width="100"></dxi-column>
+                <!-- <dxi-column cellTemplate="cellHasUnApprove" caption="Bỏ duyệt" alignment="center" width="100"></dxi-column> -->
+                <dxi-column cellTemplate="cellHasApprove" caption="Phê duyệt" alignment="center" width="100"></dxi-column>
+
+                <div *dxTemplate="let row of 'cellName'" style="text-align: left;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <p>{{row.data.Name}}</p>
+                </div>
+                <div *dxTemplate="let row of 'cellHasView'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div>
+                        <dx-check-box
+                            *ngIf="row.data.HasView"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueView')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueView"
+                        ></dx-check-box>
+                    </div>
+                </div>
+                <div *dxTemplate="let row of 'cellHasCreate'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div>
+                        <dx-check-box
+                            *ngIf="row.data.HasCreate"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueCreate')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueCreate"
+                        ></dx-check-box>
+                    </div>
+                </div>
+                <div *dxTemplate="let row of 'cellHasUpdate'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div>
+                        <dx-check-box
+                            *ngIf="row.data.HasUpdate"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueUpdate')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueUpdate"
+                        ></dx-check-box>
+                    </div>
+                </div>
+                <div *dxTemplate="let row of 'cellHasDelete'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div>
+                        <dx-check-box
+                            *ngIf="row.data.HasDelete"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueDelete')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueDelete"
+                        ></dx-check-box>
+                    </div>
+                </div>
+                <div *dxTemplate="let row of 'cellHasDownload'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div>
+                        <dx-check-box
+                            *ngIf="row.data.HasDownload"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueDownload')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueDownload"
+                        ></dx-check-box>
+                    </div>
+                </div>
+                <div *dxTemplate="let row of 'cellHasUpload'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div>
+                        <dx-check-box
+                            *ngIf="row.data.HasUpload"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueUpload')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueUpload"
+                        ></dx-check-box>
+                    </div>
+                </div>
+
+                <div *dxTemplate="let row of 'cellHasApprove'" style="text-align: center;" [ngClass]="{'parentRow': row.data.ParentId == '0'}">
+                    <div >
+                        <dx-check-box
+                            *ngIf="row.data.HasApprove"
+                            (onValueChanged)="changeParentLogic($event, row.data.Id, 'ValueApprove')"
+                            [(value)]="functions[findIndex(row.data.Id)].ValueApprove"
+                        ></dx-check-box>
+                    </div>
+                </div>
+            </dx-tree-list>
+        </div>
+    </div>
+</div>
+<dx-load-panel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '.container-permission' }"
+    [(visible)]="loading"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    >
+</dx-load-panel>
+<dx-load-panel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '.permission-content' }"
+    [(visible)]="loadingDetail"
+    message=""
+    [showIndicator]="true"
+    [showPane]="false"
+    [shading]="false"
+    >
+</dx-load-panel>

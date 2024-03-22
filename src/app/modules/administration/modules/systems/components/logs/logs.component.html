@@ -1,0 +1,72 @@
+<div class="row widget-header p-1">
+    <div class="col-10">
+        <dx-toolbar>
+            <dxi-item location="before" widget="dxButton" locateInMenu="never">
+                <div *dxTemplate>
+                    <div class="toolbar-label">
+                        NHẬT KÝ TRUY CẬP
+                    </div>
+                </div>
+            </dxi-item>
+        </dx-toolbar>
+    </div>
+
+
+    <div class="col-2" style="text-align: right;">
+
+    </div>
+</div>
+<div class="py-2" style="background-color: #EAEDED;">
+    <div class="mx-2 p-2" style="min-height: calc(100vh - 130px); background-color: #FBFCFC; width: 100%;">
+
+
+        <div class="form-row mb-2 align-items-center" style="width: 100%;">
+            <!-- <label *ngIf="isCanChangeKhoiDV" class="mr-4">Khối đơn vị</label>
+            <dx-select-box *ngIf="isCanChangeKhoiDV" class="flex-grow-1 mb-2 mr-2" [dataSource]="allKhoiDonVi" displayExpr="TenKhoiDonVi"
+                valueExpr="MaKhoiDonVi" [(value)]="makhoidonvi" placeholder="Chọn" [searchEnabled]="true"
+                searchMode="contains">
+            </dx-select-box> -->
+
+            <label class="mr-2">Từ ngày</label>
+            <dx-date-box   displayFormat="dd/MM/yyyy" [(value)]="tuNgay"></dx-date-box>
+            <label class="ml-3 mr-2">Đến ngày</label>
+            <dx-date-box   displayFormat="dd/MM/yyyy" [(value)]="denNgay"></dx-date-box>
+            <dx-text-box [(value)]="keyword" class="ml-4" mode="search"   placeholder="Tìm kiếm theo tên ..." >
+            </dx-text-box>
+            <dx-button class="ml-2" (click)="loadDataSource()" [type]="dxButtonConfig.search_type"
+                [stylingMode]="dxButtonConfig.contained_StylingMode" text="Tìm kiếm" [icon]="dxButtonConfig.search_icon">
+            </dx-button>
+        </div>
+
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover text-center small">
+                           <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên người dùng</th>
+                                <th>Thời gian đăng nhập</th>
+                            </tr>
+                           </thead>
+                           <tbody>
+                                <tr *ngFor="let item of items; index as i">
+                                    <td>{{ i + 1}}</td>
+                                    <td>{{ item.FullName }}</td>
+                                    <td>{{ item.NgayLogs | date: 'dd/MM/yyyy' }}</td>
+                                </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12" style="border-top: 1px solid #ddd; padding-top: 8px;">
+                    <app-paginator [pageSize]="pageSize" [totalRows]="totalRows" [pageSizes]="PaginatorConfig"
+                        (onPageChanged)="handlePageChange($event)"
+                        (onPageSizeChanged)="handlePageSizeChange($event)" [page]="pageIndex"></app-paginator>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

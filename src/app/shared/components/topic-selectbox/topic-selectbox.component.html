@@ -1,0 +1,5 @@
+<dx-select-box [readOnly]="readOnly" placeholder="Select a topic" [dataSource]="items" valueExpr="TopicId" displayExpr="TopicName" [(value)]="topicId" (onValueChanged)="handleChangeTopic($event)">
+  <dx-validator>
+    <dxi-validation-rule type="required" message="Data required"></dxi-validation-rule>
+  </dx-validator>
+</dx-select-box>

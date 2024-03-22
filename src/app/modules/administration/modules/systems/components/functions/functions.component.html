@@ -1,0 +1,175 @@
+<div class="widget-header">
+    <dx-toolbar>
+        <dxi-item location="before" widget="dxButton" locateInMenu="never">
+            <div *dxTemplate>
+                <div class="toolbar-label">
+                    {{ title | uppercase }}
+                </div>
+            </div>
+        </dxi-item>
+        <dxi-item
+            location="after"
+            widget="dxButton"
+            locateInMenu="never"
+        >
+            <div *dxTemplate>
+                <dx-button text="Thêm mới" [icon]="dxButtonConfig.add_icon" [type]="dxButtonConfig.add_type" (click)="add()"></dx-button>
+            </div>
+        </dxi-item>
+    </dx-toolbar>
+</div>
+<div class="view-card-body">
+    <div class="card-content">
+        <!-- Bar -->
+        <div class="bar">
+                <div class="input-group">
+                    <!-- <dx-text-box
+                        mode="search"
+                        [placeholder]="placeholderSearch"
+                        [(value)]="textSearch" (onEnterKey)="onFilter()">
+                        <dxi-button
+                            name="filter"
+                            location="after"
+                            [options]="optionsBtnFilter"
+                        ></dxi-button>
+                    </dx-text-box> -->
+                </div>
+                <div class="slide-buton">
+                    <dx-button
+                        [icon]="isShowDetail? 'chevronright': 'chevronleft'"
+                        [type]="dxButtonConfig.slide_type"
+                        (click)="toggleDetail()"
+                    ></dx-button>
+                </div>
+        </div>
+        <!-- End Bar -->
+        <!-- Grid -->
+        <div class="content">
+            <dx-tree-list
+                id="treeList"
+                [dataSource]="allData"
+                keyExpr="Id"
+                parentIdExpr="ParentId"
+                [expandedRowKeys]="[]"
+                [showBorders]="true"
+                [focusedRowEnabled]="true"
+                [columnAutoWidth]="true"
+                [wordWrapEnabled]="true"
+                [(focusedRowKey)]="focusKey"
+                [paging]="{ enabled: false }"
+                [showColumnHeaders]="true"
+                [showColumnLines]="true"
+                [showRowLines]="true"
+                [hoverStateEnabled]="true"
+                >
+                <!-- <dxo-search-panel [visible]="true" width="250"></dxo-search-panel> -->
+                <dxo-header-filter [visible]="false"></dxo-header-filter>
+                <dxo-selection mode="none"></dxo-selection>
+                <dxo-scrolling mode="standard" rowRenderingMode="standard"></dxo-scrolling>
+                <!-- <dxo-column-chooser [enabled]="true"></dxo-column-chooser> -->
+
+                <dxi-column cellTemplate="cellName" caption="Tên chức năng" [width]="300" cssClass="vertical-middle" ></dxi-column>
+                <dxi-column cellTemplate="cellId" caption="Mã chức năng" cssClass="vertical-middle"></dxi-column>
+                <dxi-column cellTemplate="cellSortOrder" caption="Thứ tự" [width]="80" alignment="center" cssClass="vertical-middle" ></dxi-column>
+                <dxi-column cellTemplate="cellStatus" caption="Hiện thị" [width]="80" alignment="center" cssClass="vertical-middle" ></dxi-column>
+                <dxi-column cellTemplate="cellAction" [width]="45" alignment="center" [showInColumnChooser]="false" cssClass="vertical-middle"></dxi-column>
+
+                <div *dxTemplate="let item of 'cellName'">
+                    <span [ngStyle]="{'font-weight': item.data.ParentId=='0' ? '600' : '400'}">{{item.data.Name}}</span>
+                </div>
+                <div *dxTemplate="let item of 'cellId'">
+                    <span [ngStyle]="{'font-weight': item.data.ParentId=='0' ? '600' : '400'}">{{item.data.Id}}</span>
+                </div>
+                <div *dxTemplate="let item of 'cellSortOrder'">
+                    <span [ngStyle]="{'color': item.data.ParentId=='0' ? 'blue' : '','font-weight':item.data.ParentId=='0' ? '600' : '400'}">{{item.data.SortOrder}}</span>
+                </div>
+                <div *dxTemplate="let item of 'cellStatus'">
+                    <span *ngIf="item.data.Status"><i class="fa fa-check" style="color: blue;"></i></span>
+                </div>
+                <div class="rowAction" *dxTemplate="let row of 'cellAction'">
+                    <span class="dx-icon-close" (click)="delete(row.data.Id, row.data.Name)"></span>
+                </div>
+            </dx-tree-list>
+        </div>
+        <!-- End Grid -->
+        <div class="paginator">
+            <!-- <app-paginator
+                [(page)]="pageIndex"
+                [(pageSize)]="pageSize"
+                [totalRows]="totalRows"
+                [pageSizes]="pageSizes"
+                (onPageChanged)="pageChanged($event)"
+                (onPageSizeChanged)="pageSizeChanged($event)"
+            ></app-paginator> -->
+        </div>
+    </div>
+
+    <!-- Detail Extend -->
+    <div *ngIf="isShowDetail " class="card-detail">
+        <div class="detail-header">
+            <p>{{ state === 'detail' ? 'CHI TIẾT' : state === 'insert' ? 'THÊM MỚI' : 'CẬP NHẬT' }}</p>
+            <dx-button
+                [icon]="dxButtonConfig.close_icon"
+                [type]="dxButtonConfig.cancel_type"
+                (click)="toggleDetail()"
+            ></dx-button>
+        </div>
+        <div class="detail-content">
+            <app-form-function-detail
+                #detail
+                [entity]="currentEntity"
+                [listData]="allData"
+                [ListParentFunction]="listParent"
+                [state]="state"
+                [(indexTab)]="indexTab"
+                [listCommands]="listCommands"
+                (onAddCommand)="addCommand($event)"
+                (onRemoveCommand)="removeCommand($event)"
+            ></app-form-function-detail>
+        </div>
+        <div class="detail-footer">
+            <ng-container *ngIf="indexTab==0">
+                <dx-button
+                    *ngIf="state=='detail'"
+                    [icon]="dxButtonConfig.edit_icon"
+                    [type]="dxButtonConfig.edit_type"
+                    text="Sửa"
+                    (click)="edit()"
+                ></dx-button>
+                <dx-button
+                    *ngIf="state!='detail'"
+                    [icon]="dxButtonConfig.save_icon"
+                    [type]="dxButtonConfig.save_type"
+                    text="Lưu"
+                    (click)="save()"
+                ></dx-button>
+                <dx-button
+                    *ngIf="state!='detail'"
+                    [icon]="dxButtonConfig.cancel_icon"
+                    [type]="dxButtonConfig.cancel_type"
+                    text="Hủy"
+                    (click)="cancel()"
+                ></dx-button>
+            </ng-container>
+            <ng-container *ngIf="indexTab==1">
+                <dx-button
+                    [icon]="dxButtonConfig.add_icon"
+                    [type]="dxButtonConfig.add_type"
+                    text="Thêm hành động"
+                    (click)="showAddCommand()"
+                ></dx-button>
+            </ng-container>
+        </div>
+    </div>
+    <!-- End Detail Extend -->
+</div>
+
+<dx-load-panel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '.view-card-body' }"
+    [(visible)]="loading"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    >
+</dx-load-panel>

@@ -1,0 +1,48 @@
+<div class="login-page">
+  <div class="form-login">
+    <div class="header-form">
+      <div class="logo">
+        <img src="/assets/images/vietnam-flag.png" width="130" height="80" alt="">
+      </div>
+      <div class="names">
+        <div class="name-dv">
+          <h4>Englightening Education Center</h4>
+          <h5 class="name-software">Mathematics Training System</h5>
+        </div>
+      </div>
+    </div>
+    <div class="body-form">
+      <div class="left-block">
+        <p class="title-left"><i class="fa fa-life-ring" aria-hidden="true"></i>Technical Support:</p>
+
+        <div class="left-contact">
+          <p style="margin-left: 1rem;"><b>EEC-ICT Team</b></p>
+          <p><i class="fa fa-phone mr-2" aria-hidden="true"></i>Mobile: xxx.xxx.xxxx hoặc xxx.xxx.xxxx</p>
+          <p><i class="fa fa-map-marker mr-2" aria-hidden="true"></i>Address: 43 Do Quang street</p>
+        </div>
+      </div>
+      <div class="right-block">
+        <p><i class="fa fa-pencil-square" aria-hidden="true"></i>Thông tin đăng nhập</p>
+        <form role="form">
+          <div class="form-content">
+            <div class="form-group">
+              <input [(ngModel)]="username" [placeholder]="'Tài khoản'" class="form-control input-underline input-lg"
+                type="text" name="username" />
+            </div>
+
+            <div class="form-group">
+              <input [(ngModel)]="password" [placeholder]="'Mật khẩu'" class="form-control input-underline input-lg"
+                type="password" name="password" (keyup.enter)="onLoggedIn()" />
+            </div>
+          </div>
+          <div class="submit">
+            <a (click)="onLoggedIn()" class="submit-button">Đăng nhập</a>
+            <img *ngIf="loading" src="../../assets/images/loading_spiner.gif">
+          </div>
+          &nbsp;
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

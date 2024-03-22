@@ -1,0 +1,100 @@
+<dx-tab-panel #tabPanel [dataSource]="types" [(selectedIndex)]="indexTab" [loop]="false" height="100%"
+  [animationEnabled]="false" [swipeEnabled]="false">
+  <div *dxTemplate="let type of 'title'">
+    <span>{{ type.Text}}</span>
+  </div>
+  <div *dxTemplate="let type of 'item'">
+    <div class="tabpanel-item">
+      <dx-scroll-view>
+        <ng-container [ngSwitch]="type.Index">
+          <dx-validation-group #validationEntity *ngSwitchCase="0">
+            <div class="field">
+              <label>Tên đăng nhập:</label>
+              <dx-text-box [readOnly]="readOnly" [(value)]="entity.UserName">
+                <dx-validator *ngIf="state!='detail'">
+                  <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                  <dxi-validation-rule type="async" message="Tên đăng nhập đã tồn tại!" [ignoreEmptyValue]="true"
+                    [validationCallback]="validationAsync"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+            <div class="field" *ngIf="state=='insert'">
+              <label>Mật khẩu:</label>
+              <dx-text-box mode="password" [(value)]="entity.Password">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Yêu cầu đặt mật khẩu!"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+              <dx-text-box mode="password">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Yêu cầu xác nhận mật khẩu!"></dxi-validation-rule>
+                  <dxi-validation-rule type="compare" [comparisonTarget]="passwordComparison"
+                    message="Mật khẩu không khớp!"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+            <div class="field">
+              <label>Tên đầy đủ:</label>
+              <dx-text-box [readOnly]="readOnly" [(value)]="entity.FullName">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+            <div class="field">
+              <label>Giới tính:</label>
+              <dx-radio-group [readOnly]="readOnly" [dataSource]="itemsGender" valueExpr="value" displayExpr="text"
+                layout="horizontal" [(value)]="entity.Gender">
+                <!-- <dx-validator>
+                        <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                    </dx-validator> -->
+              </dx-radio-group>
+            </div>
+            <div class="field">
+              <dx-check-box [readOnly]="readOnly" [(value)]="entity.Status">
+              </dx-check-box>
+              <label class="labelCheckbox">Kích hoạt</label>
+            </div>
+          </dx-validation-group>
+          <div *ngSwitchCase="1">
+            <span style="font-weight: 500; margin-bottom: 8px; margin-top: 10px;">Danh sách nhóm quyền: </span>
+            <ul>
+              <li *ngFor="let item of listRoles; let i = index">
+                <span>{{item.Name}}</span><i class="fa fa-trash" (click)="removeRoles(item.Id)"></i>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+      </dx-scroll-view>
+    </div>
+  </div>
+</dx-tab-panel>
+<dx-popup [width]="300" height="280" [showTitle]="true" title="Danh sách quyền"  [(visible)]="popupVisible">
+    <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="before" [options]="addRoleButtonOptions">
+    </dxi-toolbar-item>
+    <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="closeRoleButtonOptions">
+    </dxi-toolbar-item>
+    <dxo-position at="center" my="center"> </dxo-position>
+    <div *dxTemplate="let data of 'content'">
+      <dx-scroll-view width="100%" height="100%">
+      <dx-list #list [dataSource]="existingRoles" noDataText="Không có dữ liệu" displayExpr="Name" valueExpr="Id"
+        [height]="400" [selectionMode]="'multiple'" [selectAllMode]="'page'" [showSelectionControls]="true"
+        [(selectedItemKeys)]="selectedRoles"></dx-list>
+      </dx-scroll-view>
+    </div>
+</dx-popup>
+
+<dx-popup [width]="400" height="280" [showTitle]="true" title="Danh sách chuyên ngành"  [(visible)]="popupChuyenNganhVisible">
+  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="before" [options]="addChuyenNganhButtonOptions">
+  </dxi-toolbar-item>
+  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="closeChuyenNganhButtonOptions">
+  </dxi-toolbar-item>
+  <dxo-position at="center" my="center"> </dxo-position>
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view width="100%" height="100%">
+    <dx-list #list [dataSource]="existingChuyenNganh" noDataText="Không có dữ liệu" displayExpr="Ten" valueExpr="Id"
+      [height]="400" [selectionMode]="'multiple'" [selectAllMode]="'page'" [showSelectionControls]="true"
+      [(selectedItemKeys)]="selectedChuyenNganh"></dx-list>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

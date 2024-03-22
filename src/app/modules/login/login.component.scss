@@ -1,0 +1,133 @@
+$background-color: rgb(255, 201, 120);
+:host {
+    display: block;
+}
+
+.login-page {
+    width: 100%;
+    background-color: $background-color;
+    height: 100vh;
+    padding-top: 72px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.login-page {
+    // background-image: url("../../assets/images/background.jpg");
+    .form-login {
+        width: 700px;
+        margin: 0 auto;
+        padding: 24px 16px;
+        background-color: #FBFCFC;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 0 0 0, inset #365e86 0 0 0 1px;
+        border-radius: 10px !important;
+
+        .header-form {
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            .names {
+                margin-left: 16px;
+                text-align: center;
+                .name-dv {
+                    color: #00BFFF; }
+
+                .name-software {
+                    color: #FF0000;
+                    font-weight: 600;
+                }
+            }
+
+        }
+        .body-form {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            .left-block {
+                width: 600px;
+                padding: 8px 16px;
+                border-right: 1px solid #ddd;
+
+                .title-left {
+                    margin-bottom: 2px;
+                    i {
+                        margin-right: 4px;
+                        color: #DC143C;
+                    }
+                }
+
+                .fa-phone {
+                    margin-right: 4px;
+                    color: #008000;
+                }
+
+                .fa-download {
+                    margin-right: 4px;
+                    color: #DC143C;
+                }
+            }
+            .right-block {
+                padding: 8px 16px;
+                width: 100%;
+                .form-group {
+                    width: 100%;
+                    margin-top: 8px;
+                    input {
+                        width: 250px;
+                        border-radius: 0 !important;
+                    }
+
+                }
+
+                .fa-pencil-square {
+                    margin-right: 4px;
+                    color: 	#8FBC8F;
+                }
+            }
+
+            .submit {
+                margin-top: 16px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .submit-button {
+                    display: block;
+                    width: 120px;
+                    background-color:#1E90FF;
+                    text-align: center;
+                    color: white;
+                    padding: 8px 8px;
+                    cursor: pointer;
+                    // border-radius: 4px;
+                }
+                .submit-button:hover {
+                    display: block;
+                    width: 120px;
+                    background-color:#0360bd;
+                    color: white;
+                    padding: 8px 8px;
+                    // border-radius: 4px;
+                }
+                img {
+                    margin-left: 5px;
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+        }
+
+        .help-version {
+            text-align: center;
+            span {
+                color: #D4AC0D;
+            }
+
+            .fa-exclamation-triangle {
+                margin-right: 4px;
+                color: #D4AC0D;
+            }
+
+        }
+    }
+}
