@@ -26,19 +26,19 @@ export class AuthenService extends BaseService {
       UserName: username,
       Password: password
     };
-    return this.http.post<ResponseData>(`/api/users/login`, body, { headers: this.httpOptions })
+    return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/users/login`, body, { headers: this.httpOptions })
       .pipe(catchError(this.handleError));
   }
 
   refreshToken(refresh: string) {
     return this.http
-    .post<ResponseData>(`/api/refreshtoken/refresh?refreshToken=${refresh}`,
+    .post<ResponseData>(`${SystemConstants.API_URL}/api/refreshtoken/refresh?refreshToken=${refresh}`,
       // { headers: this.httpOptions }).pipe(catchError(this.handleError));
       { headers: this.httpOptions }).pipe(map((response: ResponseData)=>{
         if(response.Status.Code == -1){
           this.notificationService.showError('Hết phiên đăng nhập!');
             // this.router.navigate(['/login']);
-        } 
+        }
         return response;
       }))
   }
@@ -55,7 +55,7 @@ export class AuthenService extends BaseService {
 
   logout() {
     const refreshToken = this.user.refresh_token + SystemConstants.KEY_SECRET;
-    return this.http.post<ResponseData>(`/api/users/logout/${refreshToken}`,
+    return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/users/logout/${refreshToken}`,
       { headers: this.httpOptions })
       .pipe(catchError(this.handleError));
   }

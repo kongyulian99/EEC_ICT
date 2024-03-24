@@ -3,11 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ResponseData } from '../models';
+import { SystemConstants } from '../constants';
 @Injectable({
   providedIn: 'root', // ADDED providedIn root here.
 })
 export class DMTopicService extends BaseService {
-  url = '/api/dm-topic/';
   private httpOptions = new HttpHeaders();
 
   constructor(private http: HttpClient) {
@@ -19,9 +19,7 @@ export class DMTopicService extends BaseService {
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${
-            this.url
-          }SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
+          `${SystemConstants.API_URL}/api/dm-topic/SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))
@@ -31,7 +29,7 @@ export class DMTopicService extends BaseService {
     return (
       this.http
         // tslint:disable-next-line:max-line-length
-        .get<ResponseData>(`${this.url}selectone/${maTopic}`, {
+        .get<ResponseData>(`${SystemConstants.API_URL}/api/dm-topic/selectone/${maTopic}`, {
           headers: this.httpOptions,
         })
         .pipe(catchError(this.handleError))
@@ -39,28 +37,28 @@ export class DMTopicService extends BaseService {
   }
   insert(entity: any) {
     return this.http
-      .post<ResponseData>(`${this.url}insert`, entity, {
+      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-topic/insert`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   update(entity: any) {
     return this.http
-      .put<ResponseData>(`${this.url}update`, entity, {
+      .put<ResponseData>(`${SystemConstants.API_URL}/api/dm-topic/update`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   delete(maTopic: string) {
     return this.http
-      .delete<ResponseData>(`${this.url}delete/${maTopic}`, {
+      .delete<ResponseData>(`${SystemConstants.API_URL}/api/dm-topic/delete/${maTopic}`, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   checkDuplicate(ma: string) {
     return this.http
-      .post<ResponseData>(`${this.url}checkDuplicate?ma=${ma}`, {
+      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-topic/checkDuplicate?ma=${ma}`, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));

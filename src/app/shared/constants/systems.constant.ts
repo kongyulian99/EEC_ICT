@@ -25,4 +25,6 @@ export class SystemConstants {
   //Danh muc
   public static CATEGORIES: string = 'CATEGORIES';
   public static DM_CAUHOI: string = 'DM_CAUHOI';
+
+  public static API_URL: string = 'https://eecictapi.azurewebsites.net'
 }

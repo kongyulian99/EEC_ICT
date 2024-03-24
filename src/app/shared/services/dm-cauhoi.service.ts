@@ -3,11 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ResponseData } from '../models';
+import { SystemConstants } from '../constants';
 @Injectable({
   providedIn: 'root', // ADDED providedIn root here.
 })
 export class DMCauhoiService extends BaseService {
-  url = '/api/dm-cauhoi/';
   private httpOptions = new HttpHeaders();
 
   constructor(private http: HttpClient) {
@@ -19,9 +19,7 @@ export class DMCauhoiService extends BaseService {
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${
-            this.url
-          }SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
+          `${SystemConstants.API_URL}/api/dm-cauhoi/SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))
@@ -31,7 +29,7 @@ export class DMCauhoiService extends BaseService {
     return (
       this.http
         // tslint:disable-next-line:max-line-length
-        .get<ResponseData>(`${this.url}selectone/${maCauhoi}`, {
+        .get<ResponseData>(`${SystemConstants.API_URL}/api/dm-cauhoi/selectone/${maCauhoi}`, {
           headers: this.httpOptions,
         })
         .pipe(catchError(this.handleError))
@@ -39,28 +37,28 @@ export class DMCauhoiService extends BaseService {
   }
   insert(entity: any) {
     return this.http
-      .post<ResponseData>(`${this.url}insert`, entity, {
+      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-cauhoi/insert`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   update(entity: any) {
     return this.http
-      .put<ResponseData>(`${this.url}update`, entity, {
+      .put<ResponseData>(`${SystemConstants.API_URL}/api/dm-cauhoi/update`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   delete(maCauhoi: string) {
     return this.http
-      .delete<ResponseData>(`${this.url}delete/${maCauhoi}`, {
+      .delete<ResponseData>(`${SystemConstants.API_URL}/api/dm-cauhoi/delete/${maCauhoi}`, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   checkDuplicate(ma: string) {
     return this.http
-      .post<ResponseData>(`${this.url}checkDuplicate?ma=${ma}`, {
+      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-cauhoi/checkDuplicate?ma=${ma}`, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ResponseData } from '../models';
+import { SystemConstants } from '../constants';
 // import { Role } from '../models/role';
 @Injectable({
     providedIn: 'root' // ADDED providedIn root here.
@@ -15,28 +16,28 @@ export class RoleService extends BaseService {
         this.httpOptions = this.httpOptions.set('Content-Type', 'application/json');
     }
     insert(entity: any) {
-        return this.http.post<ResponseData>(`/api/roles/insert`, entity, { headers: this.httpOptions })
+        return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/roles/insert`, entity, { headers: this.httpOptions })
             .pipe(catchError(this.handleError));
     }
     update(entity: any) {
-        return this.http.post<ResponseData>(`/api/roles/update`, entity, { headers: this.httpOptions })
+        return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/roles/update`, entity, { headers: this.httpOptions })
             .pipe(catchError(this.handleError));
     }
     checkName(body: any) {
-        return this.http.post<ResponseData>(`/api/roles/checkname`,body, { headers: this.httpOptions })
+        return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/roles/checkname`,body, { headers: this.httpOptions })
             .pipe(catchError(this.handleError));
     }
     selectAll(pageindex: number, pagesize: number, keyword: string) {
         // tslint:disable-next-line:max-line-length
-        return this.http.get<ResponseData>(`/api/roles/selectAll?pageindex=${pageindex}&pagesize=${pagesize}&filter=${keyword}`, { headers: this.httpOptions })
+        return this.http.get<ResponseData>(`${SystemConstants.API_URL}/api/roles/selectAll?pageindex=${pageindex}&pagesize=${pagesize}&filter=${keyword}`, { headers: this.httpOptions })
         .pipe(catchError(this.handleError));
     }
     selectAllByPermission(id: string,pageindex: number, pagesize: number, keyword: string) {
-        return this.http.get<ResponseData>(`/api/roles/selectallbypermission/${id}?pageindex=${pageindex}&pagesize=${pagesize}&filter=${keyword}`, { headers: this.httpOptions })
+        return this.http.get<ResponseData>(`${SystemConstants.API_URL}/api/roles/selectallbypermission/${id}?pageindex=${pageindex}&pagesize=${pagesize}&filter=${keyword}`, { headers: this.httpOptions })
             .pipe(catchError(this.handleError));
     }
     selectOne(id: string) {
-        return this.http.get<ResponseData>(`/api/roles/selectOne/${id}`, { headers: this.httpOptions })
+        return this.http.get<ResponseData>(`${SystemConstants.API_URL}/api/roles/selectOne/${id}`, { headers: this.httpOptions })
         .pipe(catchError(this.handleError));
     }
     delete(ids: number[]) {
@@ -45,7 +46,7 @@ export class RoleService extends BaseService {
             query += 'ids=' + id + '&';
         }
         query = query.slice(0, -1);
-        return this.http.post<ResponseData>(`/api/roles/delete?${query}`, { headers: this.httpOptions })
+        return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/roles/delete?${query}`, { headers: this.httpOptions })
         .pipe(catchError(this.handleError));
      }
 }
