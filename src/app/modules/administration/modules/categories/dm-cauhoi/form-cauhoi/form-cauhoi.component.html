@@ -14,8 +14,8 @@
     </div>
     <div class="field">
       <label>GraphUrl:</label>
-      <dx-number-box [readOnly]="readOnly" [min]="0" [step]="0" format="#0" [(value)]="entity.STT">
-      </dx-number-box>
+      <dx-text-box [readOnly]="readOnly" [(value)]="entity.GraphUrl">
+      </dx-text-box>
     </div>
     <div class="field">
       <label for="">Choices: <button *ngIf="!readOnly" class="add-btn" (click)="handleAddChoice()"><i class="icon fa fa-plus" title="Add new choice"></i></button></label>

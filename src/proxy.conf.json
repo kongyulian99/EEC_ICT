@@ -1,5 +1,5 @@
 {
- 
+
   "/tms/*": {
     "target": "http://192.168.10.75:8112",
     "secure": false,
@@ -19,7 +19,7 @@
     "secure": false,
     "changeOrigin": true
   },
-  
+
   "/Reports/*": {
     "target": "http://localhost:44314",
     "secure": false,
@@ -35,5 +35,5 @@
     "secure": false,
     "changeOrigin": true
   }
- 
+
 }

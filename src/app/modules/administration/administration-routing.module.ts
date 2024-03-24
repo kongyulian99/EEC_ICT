@@ -31,6 +31,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'quiz',
+        loadChildren: () =>
+          import('./modules/quiz/quiz.module').then(
+            (m) => m.QuizModule
+          ),
+      },
+      {
         path: 'user-info',
         loadChildren: () =>
           import('./modules/user-info/user-info.module').then(

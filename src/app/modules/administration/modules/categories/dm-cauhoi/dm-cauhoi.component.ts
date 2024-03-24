@@ -242,7 +242,7 @@ export class DMcauhoiComponent implements OnInit {
           this.dMcauhoiService.delete(id).subscribe(
             (response: ResponseData) => {
               if (response.Status.Code == 1) {
-                this.allData = this.allData.filter((o) => o.Macauhoi != id);
+                this.allData = this.allData.filter((o) => o.QuestionId != id);
                 this.totalRows = this.allData.length;
                 // this.paging();
                 this.notificationService.showSuccess(
@@ -262,7 +262,7 @@ export class DMcauhoiComponent implements OnInit {
         } else {
           this.currentEntity = this.allData[0];
         }
-        this.focusKey = this.currentEntity.Macauhoi;
+        this.focusKey = this.currentEntity.QuestionId;
         this.state = 'detail';
       }
     );
