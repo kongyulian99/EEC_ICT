@@ -13,7 +13,7 @@ import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 export class DMtopicComponent implements OnInit {
   @ViewChild('detail', { static: false }) detail: any;
   placeholderSearch = 'Type a topic name ...';
-  title = 'List topic update';
+  title = 'List topic updated';
   optionsBtnFilter = {
     icon: 'find',
     type: 'default',
