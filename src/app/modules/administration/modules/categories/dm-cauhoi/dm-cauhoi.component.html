@@ -23,6 +23,7 @@
         <dx-text-box mode="search" [placeholder]="placeholderSearch" [(value)]="textSearch" (onEnterKey)="onFilter()">
           <dxi-button name="filter" location="after" [options]="optionsBtnFilter"></dxi-button>
         </dx-text-box>
+        <dx-select-box [dataSource]="allTopic" displayExpr="TopicName" valueExpr="TopicId" (onValueChanged)="handleChangeTopic($event)"></dx-select-box>
       </div>
       <div class="slide-buton">
         <dx-button [icon]="isShowDetail? 'chevronright': 'chevronleft'" [type]="dxButtonConfig.slide_type"

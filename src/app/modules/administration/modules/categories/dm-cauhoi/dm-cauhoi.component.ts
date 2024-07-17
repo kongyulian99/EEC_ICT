@@ -4,6 +4,7 @@ import { clone, NotificationService } from 'src/app/shared';
 import { dxButtonConfig, PaginatorConfig } from 'src/app/shared/config';
 import { ResponseData } from 'src/app/shared/models';
 import { DMCauhoiService } from 'src/app/shared/services/dm-cauhoi.service';
+import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 
 @Component({
   selector: 'app-dm-cauhoi',
@@ -13,7 +14,7 @@ import { DMCauhoiService } from 'src/app/shared/services/dm-cauhoi.service';
 export class DMcauhoiComponent implements OnInit {
   @ViewChild('detail', { static: false }) detail: any;
   placeholderSearch = 'Type a question name ...';
-  title = 'List question';
+  title = 'List question updated!';
   optionsBtnFilter = {
     icon: 'find',
     type: 'default',
@@ -43,19 +44,29 @@ export class DMcauhoiComponent implements OnInit {
   currentEntity: any = {};
   expandedIds: any[] = [];
 
+  allTopic = []; // list of topics
+
   constructor(
     private dMcauhoiService: DMCauhoiService,
+    private dmTopicService: DMTopicService,
     private notificationService: NotificationService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.dmTopicService.selectAll(0, 0, '').subscribe(
+      (res: ResponseData) => {
+        if (res.Status.Code == 1) {
+          this.allTopic = res.Data;
+        }
+      }
+    );
     this.getInitial();
   }
   loadData() {
     this.loading = true;
-    this.dMcauhoiService.selectAll(this.pageSize, this.pageIndex, this.textSearch).subscribe(
+    this.dMcauhoiService.selectAll(this.pageSize, this.pageIndex, this.textSearch, this.topicId).subscribe(
       (response: ResponseData) => {
         if (response.Status.Code == 1) {
           this.allData = response.Data;
@@ -274,5 +285,18 @@ export class DMcauhoiComponent implements OnInit {
   onFocusedRowChanged(e: any) {
     this.currentEntity = clone(e.row.data);
     this.state = 'detail';
+  }
+
+  topicId = 1;
+  handleChangeTopic($event) {
+    // console.log($event.value);
+    this.dMcauhoiService.selectAll(this.pageSize, this.pageIndex, this.textSearch, $event.value).subscribe(
+      (res: ResponseData) => {
+        if(res.Status.Code == 1) {
+          this.allData = res.Data;
+          this.totalRows = res.Pagination.TotalRows;
+        }
+      }
+    );
   }
 }

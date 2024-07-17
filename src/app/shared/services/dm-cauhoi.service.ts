@@ -14,12 +14,12 @@ export class DMCauhoiService extends BaseService {
     super();
     this.httpOptions = this.httpOptions.set('Content-Type', 'application/json');
   }
-  selectAll(pageSize: number, pageIndex: number, filter: string) {
+  selectAll(pageSize: number, pageIndex: number, filter: string, topicId: number) {
     return (
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${SystemConstants.API_URL}/api/dm-cauhoi/SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
+          `${SystemConstants.API_URL}/api/dm-cauhoi/SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}&topicId=${topicId}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))

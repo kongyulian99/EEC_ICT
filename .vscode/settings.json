@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
         "bieudophieubao"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/18b8b964-cf7a-46b3-b926-98716f5b533c/resourceGroups/EEC_ICT/providers/Microsoft.Web/sites/eec-ict-math",
+    "appService.deploySubpath": "dist"
 }

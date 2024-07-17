@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz.component';
-import { DxButtonModule, DxRadioGroupModule, DxToolbarModule } from 'devextreme-angular';
+import { DxButtonModule, DxRadioGroupModule, DxScrollViewModule, DxToolbarModule } from 'devextreme-angular';
 import { KatexModule } from 'ng-katex';
 
 @NgModule({
@@ -17,6 +17,7 @@ import { KatexModule } from 'ng-katex';
     DxButtonModule,
     DxRadioGroupModule,
     KatexModule,
+    DxScrollViewModule
   ]
 })
 export class QuizModule { }

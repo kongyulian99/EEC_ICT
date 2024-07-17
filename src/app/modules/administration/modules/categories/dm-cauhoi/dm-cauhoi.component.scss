@@ -23,8 +23,12 @@ $paginatorColor: #fff;
             box-shadow: 0 5px 5px -5px #333;
             .input-group {
                 flex-grow: 1;
+                display: flex;
                 dx-text-box {
                     width: 70%;
+                }
+                dx-select-box {
+                    width: 30%;
                 }
             }
             .slide-button {

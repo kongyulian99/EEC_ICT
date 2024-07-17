@@ -22,8 +22,10 @@ export class QuizComponent implements OnInit {
     private dMCauhoiService: DMCauhoiService
   ) { }
 
+
+
   ngOnInit(): void {
-    this.dMCauhoiService.selectAll(0, 0, '').subscribe((res:any) => {
+    this.dMCauhoiService.selectAll(0, 0, '', 0).subscribe((res:any) => {
       if(res.Status.Code === 1) {
         this.items = res.Data;
       }
