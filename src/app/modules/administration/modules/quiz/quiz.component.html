@@ -7,6 +7,16 @@
         </div>
       </div>
     </dxi-item>
+    <dxi-item location="after" widget="dxButton" locateInMenu="never">
+      <div *dxTemplate>
+        <dx-select-box [dataSource]="allTopic" displayExpr="TopicName" valueExpr="TopicId" (onValueChanged)="handleChangeTopic($event)"></dx-select-box>
+      </div>
+    </dxi-item>
+    <dxi-item location="after" widget="dxButton" locateInMenu="never">
+      <div *dxTemplate>
+        <dx-button text="Submit" (onClick)="handleSubmit()"></dx-button>
+      </div>
+    </dxi-item>
   </dx-toolbar>
 </div>
 <div class="view-card-body">
@@ -16,8 +26,11 @@
         <div *ngFor="let item of items; index as i;" class="mx-4">
           <!-- <span id="katex">{{"\\pm\\sqrt{a^2 + b^2}"}}</span> -->
           <!-- <ng-katex [equation]="equation"></ng-katex> -->
-          <span style="height: 50px;"><span style="font-weight: bold;">Question {{i+1}}: </span><ng-katex style="font-size: 14px;" [equation]="item.Question"></ng-katex></span>
-          <dx-radio-group [dataSource]="item.ChoiceList" itemTemplate="item">
+          <span style="height: 50px;"><span style="font-weight: bold;">Question {{i+1}}: </span><ng-katex-paragraph style="font-size: 14px;" [paragraph]="item.Question"></ng-katex-paragraph></span>
+          <div *ngIf="item.GraphUrl" class="image">
+            <img [src]="item.GraphUrl" alt="">
+          </div>
+          <dx-radio-group [dataSource]="item.ChoiceList" itemTemplate="item" (onValueChanged)="handleChangeSelection($event)">
             <div *dxTemplate="let data of 'item'">
               <ng-katex style="font-size: 14px; height: 50px;" [equation]="data.Answer"></ng-katex>
             </div>

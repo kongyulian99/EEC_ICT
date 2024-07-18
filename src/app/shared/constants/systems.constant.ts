@@ -1,5 +1,5 @@
 export class SystemConstants {
-  public static CURRENT_USER: string = 'USER_QUANLYCANBO';
+  public static CURRENT_USER: string = 'USER_ICT';
   public static FUNCTION_SIDEBAR: string = 'Functions';
   public static VIEW_ACTION: string = 'VIEW';
   public static CREATE_ACTION: string = 'CREATE';
@@ -26,5 +26,6 @@ export class SystemConstants {
   public static CATEGORIES: string = 'CATEGORIES';
   public static DM_CAUHOI: string = 'DM_CAUHOI';
 
-  public static API_URL: string = 'https://eecictapi.azurewebsites.net'
+  // public static API_URL: string = 'https://eecictapi.azurewebsites.net';
+  public static API_URL: string = 'http://localhost:44314/';
 }

@@ -73,4 +73,8 @@ export class FormCauhoiComponent implements OnInit {
       }
     })
   }
+
+  handleChangeGraph(event) {
+    // debugger;
+  }
 }

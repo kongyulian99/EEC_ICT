@@ -14,8 +14,9 @@
     </div>
     <div class="field">
       <label>GraphUrl:</label>
-      <dx-text-box [readOnly]="readOnly" [(value)]="entity.GraphUrl">
-      </dx-text-box>
+      <!-- <dx-text-box [readOnly]="readOnly" [(value)]="entity.GraphUrl">
+      </dx-text-box> -->
+      <input #graph type="file" accept=".png, .jpg, .jpeg" (change)="handleChangeGraph($event)">
     </div>
     <div class="field">
       <label for="">Choices: <button *ngIf="!readOnly" class="add-btn" (click)="handleAddChoice()"><i class="icon fa fa-plus" title="Add new choice"></i></button></label>

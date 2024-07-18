@@ -63,4 +63,12 @@ export class DMCauhoiService extends BaseService {
       })
       .pipe(catchError(this.handleError));
   }
+
+  checkCorrect(listRequest: any, userId: string) {
+    return this.http
+      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-cauhoi/checkCorrect?userId=${userId}`, listRequest, {
+        headers: this.httpOptions,
+      })
+      .pipe(catchError(this.handleError));
+  }
 }
