@@ -1,5 +1,5 @@
 import { ModalChangePasswordComponent } from './../modal-change-password/modal-change-password.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenService, NotificationService, SystemConstants } from 'src/app/shared';
@@ -38,7 +38,7 @@ listThongBaoChuaXem:any = [];
       this.user = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER) as string);
       this.signalRService.connectionEstablished.subscribe();
       this.signalRService.announcementThongBaoChiDao.subscribe((thongbao:any) => {
-        // console.log(thongbao);
+        console.log(thongbao);
         var listDonViNhan = thongbao.ListDonViNhan;
         var listDonViNhanByUser = listDonViNhan.filter(el => el.MaDonViNhan == this.user.MaDonVi)
         if (listDonViNhanByUser.length > 0) {
@@ -85,4 +85,8 @@ listThongBaoChuaXem:any = [];
       );
   }
 
+  @Output() onToggle = new EventEmitter();
+  toggleCollapseSidebar() {
+    this.onToggle.emit();
+  }
 }

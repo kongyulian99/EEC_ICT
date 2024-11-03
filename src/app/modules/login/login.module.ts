@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule } from '@angular/forms';
+import { DxButtonModule } from 'devextreme-angular';
 
 
 
@@ -12,8 +13,9 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule, 
-    FormsModule, 
+    LoginRoutingModule,
+    FormsModule,
+    DxButtonModule
   ]
 })
 export class LoginModule { }

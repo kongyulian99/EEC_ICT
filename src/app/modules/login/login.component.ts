@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenService, FileService, NotificationService, SystemConstants } from 'src/app/shared';
+import { dxButtonConfig } from 'src/app/shared/config';
 import { ResponseData } from 'src/app/shared/models';
 
 @Component({
@@ -13,6 +14,8 @@ export class LoginComponent implements OnInit {
   public password: string = '';
   private user: any;
   loading: boolean = false;
+  dxButtonConfig = dxButtonConfig;
+
   constructor(
     private router: Router,
     private fileService: FileService,
@@ -46,7 +49,7 @@ export class LoginComponent implements OnInit {
                     //     this.loading = false;
                     // });
                 }, 1000);
-                this.notificationService.showSuccess('Đăng nhập thành công!');
+                this.notificationService.showSuccess('Login successfully!');
             } else {
                 this.loading = false;
             }
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit {
         },
         error: (error: any) => {
           this.loading = false;
-          this.notificationService.showError('Lỗi máy chủ!');
+          this.notificationService.showError('System errorr!');
         }
     });
   }

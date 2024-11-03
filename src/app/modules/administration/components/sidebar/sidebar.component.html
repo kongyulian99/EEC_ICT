@@ -1,4 +1,4 @@
-<nav [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }" class="sidebar">
+<!-- <nav [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }" class="sidebar">
   <div class="list-group">
     <div class="nested-menu" *ngFor="let item of functions">
       <a class="list-group-item" [ngClass]="{ 'parent-active': item.IsActive }" (click)="addExpandClass(item.Id)">
@@ -13,7 +13,6 @@
         <ul class="submenu" [class.expand]="showMenu === item.Id" style="margin-bottom: 0px;">
           <li *ngFor="let subItem of item.Children">
             <a href="javascript:void(0)" routerLink="{{ subItem.Url }}" [routerLinkActive]="['router-link-active']">
-              <!-- <i class="fa {{subItem.IconCss}}"></i>&nbsp; -->
               <span>{{ subItem.Name }}</span>
             </a>
           </li>
@@ -24,5 +23,33 @@
   <div (click)="toggleCollapsed()" [ngClass]="{ collapsed: collapsed }" class="toggle-button" style="margin-left: 0px;">
     <i class="fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>&nbsp;
     <span>{{ 'Colapse menu' | uppercase}}</span>
+  </div>
+</nav> -->
+
+<nav [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }" class="sidebar">
+  <div class="user" style="margin-bottom: 5px;">
+    <img src="assets/images/math.png" alt="" width="60">
+  </div>
+  <div class="list-group">
+    <div class="nested-menu" *ngFor="let item of functions">
+      <a class="list-group-item" href="javascript:void(0)" [ngClass]="{active: checkActive(item)}" [routerLink]="(item.Children && item.Children.length > 0)?router.url.split('?')[0]:item.Url" (click)="activate(item)">
+        <div>
+          <i class="fa {{ item.IconCss }} fa-lg" title="{{item.Name}}" style="font-size: 20px;"></i>
+          <span class="role-name ml-1">{{ item.Name }}</span>
+        </div>
+        <span>
+          <i *ngIf="item.Children && item.Children.length > 0" class="fa fa-chevron-right" [ngClass]="{isExpand: item.expand, isColapse: !item.expand}"></i>
+        </span>
+      </a>
+      <li class="nested" [ngClass]="{ expand: item.expand}">
+        <ul class="submenu">
+          <li *ngFor="let subItem of item.Children" (click)="activate(subItem)">
+            <a [ngClass]="{active: checkActive(subItem)}" href="javascript:void(0)" routerLink="{{ subItem.Url }}">
+              <span>{{ subItem.Name }}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </div>
   </div>
 </nav>

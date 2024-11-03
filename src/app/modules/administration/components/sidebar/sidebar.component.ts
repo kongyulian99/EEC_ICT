@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { SystemConstants, clone } from 'src/app/shared';
@@ -12,7 +12,7 @@ import { SystemConstants, clone } from 'src/app/shared';
 export class SidebarComponent implements OnInit {
 
   isActive: boolean = false;
-  collapsed: boolean = false;
+  @Input() collapsed: boolean = false;
   showMenu: string = '';
   pushRightClass: string = '';
   functions: any[] = [];
@@ -88,6 +88,38 @@ export class SidebarComponent implements OnInit {
     this.showMenu = '';
     this.pushRightClass = 'push-right';
     this.toggleCollapsed();
+  }
+
+  checkActive(item): boolean {
+    // debugger;
+    // console.log(this.showMenu);
+
+    if(item.Children?.length > 0) {
+      for(let i=0; i<item.Children.length; i++) {
+        if(this.showMenu === item.Children[i].Id) {
+          // console.log(item.Children[i]);
+          return true;
+        }
+      }
+    } else {
+      if(this.showMenu === item.Id) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  activate(item: any) {
+    // debugger;
+    if(item.Children?.length > 0) {
+      item.expand = !item.expand;
+    }
+    if (item.Id === this.showMenu) {
+      this.showMenu = '0';
+    } else {
+      this.showMenu = item.Id;
+    }
   }
 
   checkActiveParent() {
