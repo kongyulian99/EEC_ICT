@@ -181,7 +181,7 @@ export class CustomCkEditorComponent {
       },
       simpleUpload: {
         // The URL that the images are uploaded to.
-        uploadUrl: `/api/File/ckeditor-images`,
+        uploadUrl: `https://eecictapi.azurewebsites.net/api/files/ckeditor-images`,
       },
       image: {
         toolbar: [
