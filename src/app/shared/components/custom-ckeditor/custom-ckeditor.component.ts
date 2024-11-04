@@ -68,7 +68,7 @@ import translations from './vi.js';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomCkEditorComponent {
-  @Input() placeholder = 'Text here';
+  @Input() placeholder = 'Nhập thông tin tại đây';
   @Input() isValidate = false;
   @Input() message = '';
   constructor(private changeDetector: ChangeDetectorRef) {}
@@ -162,6 +162,17 @@ export class CustomCkEditorComponent {
         Undo,
       ],
       fontFamily: {
+        options: [
+          'default',
+          'Arial, Helvetica, sans-serif',
+          'Courier New, Courier, monospace',
+          'Georgia, serif',
+          'Lucida Sans Unicode, Lucida Grande, sans-serif',
+          'Tahoma, Geneva, sans-serif',
+          'Times New Roman, Times, serif',
+          'Trebuchet MS, Helvetica, sans-serif',
+          'Verdana, Geneva, sans-serif',
+        ],
         supportAllValues: true,
       },
       fontSize: {

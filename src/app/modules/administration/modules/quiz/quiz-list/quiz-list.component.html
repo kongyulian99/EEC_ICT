@@ -7,19 +7,19 @@
   </ng-container>
 
   <ng-container buttons>
-    <dx-button class="custom-button" text="Add new test" [icon]="dxButtonConfig.add_icon"
+    <!-- <dx-button class="custom-button" text="Add new test" [icon]="dxButtonConfig.add_icon"
       [type]="dxButtonConfig.add_type" (click)="addTest()">
-    </dx-button>
+    </dx-button> -->
   </ng-container>
 
   <ng-container body>
     <div class="card-wrapper" *ngFor="let item of items; index as i">
       <div class="title">
         <h4>{{i + 1}}. <a routerLink="/administration/quiz/test/{{item.IdDeThi}}">{{item.TenDeThi}}</a></h4>
-        <div class="actions">
+        <!-- <div class="actions">
           <a class="dx-icon-edit" routerLink="/administration/quiz/prepare/{{item.IdDeThi}}"></a>
           <a class="dx-icon-close" (click)="handleDelete(item)"></a>
-        </div>
+        </div> -->
       </div>
       <p>{{item.GhiChu}}</p>
     </div>
@@ -28,7 +28,7 @@
   </ng-container>
 </app-generic-page>
 
-<dx-popup [width]="400" height="auto" title="Add new test" [(visible)]="isShowPopup">
+<!-- <dx-popup [width]="400" height="auto" title="Add new test" [(visible)]="isShowPopup">
   <div class="m-2">
     <dx-text-box label="Test title" [(value)]="item.TenDeThi"></dx-text-box>
     <dx-text-area label="Note" [(value)]="item.GhiChu"></dx-text-area>
@@ -37,4 +37,4 @@
       </dx-button>
     </div>
   </div>
-</dx-popup>
+</dx-popup> -->

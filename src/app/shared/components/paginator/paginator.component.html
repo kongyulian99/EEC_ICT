@@ -7,7 +7,7 @@
             [items]="pageSizes"
             [showDropDownButton]="false"
         ></dx-select-box>
-        <label>{{nameData}}/trang | <b>Tổng số: {{totalRows}} {{nameData}}</b></label>
+        <label>{{nameData}}/page | <b>Total: {{totalRows}} {{nameData}}</b></label>
     </div>
     <ngb-pagination
         #paginator
@@ -20,10 +20,10 @@
         [boundaryLinks]="true"
         (pageChange)="pageChanged($event)"
     >
-        <ng-template ngbPaginationFirst>Đầu</ng-template>
-        <ng-template ngbPaginationLast>Cuối</ng-template>
-        <ng-template ngbPaginationPrevious>Trước</ng-template>
-        <ng-template ngbPaginationNext>Sau</ng-template>
+        <ng-template ngbPaginationFirst><a class="dx-icon-chevrondoubleleft"></a></ng-template>
+        <ng-template ngbPaginationLast><a class="dx-icon-chevrondoubleright"></a></ng-template>
+        <ng-template ngbPaginationPrevious><a class="dx-icon-chevronleft"></a></ng-template>
+        <ng-template ngbPaginationNext><a class="dx-icon-chevronright"></a></ng-template>
         <ng-template ngbPaginationEllipsis>...</ng-template>
         <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
     </ngb-pagination>

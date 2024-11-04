@@ -11,7 +11,7 @@ export class PaginatorComponent implements OnInit {
     @ViewChild('paginator', { static: false })
     paginator!: NgbPagination;
     private _page: number = 1;
-    @Input() 
+    @Input()
     set page (value: number) {
         this.pageChange.emit(value);
         this._page = value;
@@ -21,7 +21,7 @@ export class PaginatorComponent implements OnInit {
     }
     @Output('pageChange') pageChange = new EventEmitter<number>();  // output
     private _pageSize!: number;
-    @Input() 
+    @Input()
     set pageSize (value: number) {
         this.pageSizeChange.emit(value);
         this._pageSize = value;
@@ -31,7 +31,7 @@ export class PaginatorComponent implements OnInit {
     }
     @Output('pageSizeChange') pageSizeChange = new EventEmitter<number>();  // output
     private _totalRows!: number;
-    @Input() 
+    @Input()
     set totalRows (value: number) {
         this._totalRows = value;
         if(this.paginator){
@@ -44,7 +44,7 @@ export class PaginatorComponent implements OnInit {
     @Input() pageSizes: any[]=[];
     @Output() onPageChanged = new EventEmitter<any>();
     @Output() onPageSizeChanged = new EventEmitter<any>();
-    @Input() nameData: string= 'bản ghi';
+    @Input() nameData: string= 'items';
     constructor() { }
 
     ngOnInit(): void {
