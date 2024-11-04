@@ -68,7 +68,7 @@ import translations from './vi.js';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomCkEditorComponent {
-  @Input() placeholder = 'Nhập thông tin tại đây';
+  @Input() placeholder = 'Text here';
   @Input() isValidate = false;
   @Input() message = '';
   constructor(private changeDetector: ChangeDetectorRef) {}

@@ -2803,8 +2803,8 @@
 }
 .dx-texteditor.dx-editor-outlined {
   background: #fff;
-  border: 1px solid #ced4da;
-  border-radius: 0;
+  /* border: 1px solid #ced4da; */
+  border-radius: 20px;
 }
 .dx-texteditor.dx-editor-underlined {
   background: 0 0;
@@ -3069,6 +3069,7 @@
   font: 17px/18px DXIcons;
   position: absolute;
   top: 50%;
+  right: 0;
   margin-top: -17px;
   width: 34px;
   height: 34px;
@@ -3086,7 +3087,7 @@
 }
 .dx-searchbox .dx-placeholder:before,
 .dx-searchbox .dx-texteditor-input {
-  padding-left: 34px;
+  padding-left: 15px;
 }
 .dx-rtl .dx-searchbox .dx-placeholder:before,
 .dx-rtl .dx-searchbox .dx-texteditor-input,
@@ -4884,6 +4885,7 @@
 }
 .dx-popup-title.dx-toolbar {
   padding: 6px 20px;
+  height: 36px;;
   overflow: visible;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -4907,7 +4909,7 @@
   padding: 0;
 }
 .dx-popup-title.dx-toolbar .dx-toolbar-items-container {
-  height: 36px;
+  height: 20px !important;
   overflow: visible;
 }
 .dx-popup-title.dx-toolbar .dx-toolbar-menu-container {
@@ -4930,7 +4932,7 @@
   padding: 0;
 }
 .dx-popup-title.dx-toolbar .dx-toolbar-label {
-  font-size: 20px;
+  font-size: 18px;
 }
 .dx-popup-title .dx-closebutton {
   display: block;
@@ -5466,7 +5468,7 @@
 .dx-gallery .dx-gallery-nav-button-prev {
   position: absolute;
   top: 0;
-  width: 34%;
+  width: 50px;
   height: 100%;
   background: 0 0;
   cursor: pointer;

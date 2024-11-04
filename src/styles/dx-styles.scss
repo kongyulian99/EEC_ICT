@@ -199,8 +199,9 @@
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 7px;
+    padding-bottom: 7px;
     margin-bottom: 2px;
-    overflow: visible;
+    // overflow: hidden;
     box-shadow: 0 1px #dee2e6;
 }
 .dx-popup-bottom.dx-toolbar {
@@ -320,10 +321,21 @@
 }
 // End FileUpload
 
+// dx grid
+.dx-datagrid-headers .dx-datagrid-table .dx-row > td {
+  background-color: #146C94;
+  border-bottom: none;
+}
+.dx-header-row > td > .dx-datagrid-text-content {
+  color: white;
+}
 // dx tree list
 .dx-treelist-headers .dx-treelist-table .dx-row > td {
-  background-color: #7fb1b3;
+  background-color: #146C94;
   border-bottom: none;
+}
+.dx-treelist-headers {
+  color: white;
 }
 .dx-treelist-checkbox-size.dx-state-disabled {
     .dx-checkbox-icon {
@@ -332,6 +344,12 @@
 
     }
 }
+
+// .dx-datagrid-rowsview .dx-row-focused.dx-data-row .dx-command-edit:not(.dx-focused) .dx-link, .dx-datagrid-rowsview .dx-row-focused.dx-data-row > td:not(.dx-focused), .dx-datagrid-rowsview .dx-row-focused.dx-data-row > tr > td:not(.dx-focused) {
+//   background-color: #F1F1F1 !important;
+//   color: black !important;
+//   border-bottom: inherit;
+// }
 // .dx-treelist-icon-container.dx-cell-focus-disabled.dx-editor-inline-block {
 //   padding-right: 2px;
 // }
@@ -350,7 +368,9 @@
 }
 // text-area
 .dx-texteditor-label .dx-label span {
-  color: #337ab7;
+  // color: #337ab7;
+  color: black;
+  font-weight: 500;
   font-size: 14px !important;
 }
 .dx-textarea .dx-texteditor-input {
@@ -427,3 +447,127 @@ dx-list {
 //         }
 //     }
 // }
+
+
+// Liem
+// .dx-texteditor-label {
+//   font-weight: bold;
+//   opacity: 1; /* Make sure the label is always visible */
+//   color: #000 !important; /* Adjust the color for more visibility */
+// }
+
+.dx-texteditor-with-label {
+  // height: 40px !important;
+  border-radius: 5px !important;
+  padding: 3px !important;
+  .dx-texteditor-input {
+    padding-bottom: 3px !important;
+  }
+}
+
+.dx-searchbox {
+  .dx-texteditor-container::after {
+    background-color: transparent !important;
+  }
+}
+.dx-dropdowneditor {
+  .dx-texteditor-container::after {
+    background-color: transparent !important;
+  }
+}
+
+// dx-button
+dx-button {
+  border-radius: 5px !important;
+}
+// dx-text-box
+dx-text-box {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 20px !important;
+}
+// dx-text-area
+dx-text-area {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+// dx-number-box
+dx-number-box {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+}
+// dx-date-box
+dx-date-box {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+// dx-select-box
+dx-select-box {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+
+  .dx-button-content {
+    border-radius: 5px !important;
+  }
+}
+
+// dx-tag-box
+dx-tag-box {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+// dx-drop-down-box
+dx-drop-down-box {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+// dx-select-box
+dx-tree-list {
+  // color: red;
+  // box-shadow: 2px 3px #acda;
+  // // box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  // background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+.dx-checkbox-icon {
+  // background-color: #F3F8FF;
+}
+
+.dx-popup-title.dx-toolbar {
+  color: red;
+  text-transform: uppercase;
+  background-color: #F3F8FF;
+}
+
+.dx-toolbar-before {
+  padding-right: 0 !important;
+}
+
+.dx-texteditor-input-container {
+  border-radius: 20px !important;
+}
