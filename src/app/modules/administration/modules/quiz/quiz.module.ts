@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz.component';
-import { DxButtonModule, DxRadioGroupModule, DxScrollViewModule, DxSelectBoxComponent, DxSelectBoxModule, DxToolbarModule } from 'devextreme-angular';
-import { KatexModule } from 'ng-katex';
+import { DxButtonModule, DxRadioGroupModule, DxScrollViewModule, DxSelectBoxComponent, DxSelectBoxModule, DxTextBoxModule, DxToolbarModule } from 'devextreme-angular';
+import { ComponentsSharedModule } from 'src/app/shared';
+import { QuizPrepareComponent } from './quiz-prepare/quiz-prepare.component';
+import { QuizTestComponent } from './quiz-test/quiz-test.component';
 
 @NgModule({
   declarations: [
-    QuizComponent
+    QuizComponent,
+    QuizPrepareComponent,
+    QuizTestComponent
   ],
   imports: [
     CommonModule,
@@ -16,9 +20,10 @@ import { KatexModule } from 'ng-katex';
     DxToolbarModule,
     DxButtonModule,
     DxRadioGroupModule,
-    KatexModule,
     DxScrollViewModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    ComponentsSharedModule
   ]
 })
 export class QuizModule { }

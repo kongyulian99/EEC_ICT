@@ -1,4 +1,4 @@
-import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule } from 'devextreme-angular';
+import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule, DxLoadPanelModule } from 'devextreme-angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,11 @@ import { PipesModule } from '../pipes';
 import { HttpClientModule } from '@angular/common/http';
 import { MoreFilterComponent } from './more-filter/more-filter.component';
 import { TopicSelectboxComponent } from './topic-selectbox/topic-selectbox.component';
+import { GenericPageComponent } from './generic-page/generic-page.component';
+import { CustomCkEditorComponent } from './custom-ckeditor/custom-ckeditor.component';
+import { ViewCkeditorComponent } from './view-ckeditor/view-ckeditor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -19,10 +24,14 @@ import { TopicSelectboxComponent } from './topic-selectbox/topic-selectbox.compo
     MultiImagesComponent,
     MoreFilterComponent,
     TopicSelectboxComponent,
+    GenericPageComponent,
+    CustomCkEditorComponent,
+    ViewCkeditorComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     HttpClientModule,
     NgbPaginationModule,
         // Dev
@@ -46,14 +55,18 @@ import { TopicSelectboxComponent } from './topic-selectbox/topic-selectbox.compo
     DxTagBoxModule,
     DxValidationGroupModule,
     DxTreeListModule,
-    DxDataGridModule
+    DxLoadPanelModule,
+    CKEditorModule,
   ],
   exports: [
     PaginatorComponent,
     StepsComponent,
     MultiImagesComponent,
     MoreFilterComponent,
-    TopicSelectboxComponent
+    TopicSelectboxComponent,
+    GenericPageComponent,
+    CustomCkEditorComponent,
+    ViewCkeditorComponent
   ]
 })
 export class ComponentsSharedModule { }

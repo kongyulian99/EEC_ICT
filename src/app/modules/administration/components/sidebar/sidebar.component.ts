@@ -49,8 +49,8 @@ export class SidebarComponent implements OnInit {
   userFunctions: any[] = [
     {
       IsActive: true, Id: 7, IconCss: 'fa-bars', Name: 'Quiz', Children: [
-        {IsActive: true, Id: 8, IconCss: 'fa-caret-light', Name: 'Do a quiz', Url: 'quiz'},
-        {IsActive: true, Id: 9, IconCss: 'fa-caret-light', Name: 'Courses', Url: '/'},
+        {IsActive: true, Id: 8, IconCss: 'fa-caret-light', Name: 'Do a quiz', Url: 'quiz/list'},
+        {IsActive: true, Id: 9, IconCss: 'fa-caret-light', Name: 'Prepare', Url: 'quiz/list'},
       ]
     }
   ]
