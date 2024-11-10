@@ -42,6 +42,9 @@
 </div> -->
 
 <app-generic-page pageTitle="Test details" [haveBackButton]="true" [loading]="loading">
+  <ng-container main-filters>
+    {{correctCount}}
+  </ng-container>
   <ng-container buttons>
     <dx-button text="Submit" (onClick)="handleSubmit()"></dx-button>
   </ng-container>

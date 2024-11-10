@@ -35,6 +35,26 @@ export class DMDethiService extends BaseService {
         .pipe(catchError(this.handleError))
     );
   }
+
+  selectOneForTest(maDethi: string) {
+    return (
+      this.http
+        // tslint:disable-next-line:max-line-length
+        .get<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/selectonefortest/${maDethi}`, {
+          headers: this.httpOptions,
+        })
+        .pipe(catchError(this.handleError))
+    );
+  }
+
+  submit(userId: string, entity: any) {
+    return this.http
+      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/submit/${userId}`, entity, {
+        headers: this.httpOptions,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   insert(entity: any) {
     return this.http
       .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/insert`, entity, {

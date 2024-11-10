@@ -44,7 +44,7 @@ export class QuizTestComponent implements OnInit {
   // }
 
   loadData() {
-    this.dMDethiService.selectOne(this.item.IdDeThi).subscribe((res: any) => {
+    this.dMDethiService.selectOneForTest(this.item.IdDeThi).subscribe((res: any) => {
       if(res.Status.Code == 1) {
         this.item = res.Data;
         // this.loadQuestions();
@@ -52,38 +52,14 @@ export class QuizTestComponent implements OnInit {
     })
   }
 
-  // topicId = 1;
-  // handleChangeTopic($event) {
-  //   // console.log($event.value);
-  //   this.dMCauhoiService.selectAll(0, 0, '', $event.value).subscribe((res:any) => {
-  //     if(res.Status.Code === 1) {
-  //       this.items = res.Data;
-  //     }
-  //   })
-  // }
-
-  // listSelection = [];
-  // handleChangeSelection(event) {
-  //   // debugger;
-  //   let index = this.listSelection.findIndex(o => o.QuestionId == event.value.QuestionId);
-  //   if(index < 0) {
-  //     this.listSelection.push(event.value);
-  //   } else {
-  //     this.listSelection[index].AnswerId = event.value.AnswerId;
-  //   }
-  //   console.log(this.listSelection);
-  // }
-
+  correctCount = 0;
   handleSubmit() {
-    // debugger;
-    // if(this.listSelection.length < this.items.length) {
-    //   this.notificationService.showConfirmation("There are some question not answer! Still submit?", () => {
-    //     this.dMCauhoiService.checkCorrect(this.listSelection, this.user.UserId).subscribe((res: any) => {
-    //       if(res.Status.Code === 1) {
-    //         this.notificationService.showSuccess("Submit success, you've got score" + res.Data);
-    //       }
-    //     })
-    //   })
-    // }
+    this.dMDethiService.submit(this.user.UserId, this.item).subscribe((res: any) => {
+      if(res.Status.Code == 1) {
+        this.correctCount = res.Data;
+        this.notificationService.showSuccess("Submit successfully!");
+        // this.loadQuestions();
+      }
+    })
   }
 }
