@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationService, SystemConstants } from 'src/app/shared';
+import { fixTimezoneToJSON, NotificationService, SystemConstants } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
 import { ResponseData } from 'src/app/shared/models';
 import { DMCauhoiService } from 'src/app/shared/services/dm-cauhoi.service';
@@ -15,7 +15,8 @@ import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 export class QuizTestComponent implements OnInit {
   loading = false;
   equation: string = 'x^{a}';
-  // options: KatexOptions = {
+  startTime = new Date();
+   // options: KatexOptions = {
   //   displayMode: false,
   // };
 
@@ -29,7 +30,6 @@ export class QuizTestComponent implements OnInit {
   ) {
     this.user = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   }
-
 
   user: any;
   allTopic = [];
@@ -54,7 +54,11 @@ export class QuizTestComponent implements OnInit {
 
   correctCount = 0;
   handleSubmit() {
-    this.dMDethiService.submit(this.user.UserId, this.item).subscribe((res: any) => {
+    this.dMDethiService.submit(this.user.UserId, {
+      ...this.item,
+      StartTime: fixTimezoneToJSON(this.startTime),
+      EndTime: fixTimezoneToJSON(new Date())
+    }).subscribe((res: any) => {
       if(res.Status.Code == 1) {
         this.correctCount = res.Data;
         this.notificationService.showSuccess("Submit successfully!");

@@ -1,46 +1,3 @@
-<!-- <div class="widget-header">
-  <dx-toolbar>
-    <dxi-item location="before" widget="dxButton" locateInMenu="never">
-      <div *dxTemplate>
-        <div class="toolbar-label">
-          {{ title | uppercase }}
-        </div>
-      </div>
-    </dxi-item>
-    <dxi-item location="after" widget="dxButton" locateInMenu="never">
-      <div *dxTemplate>
-        <dx-select-box [dataSource]="allTopic" displayExpr="TopicName" valueExpr="TopicId"
-          (onValueChanged)="handleChangeTopic($event)"></dx-select-box>
-      </div>
-    </dxi-item>
-    <dxi-item location="after" widget="dxButton" locateInMenu="never">
-      <div *dxTemplate>
-        <dx-button text="Submit" (onClick)="handleSubmit()"></dx-button>
-      </div>
-    </dxi-item>
-  </dx-toolbar>
-</div>
-<div class="view-card-body">
-  <div class="card-content">
-    <div class="content">
-      <dx-scroll-view>
-        <div *ngFor="let item of items; index as i;" class="mx-4">
-          <span style="height: 50px;"><span style="font-weight: bold;">Question {{i+1}}: </span>
-          </span>
-          <div *ngIf="item.GraphUrl" class="image">
-            <img [src]="item.GraphUrl" alt="">
-          </div>
-          <dx-radio-group [dataSource]="item.ChoiceList" itemTemplate="item"
-            (onValueChanged)="handleChangeSelection($event)">
-            <div *dxTemplate="let data of 'item'">
-            </div>
-          </dx-radio-group>
-        </div>
-      </dx-scroll-view>
-    </div>
-  </div>
-</div> -->
-
 <app-generic-page pageTitle="Test details" [haveBackButton]="true" [loading]="loading">
   <ng-container main-filters>
     {{correctCount}}
@@ -52,18 +9,9 @@
   <ng-container body>
     <div class="row mt-2">
       <div class="col-12">
-        <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
-         <!-- <dx-text-area [readOnly]="true" [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area> -->
         <h4>{{item.TenDeThi}}</h4>
       </div>
     </div>
-
-    <!-- <div class="row mt-2">
-      <div class="col-12 field">
-        <div class="label">Note</div>
-        <app-custom-ckeditor [(Content)]="item.GhiChu"></app-custom-ckeditor>
-      </div>
-    </div> -->
 
     <div class="row mt-4" *ngFor="let question of item.ListCauHoi; index as i" style="background-color: #fff;">
       <div class="col-6">
