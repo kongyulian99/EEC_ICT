@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { GiamsatComponent } from './giamsat/giamsat.component';
-import { DxScrollViewModule } from 'devextreme-angular';
+import { DxChartModule, DxScrollViewModule } from 'devextreme-angular';
 
 
 @NgModule({
@@ -13,6 +13,7 @@ import { DxScrollViewModule } from 'devextreme-angular';
   imports: [
     CommonModule,
     DxScrollViewModule,
+    DxChartModule,
     DashboardRoutingModule
   ]
 })

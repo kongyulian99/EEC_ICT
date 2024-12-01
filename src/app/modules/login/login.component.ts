@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
                 this.loading = false;
             } else if (response.Status.Code === 1) {
                 this.user = response.Data;
+
                 localStorage.removeItem(SystemConstants.CURRENT_USER);
                 localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
 
