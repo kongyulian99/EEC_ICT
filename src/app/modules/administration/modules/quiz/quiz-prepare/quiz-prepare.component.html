@@ -7,7 +7,7 @@
   </ng-container>
 
   <ng-container body>
-    <div class="row mt-2">
+    <div class="row mx-1 mt-2">
       <div class="col-12">
         <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
          <dx-text-area [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area>
@@ -20,8 +20,12 @@
         <app-custom-ckeditor [(Content)]="item.GhiChu"></app-custom-ckeditor>
       </div>
     </div> -->
+    <div class="field" *ngFor="let question of item.ListCauHoi; index as i;">
+      <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)" (onExit)="handleExitEdit(question, i)"></app-multiple-choice-question>
+    </div>
 
-    <div class="row mt-4" *ngFor="let question of item.ListCauHoi; index as i">
+
+    <!-- <div class="row mx-1 mt-4" *ngFor="let question of item.ListCauHoi; index as i">
       <div class="col-6">
         <div class="field">
           <div class="label">Quiz: {{i + 1}}</div>
@@ -42,6 +46,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </ng-container>
 </app-generic-page>

@@ -60,7 +60,47 @@ export class QuizPrepareComponent implements OnInit {
 
   addQuestion() {
     this.item.ListCauHoi.push({
-      ChoiceList: [{}, {}, {}, {}]
+      IdDeThi: this.item.IdDeThi,
+      Question: '',
+      Choices: JSON.stringify(
+        [
+          {
+            Id: 1,
+            Answer: '',
+            IsCorrect: false
+          },
+          {
+            Id: 2,
+            Answer: '',
+            IsCorrect: false
+          },
+          {
+            Id: 3,
+            Answer: '',
+            IsCorrect: false
+          },
+          {
+            Id: 4,
+            Answer: '',
+            IsCorrect: false
+          }
+        ]
+      ),
+      Note: '',
+      QuestionType: 1,
+      IsEdit: true
     });
+  }
+
+  handleChangeQuestion(event, i) {
+    // debugger;
+    // const id = this.item.ListCauHoi.findIndex(o => o == question);
+    this.item.ListCauHoi[i] = event;
+    // question = event;
+  }
+
+  handleExitEdit(question, i) {
+    // const id = this.item.ListCauHoi.findIndex(o => o == question);
+    question = this.item.ListCauHoi[i];
   }
 }

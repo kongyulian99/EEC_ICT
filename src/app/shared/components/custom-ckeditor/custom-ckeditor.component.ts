@@ -57,6 +57,8 @@ import {
   Underline,
   Undo,
   type EditorConfig,
+  BalloonEditor,
+  InlineEditor,
 } from 'ckeditor5';
 
 import translations from './vi.js';
@@ -68,13 +70,14 @@ import translations from './vi.js';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomCkEditorComponent {
-  @Input() placeholder = 'Nhập thông tin tại đây';
+  @Input() placeholder = 'Input here...';
   @Input() isValidate = false;
   @Input() message = '';
   constructor(private changeDetector: ChangeDetectorRef) {}
 
   public isLayoutReady = false;
-  public Editor = ClassicEditor;
+  // public Editor = ClassicEditor;
+  public Editor = InlineEditor;
   public config: EditorConfig = {}; // CKEditor needs the DOM tree before calculating the configuration.
   public ngAfterViewInit(): void {
     this.config = {

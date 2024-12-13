@@ -1,4 +1,4 @@
-import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule, DxLoadPanelModule } from 'devextreme-angular';
+import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule, DxLoadPanelModule, DxCheckBoxModule, DxRadioGroupModule } from 'devextreme-angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ import { CustomCkEditorComponent } from './custom-ckeditor/custom-ckeditor.compo
 import { ViewCkeditorComponent } from './view-ckeditor/view-ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RouterModule } from '@angular/router';
+import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RouterModule } from '@angular/router';
     TopicSelectboxComponent,
     GenericPageComponent,
     CustomCkEditorComponent,
-    ViewCkeditorComponent
+    ViewCkeditorComponent,
+    MultipleChoiceQuestionComponent
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,8 @@ import { RouterModule } from '@angular/router';
     DxValidationGroupModule,
     DxTreeListModule,
     DxLoadPanelModule,
+    DxCheckBoxModule,
+    DxRadioGroupModule,
     CKEditorModule,
   ],
   exports: [
@@ -66,7 +70,8 @@ import { RouterModule } from '@angular/router';
     TopicSelectboxComponent,
     GenericPageComponent,
     CustomCkEditorComponent,
-    ViewCkeditorComponent
+    ViewCkeditorComponent,
+    MultipleChoiceQuestionComponent
   ]
 })
 export class ComponentsSharedModule { }
