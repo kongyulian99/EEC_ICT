@@ -24,7 +24,7 @@ export class QuizTestComponent implements OnInit {
   dxButtonConfig = dxButtonConfig;
   title = 'Quiz';
   item: any = [];
-  countdownTime: number = 5 ; // 5 minutes in seconds
+  countdownTime: number = 300 ; // 5 minutes in seconds
   timerSubscription!: Subscription;
   isSubmitted: boolean = false;
   constructor(
@@ -74,7 +74,7 @@ export class QuizTestComponent implements OnInit {
   // Hàm chuyển đổi thời gian countdown thành phút và giây
   get displayTime(): string {
     const minutes = Math.floor(this.countdownTime / 60);
-    const seconds = this.countdownTime % 60;
+    const seconds= this.countdownTime % 60;
     return `${this.pad(minutes)}:${this.pad(seconds)}`;
   
   }
