@@ -1,6 +1,7 @@
 <app-generic-page pageTitle="Test details" [haveBackButton]="true" [loading]="loading">
   <ng-container main-filters>
-    {{correctCount}}
+    <!-- {{correctCount}} -->
+    <h5>Remaining time: {{ displayTime }}</h5>
   </ng-container>
   <ng-container buttons>
     <dx-button text="Submit" (onClick)="handleSubmit()"></dx-button>

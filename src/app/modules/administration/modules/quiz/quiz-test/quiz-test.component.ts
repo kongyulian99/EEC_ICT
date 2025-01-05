@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
 import { fixTimezoneToJSON, NotificationService, SystemConstants } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
 import { ResponseData } from 'src/app/shared/models';
@@ -23,6 +24,9 @@ export class QuizTestComponent implements OnInit {
   dxButtonConfig = dxButtonConfig;
   title = 'Quiz';
   item: any = [];
+  countdownTime: number = 5 ; // 5 minutes in seconds
+  timerSubscription!: Subscription;
+  isSubmitted: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private dMDethiService: DMDethiService,
@@ -38,6 +42,7 @@ export class QuizTestComponent implements OnInit {
       this.item.IdDeThi = this.activatedRoute.snapshot.paramMap.get('idDeThi');
       this.loadData();
     }
+    this.startCountdown();
   }
   // ngAfterViewChecked() {
   //   katex.renderAll();
@@ -65,5 +70,25 @@ export class QuizTestComponent implements OnInit {
         // this.loadQuestions();
       }
     })
+  }
+  // Hàm chuyển đổi thời gian countdown thành phút và giây
+  get displayTime(): string {
+    const minutes = Math.floor(this.countdownTime / 60);
+    const seconds = this.countdownTime % 60;
+    return `${this.pad(minutes)}:${this.pad(seconds)}`;
+  
+  }
+  pad(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
+  startCountdown(): void {
+    // Sử dụng interval của RxJS để đếm ngược
+    this.timerSubscription = interval(1000).subscribe(() => {
+      if (this.countdownTime > 0) {
+        this.countdownTime--;
+      } else {
+        this.handleSubmit(); // Gọi function submit khi hết giờ
+      }
+    });
   }
 }
