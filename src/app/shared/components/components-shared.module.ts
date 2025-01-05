@@ -16,6 +16,7 @@ import { ViewCkeditorComponent } from './view-ckeditor/view-ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RouterModule } from '@angular/router';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
+import { FillingQuestionComponent } from './filling-question/filling-question.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MultipleChoiceQuestionComponent } from './multiple-choice-question/mult
     GenericPageComponent,
     CustomCkEditorComponent,
     ViewCkeditorComponent,
-    MultipleChoiceQuestionComponent
+    MultipleChoiceQuestionComponent,
+    FillingQuestionComponent
   ],
   imports: [
     CommonModule,

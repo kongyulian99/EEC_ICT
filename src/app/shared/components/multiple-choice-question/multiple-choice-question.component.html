@@ -5,7 +5,14 @@
     <span *ngIf="question?.IsEdit" class="button dx-icon-close" style="color: red;" (click)="handleExit()"></span>
   </div>
 </div>
-<div class="row mx-1 mt-2">
+<div class="row mx-1">
+  <div class="col-12 field">
+    <div class="label">Question type</div>
+    <dx-select-box [dataSource]="questionTypes" displayExpr="Name" valueExpr="Id" [(value)]="question.QuestionType" (onValueChanged)="handleChangeQuestionType($event)">
+    </dx-select-box>
+  </div>
+</div>
+<div *ngIf="question.QuestionType==enum_QuestionType.MULTIPLE_CHOICE" class="row mx-1 mt-2">
   <div class="col-6">
     <div class="field">
       <div class="label">Quiz: {{index + 1}}</div>
@@ -20,14 +27,9 @@
     </div>
   </div>
   <div class="col-6">
-    <div class="field">
-      <div class="label">Question type</div>
-      <dx-select-box [dataSource]="questionTypes" displayExpr="Name" valueExpr="Id" [(value)]="questionType">
-      </dx-select-box>
-    </div>
     <div class="field mt-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
       <div class="label">Answers</div>
-      <div *ngIf="questionType=='MULTIPLECHOICE'" class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
+      <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
         <!-- <dx-radio-group [dataSource]="choices" valueExpr="Id" [(value)]="answerId">
           <ng-template *dxTemplate="let answer of 'item'">
             <app-custom-ckeditor class="flex-grow-1" [(Content)]="answer"></app-custom-ckeditor>
@@ -36,6 +38,43 @@
         <div *ngFor="let choice of choices" class="d-flex" style="margin: 5px 0px;">
           <dx-check-box [(value)]="choice.IsCorrect"></dx-check-box>
           <app-custom-ckeditor *ngIf="question?.IsEdit" class="flex-grow-1" [(Content)]="choice.Answer"></app-custom-ckeditor>
+          <app-view-ckeditor *ngIf="!question?.IsEdit" class="flex-grow-1" [data]="choice.Answer"></app-view-ckeditor>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="question.QuestionType==enum_QuestionType.FILL_IN_BLANK" class="row mx-1 mt-2">
+  <div class="col-6">
+    <div class="field">
+      <div class="label">Quiz: {{index + 1}}</div>
+      <app-custom-ckeditor *ngIf="question?.IsEdit" [(Content)]="question.Question"></app-custom-ckeditor>
+      <app-view-ckeditor *ngIf="!question?.IsEdit" [data]="question.Question"></app-view-ckeditor>
+    </div>
+
+    <div class="field mt-2">
+      <div class="label">Note</div>
+      <app-custom-ckeditor *ngIf="question?.IsEdit" [(Content)]="question.Note"></app-custom-ckeditor>
+      <app-view-ckeditor *ngIf="!question?.IsEdit" [data]="question.Note"></app-view-ckeditor>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="field mt-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
+      <div class="label">Answers <span class="dx-icon-add" style="color: blue; cursor: pointer;" (click)="handleAddFillInBlankAnswer()"></span></div>
+      <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
+        <!-- <dx-radio-group [dataSource]="choices" valueExpr="Id" [(value)]="answerId">
+          <ng-template *dxTemplate="let answer of 'item'">
+            <app-custom-ckeditor class="flex-grow-1" [(Content)]="answer"></app-custom-ckeditor>
+          </ng-template>
+        </dx-radio-group> -->
+        <div *ngFor="let choice of choices" class="d-flex" style="margin: 5px 0px;">
+          <!-- <dx-check-box [(value)]="choice.IsCorrect"></dx-check-box> -->
+          <div class="d-flex">
+            <app-custom-ckeditor *ngIf="question?.IsEdit" class="flex-grow-1" [(Content)]="choice.Answer"></app-custom-ckeditor>
+            <span class="dx-icon-close" style="color: red; cursor: pointer;" (click)="handleDeleteFillInBlankAnswer(choice.Id)"></span>
+          </div>
           <app-view-ckeditor *ngIf="!question?.IsEdit" class="flex-grow-1" [data]="choice.Answer"></app-view-ckeditor>
         </div>
       </div>

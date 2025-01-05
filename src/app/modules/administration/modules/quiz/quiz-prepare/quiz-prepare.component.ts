@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService, SystemConstants } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
+import { QuestionType } from 'src/app/shared/enum';
 import { DMDethiService } from 'src/app/shared/services/dm-dethi.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class QuizPrepareComponent implements OnInit {
   user: any = {};
   dxButtonConfig = dxButtonConfig;
 
+  enum_QuestionType = QuestionType;
   // listQuestion = [];
   item: any = {};
 

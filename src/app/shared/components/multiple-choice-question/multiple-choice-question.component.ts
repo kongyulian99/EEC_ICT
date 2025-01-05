@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { clone } from '../../utilities';
+import { QuestionType } from '../../enum';
 
 @Component({
   selector: 'app-multiple-choice-question',
@@ -16,12 +17,13 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
 
   choices = [];
 
+  enum_QuestionType = QuestionType;
   questionTypes = [
-    {Id: 'MULTIPLECHOICE', Name: "Multiple choice"},
-    {Id: 'MATCHING', Name: "Matching"},
-    {Id: 'FILLINBLANK', Name: "Fill in blank"},
+    {Id: QuestionType.MULTIPLE_CHOICE, Name: "Multiple choice"},
+    {Id: QuestionType.MATCHING, Name: "Matching"},
+    {Id: QuestionType.FILL_IN_BLANK, Name: "Fill in blank"},
   ];
-  questionType = this.questionTypes[0].Id;
+  // questionType = this.questionTypes[0].Id;
 
   constructor() { }
 
@@ -52,5 +54,47 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   }
   handleExit() {
     this.question.IsEdit = false;
+  }
+
+  handleChangeQuestionType(event) {
+    if(event.value == this.enum_QuestionType.MULTIPLE_CHOICE) {
+      this.choices = [
+        {
+          Id: 1,
+          Answer: '',
+          IsCorrect: false
+        },
+        {
+          Id: 2,
+          Answer: '',
+          IsCorrect: false
+        },
+        {
+          Id: 3,
+          Answer: '',
+          IsCorrect: false
+        },
+        {
+          Id: 4,
+          Answer: '',
+          IsCorrect: false
+        }
+      ];
+    } else if(event.value == this.enum_QuestionType.FILL_IN_BLANK) {
+      this.choices = [
+
+      ]
+    }
+  }
+
+  handleAddFillInBlankAnswer() {
+    this.choices.push({
+      Id: Math.max(...this.choices.map(choice => choice.Id)) + 1,
+      Answer: ''
+    })
+  }
+  handleDeleteFillInBlankAnswer(id) {
+    // const index = this.choices.findIndex(o => o.Id == id);
+    this.choices = this.choices.filter(o => o.Id != id);
   }
 }
