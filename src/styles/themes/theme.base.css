@@ -2398,7 +2398,7 @@
   line-height: 0;
 }
 .dx-checkbox.dx-state-readonly .dx-checkbox-icon {
-  border-color: #f8f9fa;
+  border-color: #ddd;
   background-color: #fff;
 }
 .dx-checkbox.dx-state-hover .dx-checkbox-icon {
