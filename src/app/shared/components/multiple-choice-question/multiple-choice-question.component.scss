@@ -1,8 +1,10 @@
 .button {
+  justify-content: space-between;
   font-size: 16px;
   cursor: pointer;
   border: solid 1px;
   padding: 5px;
   border-radius: 5px;
-  margin-left: 5px;
+  padding-bottom: 1.2px;
+
 }

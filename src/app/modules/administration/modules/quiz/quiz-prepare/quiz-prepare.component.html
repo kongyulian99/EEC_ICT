@@ -20,7 +20,7 @@
         <app-custom-ckeditor [(Content)]="item.GhiChu"></app-custom-ckeditor>
       </div>
     </div> -->
-    <div class="field" *ngFor="let question of item.ListCauHoi; index as i;">
+    <div class="field" *ngFor="let question of item.ListCauHoi; index as i;" style="border: solid 1px;">
       <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)" (onExit)="handleExitEdit(question, i)"></app-multiple-choice-question>
     </div>
 
