@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { fixTimezoneToJSON, NotificationService, SystemConstants } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
+import { QuestionType } from 'src/app/shared/enum';
 import { ResponseData } from 'src/app/shared/models';
 import { DMCauhoiService } from 'src/app/shared/services/dm-cauhoi.service';
 import { DMDethiService } from 'src/app/shared/services/dm-dethi.service';
@@ -27,6 +28,9 @@ export class QuizTestComponent implements OnInit {
   countdownTime: number = 300 ; // 5 minutes in seconds
   timerSubscription!: Subscription;
   isSubmitted: boolean = false;
+
+  enum_QuestionType = QuestionType;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private dMDethiService: DMDethiService,
@@ -52,6 +56,12 @@ export class QuizTestComponent implements OnInit {
     this.dMDethiService.selectOneForTest(this.item.IdDeThi).subscribe((res: any) => {
       if(res.Status.Code == 1) {
         this.item = res.Data;
+        this.item.ListCauHoi = this.item.ListCauHoi?.map(element => {
+          return {
+            ...element,
+            Choices: JSON.parse(element.Choices)
+          }
+        });
         // this.loadQuestions();
       }
     })
@@ -59,10 +69,18 @@ export class QuizTestComponent implements OnInit {
 
   correctCount = 0;
   handleSubmit() {
-    this.dMDethiService.submit(this.user.UserId, {
-      ...this.item,
+    const submitItem: any = {};
+    submitItem.ListCauHoi = this.item.ListCauHoi.map(element => {
+      return {
+        ...element,
+        Choices: JSON.stringify(element.Choices)
+      }
+    })
+    this.dMDethiService.submit({
+      ...submitItem,
       StartTime: fixTimezoneToJSON(this.startTime),
-      EndTime: fixTimezoneToJSON(new Date())
+      EndTime: fixTimezoneToJSON(new Date()),
+      UserId: this.user.UserId
     }).subscribe((res: any) => {
       if(res.Status.Code == 1) {
         this.correctCount = res.Data;
@@ -76,7 +94,7 @@ export class QuizTestComponent implements OnInit {
     const minutes = Math.floor(this.countdownTime / 60);
     const seconds= this.countdownTime % 60;
     return `${this.pad(minutes)}:${this.pad(seconds)}`;
-  
+
   }
   pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
@@ -90,5 +108,9 @@ export class QuizTestComponent implements OnInit {
         this.handleSubmit(); // Gọi function submit khi hết giờ
       }
     });
+  }
+
+  parseChoices(choiceJsonString) {
+    return JSON.parse(choiceJsonString);
   }
 }

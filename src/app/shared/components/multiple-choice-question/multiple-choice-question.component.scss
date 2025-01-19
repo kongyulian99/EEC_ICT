@@ -6,5 +6,16 @@
   padding: 5px;
   border-radius: 5px;
   padding-bottom: 1.2px;
-
 }
+
+.question-container {
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  margin: 18px;
+  // padding: 10px;
+  box-shadow: 3px 3px 3px -3px #333;
+}
+
+// ::ng-deep p {
+//   margin-top: 5px !important;
+// }

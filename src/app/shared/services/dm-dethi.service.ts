@@ -47,14 +47,6 @@ export class DMDethiService extends BaseService {
     );
   }
 
-  submit(userId: string, entity: any) {
-    return this.http
-      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/submit/${userId}`, entity, {
-        headers: this.httpOptions,
-      })
-      .pipe(catchError(this.handleError));
-  }
-
   insert(entity: any) {
     return this.http
       .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/insert`, entity, {
@@ -69,6 +61,15 @@ export class DMDethiService extends BaseService {
       })
       .pipe(catchError(this.handleError));
   }
+
+  submit(entity: any) {
+    return this.http
+      .put<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/submit`, entity, {
+        headers: this.httpOptions,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   delete(maDethi: string) {
     return this.http
       .delete<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/delete/${maDethi}`, {

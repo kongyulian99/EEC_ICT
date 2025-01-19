@@ -1,32 +1,58 @@
-<app-generic-page pageTitle="Test details" [haveBackButton]="true" [loading]="loading">
+<app-generic-page [pageTitle]="item?.TenDeThi" [haveBackButton]="true" [loading]="loading">
   <ng-container main-filters>
     <!-- {{correctCount}} -->
-    <h5>Remaining time: {{ displayTime }}</h5>
   </ng-container>
   <ng-container buttons>
+    <span class="font-weight-bold mr-1" style="font-size: 16px;">Remaining time: {{ displayTime }}</span>
     <dx-button text="Submit" (onClick)="handleSubmit()"></dx-button>
   </ng-container>
 
   <ng-container body>
-    <div class="row mt-2">
-      <div class="col-12">
-        <h4>{{item.TenDeThi}}</h4>
+    <div *ngFor="let question of item.ListCauHoi; index as i" style="background-color: #fff;">
+      <div class="row mx-1 mt-4">
+        <div class="col-12 d-flex align-items-center">
+          <h5 class="label" style="font-weight: bold;">#{{i + 1}}: </h5>
+          <!-- <app-custom-ckeditor [(Content)]="question.Question"></app-custom-ckeditor> -->
+        </div>
       </div>
-    </div>
-
-    <div class="row mt-4" *ngFor="let question of item.ListCauHoi; index as i" style="background-color: #fff;">
-      <div class="col-6">
-        <h5 class="label">Quiz: {{i + 1}}</h5>
-        <!-- <app-custom-ckeditor [(Content)]="question.Question"></app-custom-ckeditor> -->
-        <app-view-ckeditor [data]="question.Question"></app-view-ckeditor>
+      <div class="row mx-2 mt-1">
+        <app-view-ckeditor class="flex-grow-1" [data]="question.Question"></app-view-ckeditor>
       </div>
-      <div class="col-6">
-        <div class="label">Answers</div>
-        <div class="answers p-2" style="background-color: #fff;">
-          <div *ngFor="let choice of question.ChoiceList" class="d-flex mt-2">
-            <dx-check-box class="mr-1" [(value)]="choice.IsCorrect"></dx-check-box>
-            <!-- <app-custom-ckeditor class="flex-grow-1" [(Content)]="choice.Answer"></app-custom-ckeditor> -->
-            <app-view-ckeditor [data]="choice.Answer"></app-view-ckeditor>
+      <div class="row mx-2 mt-2">
+        <div class="col-12">
+          <div *ngIf="question.QuestionType==enum_QuestionType.MULTIPLE_CHOICE" class="field mt-3 mb-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
+            <div class="label">Answers</div>
+            <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
+              <!-- <dx-radio-group [dataSource]="choices" valueExpr="Id" [(value)]="answerId">
+                <ng-template *dxTemplate="let answer of 'item'">
+                  <app-custom-ckeditor class="flex-grow-1" [(Content)]="answer"></app-custom-ckeditor>
+                </ng-template>
+              </dx-radio-group> -->
+              <div *ngFor="let choice of question.Choices" class="d-flex mb-2" style="margin: 5px 0px; border-bottom: solid 1px #eee;">
+                <dx-check-box class="mr-1" [(value)]="choice.IsCorrect"></dx-check-box>
+                <app-custom-ckeditor *ngIf="question?.IsEdit" class="flex-grow-1" [(Content)]="choice.Answer">
+                </app-custom-ckeditor>
+                <app-view-ckeditor *ngIf="!question?.IsEdit" class="flex-grow-1" [data]="choice.Answer"></app-view-ckeditor>
+              </div>
+            </div>
+          </div>
+          <div  *ngIf="question.QuestionType==enum_QuestionType.FILL_IN_BLANK" class="field mt-3 mb-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
+            <div class="label">Answers</div>
+            <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
+              <!-- <dx-radio-group [dataSource]="choices" valueExpr="Id" [(value)]="answerId">
+                <ng-template *dxTemplate="let answer of 'item'">
+                  <app-custom-ckeditor class="flex-grow-1" [(Content)]="answer"></app-custom-ckeditor>
+                </ng-template>
+              </dx-radio-group> -->
+              <div *ngFor="let choice of question.Choices; index as i;" class="d-flex align-items-center mb-2"
+                style="margin: 5px 0px;">
+                <!-- <dx-check-box [(value)]="choice.IsCorrect"></dx-check-box> -->
+                <span class="mr-1" style="font-weight: bold;">{{i+1}}</span>
+                <app-custom-ckeditor class="flex-grow-1" [(Content)]="choice.Answer">
+                </app-custom-ckeditor>
+                <!-- <dx-text-box [(value)]="choice.Answer"></dx-text-box> -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
