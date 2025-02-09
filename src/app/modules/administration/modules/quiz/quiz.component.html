@@ -32,6 +32,8 @@
   <div class="m-2">
     <dx-text-box label="Test title" [(value)]="item.TenDeThi"></dx-text-box>
     <dx-text-area label="Note" [(value)]="item.GhiChu"></dx-text-area>
+    <dx-date-box label="Date" [(value)]="item.Ngay"></dx-date-box>
+    <dx-number-box label="Time" [(value)]="item.ThoiGianLamBai" [step]="0"></dx-number-box>
     <div class="text-right mt-2">
       <dx-button [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type" text="Save" (click)="save()">
       </dx-button>

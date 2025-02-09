@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
-import { fixTimezoneToJSON, NotificationService, SystemConstants } from 'src/app/shared';
+import {
+  fixTimezoneToJSON,
+  NotificationService,
+  SystemConstants,
+} from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
 import { QuestionType } from 'src/app/shared/enum';
 import { ResponseData } from 'src/app/shared/models';
@@ -12,20 +16,20 @@ import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 @Component({
   selector: 'app-quiz-test',
   templateUrl: './quiz-test.component.html',
-  styleUrls: ['./quiz-test.component.scss']
+  styleUrls: ['./quiz-test.component.scss'],
 })
 export class QuizTestComponent implements OnInit {
   loading = false;
   equation: string = 'x^{a}';
   startTime = new Date();
-   // options: KatexOptions = {
+  // options: KatexOptions = {
   //   displayMode: false,
   // };
 
   dxButtonConfig = dxButtonConfig;
   title = 'Quiz';
   item: any = [];
-  countdownTime: number = 300 ; // 5 minutes in seconds
+  countdownTime: number = 3600; // 5 minutes in seconds
   timerSubscription!: Subscription;
   isSubmitted: boolean = false;
 
@@ -42,59 +46,67 @@ export class QuizTestComponent implements OnInit {
   user: any;
   allTopic = [];
   ngOnInit(): void {
-    if(this.activatedRoute.snapshot.paramMap.get('idDeThi')) {
+    if (this.activatedRoute.snapshot.paramMap.get('idDeThi')) {
       this.item.IdDeThi = this.activatedRoute.snapshot.paramMap.get('idDeThi');
       this.loadData();
     }
-    this.startCountdown();
+    // this.startCountdown();
   }
   // ngAfterViewChecked() {
   //   katex.renderAll();
   // }
 
   loadData() {
-    this.dMDethiService.selectOneForTest(this.item.IdDeThi).subscribe((res: any) => {
-      if(res.Status.Code == 1) {
-        this.item = res.Data;
-        this.item.ListCauHoi = this.item.ListCauHoi?.map(element => {
-          return {
-            ...element,
-            Choices: JSON.parse(element.Choices)
-          }
-        });
-        // this.loadQuestions();
-      }
-    })
+    this.dMDethiService
+      .selectOneForTest(this.item.IdDeThi)
+      .subscribe((res: any) => {
+        if (res.Status.Code == 1) {
+          this.item = res.Data;
+          this.countdownTime = this.item?.ThoiGianLamBai * 60;
+          this.startCountdown();
+          this.item.ListCauHoi = this.item.ListCauHoi?.map((element) => {
+            return {
+              ...element,
+              Choices: JSON.parse(element.Choices),
+            };
+          });
+          // this.loadQuestions();
+        }
+      });
   }
 
   correctCount = 0;
   handleSubmit() {
-    const submitItem: any = {};
-    submitItem.ListCauHoi = this.item.ListCauHoi.map(element => {
-      return {
-        ...element,
-        Choices: JSON.stringify(element.Choices)
-      }
-    })
-    this.dMDethiService.submit({
-      ...submitItem,
-      StartTime: fixTimezoneToJSON(this.startTime),
-      EndTime: fixTimezoneToJSON(new Date()),
-      UserId: this.user.UserId
-    }).subscribe((res: any) => {
-      if(res.Status.Code == 1) {
-        this.correctCount = res.Data;
-        this.notificationService.showSuccess("Submit successfully!");
-        // this.loadQuestions();
-      }
-    })
+    this.notificationService.showConfirmation('Do you want to submit?', () => {
+      const submitItem: any = {};
+      submitItem.ListCauHoi = this.item.ListCauHoi.map((element) => {
+        return {
+          ...element,
+          Choices: JSON.stringify(element.Choices),
+        };
+      });
+      this.dMDethiService
+        .submit({
+          ...submitItem,
+          StartTime: fixTimezoneToJSON(this.startTime),
+          EndTime: fixTimezoneToJSON(new Date()),
+          UserId: this.user.UserId,
+        })
+        .subscribe((res: any) => {
+          if (res.Status.Code == 1) {
+            this.stopCountdown();
+            this.correctCount = res.Data;
+            this.notificationService.showSuccess('Submit successfully!');
+            // this.loadQuestions();
+          }
+        });
+    });
   }
   // Hàm chuyển đổi thời gian countdown thành phút và giây
   get displayTime(): string {
     const minutes = Math.floor(this.countdownTime / 60);
-    const seconds= this.countdownTime % 60;
+    const seconds = this.countdownTime % 60;
     return `${this.pad(minutes)}:${this.pad(seconds)}`;
-
   }
   pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
@@ -108,6 +120,12 @@ export class QuizTestComponent implements OnInit {
         this.handleSubmit(); // Gọi function submit khi hết giờ
       }
     });
+  }
+  stopCountdown(): void {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+      this.timerSubscription = null;
+    }
   }
 
   parseChoices(choiceJsonString) {
