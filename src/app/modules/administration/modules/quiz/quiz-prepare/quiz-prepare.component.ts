@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs';
 import { NotificationService, SystemConstants } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
 import { QuestionType } from 'src/app/shared/enum';
@@ -35,7 +36,14 @@ export class QuizPrepareComponent implements OnInit {
   }
 
   loadData() {
-    this.dMDethiService.selectOne(this.item.IdDeThi).subscribe((res: any) => {
+    this.loading = true;
+    this.dMDethiService.selectOne(this.item.IdDeThi)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+      })
+    )
+    .subscribe((res: any) => {
       if(res.Status.Code == 1) {
         this.item = res.Data;
         // this.loadQuestions();

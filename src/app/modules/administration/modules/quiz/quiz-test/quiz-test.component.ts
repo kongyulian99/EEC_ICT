@@ -88,6 +88,7 @@ export class QuizTestComponent implements OnInit {
       this.dMDethiService
         .submit({
           ...submitItem,
+          IdDeThi: this.item.IdDeThi,
           StartTime: fixTimezoneToJSON(this.startTime),
           EndTime: fixTimezoneToJSON(new Date()),
           UserId: this.user.UserId,
@@ -122,6 +123,7 @@ export class QuizTestComponent implements OnInit {
     });
   }
   stopCountdown(): void {
+    debugger;
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
       this.timerSubscription = null;
