@@ -124,19 +124,9 @@ export class QuizTestComponent implements OnInit {
     });
   }
   stopCountdown(): void {
-    debugger;
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
       this.timerSubscription = null;
-    }
-  }
-
-  stopCountdown(): void {
-    // Unsubscribe from the interval to stop the countdown
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-      this.timerSubscription = null;
-      console.log('Countdown stopped');
     }
   }
 

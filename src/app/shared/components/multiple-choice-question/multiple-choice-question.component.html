@@ -40,7 +40,7 @@
               <app-custom-ckeditor class="flex-grow-1" [(Content)]="answer"></app-custom-ckeditor>
             </ng-template>
           </dx-radio-group> -->
-          <div *ngFor="let choice of choices" class="d-flex mb-2" style="margin: 5px 0px; border-bottom: solid 1px #eee;">
+          <div *ngFor="let choice of choices; index as i;" class="d-flex mb-2" style="margin: 5px 0px; border-bottom: solid 1px #eee;">
             <dx-check-box class="mr-2" [readOnly]="!question?.IsEdit" [(value)]="choice.IsCorrect"></dx-check-box>
             <app-custom-ckeditor *ngIf="question?.IsEdit" class="flex-grow-1" [(Content)]="choice.Answer">
             </app-custom-ckeditor>
