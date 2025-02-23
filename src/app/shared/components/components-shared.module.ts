@@ -1,4 +1,4 @@
-import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule, DxLoadPanelModule, DxCheckBoxModule, DxRadioGroupModule } from 'devextreme-angular';
+import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule, DxLoadPanelModule, DxCheckBoxModule, DxRadioGroupModule, DxNumberBoxModule } from 'devextreme-angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -63,6 +63,7 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     DxCheckBoxModule,
     DxRadioGroupModule,
     CKEditorModule,
+    DxNumberBoxModule
   ],
   exports: [
     PaginatorComponent,
