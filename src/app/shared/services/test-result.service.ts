@@ -25,4 +25,16 @@ export class TestResultService extends BaseService {
         .pipe(catchError(this.handleError))
     );
   }
+
+  selectAvgScoreByUser(userId, nam) {
+    return (
+      this.http
+        // tslint:disable-next-line:max-line-length
+        .get<ResponseData>(
+          `${SystemConstants.API_URL}/api/TestResults/getAverageScoreByUser?userId=${userId}&nam=${nam}`,
+          { headers: this.httpOptions }
+        )
+        .pipe(catchError(this.handleError))
+    );
+  }
 }

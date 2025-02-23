@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { DxDataGridModule } from 'devextreme-angular';
 import { SystemConstants } from 'src/app/shared';
 import { TestResultService } from 'src/app/shared/services/test-result.service';
 
@@ -9,7 +13,10 @@ import { TestResultService } from 'src/app/shared/services/test-result.service';
 })
 export class GiamsatComponent implements OnInit {
   items = [];
+  itemsAvg = [];
   user: any;
+  nam: any;
+  columns = ['IdDeThi','AverageScore'];
   constructor(
     private testResultService: TestResultService
   ) { }
@@ -20,7 +27,17 @@ export class GiamsatComponent implements OnInit {
       if(res.Status.Code === 1) {
         this.items = res.Data;
       }
-    })
+    });
+
+    this.testResultService.selectAvgScoreByUser(this.user.UserId, this.nam).subscribe((res: any)=> {
+      if(res.Status.Code ===1) {
+        this.itemsAvg = res.Data;
+      }
+    });
+
+
+
   }
 
 }
+
