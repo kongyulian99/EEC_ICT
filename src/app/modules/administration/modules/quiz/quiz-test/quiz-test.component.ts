@@ -106,8 +106,18 @@ export class QuizTestComponent implements OnInit {
         this.countdownTime--;
       } else {
         this.handleSubmit(); // Gọi function submit khi hết giờ
+        this.stopCountdown();
       }
     });
+  }
+
+  stopCountdown(): void {
+    // Unsubscribe from the interval to stop the countdown
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+      this.timerSubscription = null;
+      console.log('Countdown stopped');
+    }
   }
 
   parseChoices(choiceJsonString) {

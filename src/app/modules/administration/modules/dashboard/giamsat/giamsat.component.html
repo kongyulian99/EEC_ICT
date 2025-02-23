@@ -9,3 +9,14 @@
     </dxo-argument-axis>
   </dx-chart>
 </dx-scroll-view>
+
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="itemsAvg"
+  keyExpr="ID"
+  [showBorders]="true"
+>
+  <dxi-column *ngFor="let column of columns" [dataField]="column"></dxi-column>
+</dx-data-grid>
+
+
