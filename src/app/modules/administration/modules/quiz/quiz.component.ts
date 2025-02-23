@@ -60,6 +60,11 @@ export class QuizComponent implements OnInit {
   item: any = {};
   isShowPopup = false;
   addTest() {
+    this.item = {
+      ...this.item,
+      Ngay: new Date(),
+      ThoiGianLamBai: 60
+    }
     this.isShowPopup = true;
   }
 

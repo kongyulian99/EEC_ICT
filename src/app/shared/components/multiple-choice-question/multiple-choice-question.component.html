@@ -6,17 +6,16 @@
     <div class="col-6 text-right">
       <span *ngIf="!question?.IsEdit" class="button dx-icon-edit" style="color: blue;"
         (click)="handleClickEdit()"></span>
+      <span class="button dx-icon-close" style="color: red;" (click)="handleDelete()"></span>
       <span *ngIf="question?.IsEdit" class="button dx-icon-check" style="color: blue" (click)="handleSave()"></span>
-      <span *ngIf="question?.IsEdit" class="button dx-icon-close" style="color: red;" (click)="handleExit()"></span>
+      <span *ngIf="question?.IsEdit" class="button dx-icon-return" style="color: red;" (click)="handleExit()"></span>
     </div>
   </div>
   <div class="row mx-2 mt-1">
-    <h4 class="col-12 d-flex align-items-center">
-      <div class="flex-grow-1">
-        <app-custom-ckeditor *ngIf="question?.IsEdit" [(Content)]="question.Question"></app-custom-ckeditor>
-        <app-view-ckeditor *ngIf="!question?.IsEdit" [data]="question.Question"></app-view-ckeditor>
-      </div>
-    </h4>
+    <div class="col-12">
+      <app-custom-ckeditor *ngIf="question?.IsEdit" [(Content)]="question.Question"></app-custom-ckeditor>
+      <app-view-ckeditor *ngIf="!question?.IsEdit" [data]="question.Question"></app-view-ckeditor>
+    </div>
   </div>
 
   <div class="row mx-1 mt-3">

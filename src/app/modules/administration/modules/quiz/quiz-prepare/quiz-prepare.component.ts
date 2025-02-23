@@ -105,4 +105,9 @@ export class QuizPrepareComponent implements OnInit {
     // const id = this.item.ListCauHoi.findIndex(o => o == question);
     question = this.item.ListCauHoi[i];
   }
+
+  handleDeleteQuestion(event) {
+    this.item.ListCauHoi = this.item.ListCauHoi.filter(o => o != event);
+    this.notificationService.showSuccess("Delete question succeed!");
+  }
 }

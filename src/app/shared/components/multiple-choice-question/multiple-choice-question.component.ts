@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { clone } from '../../utilities';
 import { QuestionType } from '../../enum';
+import { DMCauhoiService } from '../../services/dm-cauhoi.service';
 
 @Component({
   selector: 'app-multiple-choice-question',
@@ -12,6 +13,7 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   @Input() question: any = {};
   @Output() questionChange = new EventEmitter();
   @Output() onExit = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
 
   answerId;
 
@@ -25,7 +27,9 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   ];
   // questionType = this.questionTypes[0].Id;
 
-  constructor() { }
+  constructor(
+    private dmCauHoiService: DMCauhoiService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -54,6 +58,16 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   }
   handleExit() {
     this.question.IsEdit = false;
+  }
+
+  handleDelete() {
+    if(this.question?.QuestionId > 0) {
+      this.dmCauHoiService.delete(this.question.QuestionId).subscribe((res:any) => {
+        if(res.Status.Code == 1) {
+          this.onDelete.emit(this.question);
+        }
+      })
+    }
   }
 
   handleChangeQuestionType(event) {

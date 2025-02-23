@@ -8,9 +8,22 @@
 
   <ng-container body>
     <div class="row mx-1 mt-2">
-      <div class="col-12">
+      <div class="col-6">
         <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
          <dx-text-area [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area>
+      </div>
+      <div class="col-3">
+        <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
+        <dx-date-box label="Date" [(value)]="item.Ngay"></dx-date-box>
+      </div>
+      <div class="col-3">
+        <dx-number-box label="Time" [(value)]="item.ThoiGianLamBai" [step]="0"></dx-number-box>
+      </div>
+    </div>
+    <div class="row mx-1 mt-2">
+      <div class="col-12">
+        <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
+        <dx-text-area label="Note" [(value)]="item.GhiChu"></dx-text-area>
       </div>
     </div>
 
@@ -20,8 +33,8 @@
         <app-custom-ckeditor [(Content)]="item.GhiChu"></app-custom-ckeditor>
       </div>
     </div> -->
-    <div class="field" *ngFor="let question of item.ListCauHoi; index as i;" style="border: solid 1px;">
-      <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)" (onExit)="handleExitEdit(question, i)"></app-multiple-choice-question>
+    <div class="field" *ngFor="let question of item.ListCauHoi; index as i;">
+      <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)" (onExit)="handleExitEdit(question, i)" (onDelete)="handleDeleteQuestion($event)"></app-multiple-choice-question>
     </div>
 
 
