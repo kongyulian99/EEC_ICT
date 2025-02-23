@@ -14,12 +14,12 @@ export class TestResultService extends BaseService {
     super();
     this.httpOptions = this.httpOptions.set('Content-Type', 'application/json');
   }
-  selectMaxScoreByUser(userId) {
+  selectMaxScoreByUser(userId, nam: any) {
     return (
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${SystemConstants.API_URL}/api/TestResults/getMaxScoreByUser?userId=${userId}`,
+          `${SystemConstants.API_URL}/api/TestResults/getMaxScoreByUser?userId=${userId}&nam=${nam}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))
