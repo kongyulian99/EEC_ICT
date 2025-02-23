@@ -129,14 +129,14 @@ export class QuizTestComponent implements OnInit {
     }
   }
 
-  stopCountdown(): void {
-    // Unsubscribe from the interval to stop the countdown
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-      this.timerSubscription = null;
-      console.log('Countdown stopped');
-    }
-  }
+  // stopCountdown(): void {
+  //   // Unsubscribe from the interval to stop the countdown
+  //   if (this.timerSubscription) {
+  //     this.timerSubscription.unsubscribe();
+  //     this.timerSubscription = null;
+  //     console.log('Countdown stopped');
+  //   }
+  // }
 
   parseChoices(choiceJsonString) {
     return JSON.parse(choiceJsonString);
