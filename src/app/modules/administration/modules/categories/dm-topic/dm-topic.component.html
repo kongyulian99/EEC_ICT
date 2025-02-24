@@ -21,7 +21,7 @@
     <div class="bar">
       <div class="input-group">
         <dx-text-box mode="search" [placeholder]="placeholderSearch" [(value)]="textSearch" (onEnterKey)="onFilter()">
-          <dxi-button name="filter" location="after" [options]="optionsBtnFilter"></dxi-button>
+          <!-- <dxi-button name="filter" location="after" [options]="optionsBtnFilter"></dxi-button> -->
         </dx-text-box>
       </div>
       <div class="slide-buton">
@@ -32,7 +32,7 @@
     <!-- End Bar -->
     <!-- Grid -->
     <div class="content">
-      <dx-data-grid id="table" [dataSource]="allData" keyExpr="TopicId" [hoverStateEnabled]="true" [focusedRowKey]="focusKey"
+      <!-- <dx-data-grid id="table" [dataSource]="allData" keyExpr="TopicId" [hoverStateEnabled]="true" [focusedRowKey]="focusKey"
         [focusedRowEnabled]="true" [(autoNavigateToFocusedRow)]="autoNavigateToFocusedRow"
         (onFocusedRowChanged)="onFocusedRowChanged($event)" [columnAutoWidth]="true" [wordWrapEnabled]="true"
         [showBorders]="true" [showRowLines]="true" [noDataText]="'no data'">
@@ -40,9 +40,7 @@
         <dxo-selection mode=""></dxo-selection>
         <dxo-column-chooser [enabled]="false"></dxo-column-chooser>
         <dxo-paging [enabled]="false"></dxo-paging>
-        <!-- <dxo-scrolling mode="auto"></dxo-scrolling> -->
 
-        <!-- <dxi-column cellTemplate="cellSTT" caption="STT" [width]="45" alignment="center" cssClass="vertical-middle"></dxi-column> -->
         <dxi-column dataField="TopicId" [width]="100" cssClass="vertical-middle" alignment="center"></dxi-column>
         <dxi-column dataField="TopicName" [width]="300" cssClass="vertical-middle"></dxi-column>
         <dxi-column dataField="Note" [minWidth]="200" cssClass="vertical-middle"></dxi-column>
@@ -52,12 +50,28 @@
           *dxTemplate="let row of 'cellAction'">
           <span class="dx-icon-close" (click)="delete(row.data.TopicId, row.data.TopicName)"></span>
         </div>
-      </dx-data-grid>
+      </dx-data-grid> -->
+      <dx-tree-list id="table" [dataSource]="allData" [showBorders]="true" [focusedRowEnabled]="true" keyExpr="TopicId" parentIdExpr="IdCha" (onFocusedRowChanged)="onFocusedRowChanged($event)">
+        <dxo-header-filter [visible]="false"></dxo-header-filter>
+        <dxo-selection mode=""></dxo-selection>
+        <dxo-column-chooser [enabled]="false"></dxo-column-chooser>
+        <dxo-paging [enabled]="false"></dxo-paging>
+
+        <!-- <dxi-column dataField="TopicId" [width]="100" cssClass="vertical-middle" alignment="center"></dxi-column> -->
+        <dxi-column dataField="TopicName" [width]="300" cssClass="vertical-middle"></dxi-column>
+        <dxi-column dataField="Note" [minWidth]="200" cssClass="vertical-middle"></dxi-column>
+        <dxi-column cellTemplate="cellAction" [width]="45" alignment="center" [showInColumnChooser]="false"
+          cssClass="vertical-middle"></dxi-column>
+        <div class="rowAction"
+          *dxTemplate="let row of 'cellAction'">
+          <span class="dx-icon-close" (click)="delete(row.data.TopicId, row.data.TopicName)"></span>
+        </div>
+      </dx-tree-list>
     </div>
     <!-- End Grid -->
     <div class="paginator">
-      <app-paginator [(page)]="pageIndex" [(pageSize)]="pageSize" [totalRows]="totalRows" [pageSizes]="pageSizes"
-        (onPageChanged)="pageChanged($event)" (onPageSizeChanged)="pageSizeChanged($event)"></app-paginator>
+      <!-- <app-paginator [(page)]="pageIndex" [(pageSize)]="pageSize" [totalRows]="totalRows" [pageSizes]="pageSizes"
+        (onPageChanged)="pageChanged($event)" (onPageSizeChanged)="pageSizeChanged($event)"></app-paginator> -->
     </div>
   </div>
 
@@ -69,7 +83,7 @@
       </dx-button>
     </div>
     <div class="detail-content">
-      <app-form-topic #detail [entity]="currentEntity" [listData]="allData" [state]="state">
+      <app-form-topic #detail [allData]="allData" [entity]="currentEntity" [state]="state">
       </app-form-topic>
     </div>
     <div class="detail-footer">

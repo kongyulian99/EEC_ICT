@@ -55,7 +55,7 @@ export class DMtopicComponent implements OnInit {
   }
   loadData() {
     this.loading = true;
-    this.dMtopicService.selectAll(this.pageSize, this.pageIndex, this.textSearch).subscribe(
+    this.dMtopicService.selectAll(0, 0, this.textSearch).subscribe(
       (response: ResponseData) => {
         if (response.Status.Code == 1) {
           this.allData = response.Data;
@@ -174,7 +174,7 @@ export class DMtopicComponent implements OnInit {
   }
   cancel() {
     this.state = 'detail';
-    this.detail.entity.Matopic = -1;
+    this.detail.entity.TopicId = -1;
     setTimeout(() => {
       this.detail.entity = this.currentEntity;
     }, 10);
@@ -227,7 +227,7 @@ export class DMtopicComponent implements OnInit {
           this.dMtopicService.delete(id).subscribe(
             (response: ResponseData) => {
               if (response.Status.Code == 1) {
-                this.allData = this.allData.filter((o) => o.Matopic != id);
+                this.allData = this.allData.filter((o) => o.TopicId != id);
                 this.totalRows = this.allData.length;
                 // this.paging();
                 this.notificationService.showSuccess(
@@ -247,7 +247,7 @@ export class DMtopicComponent implements OnInit {
         } else {
           this.currentEntity = this.allData[0];
         }
-        this.focusKey = this.currentEntity.Matopic;
+        this.focusKey = this.currentEntity.TopicId;
         this.state = 'detail';
       }
     );

@@ -4,18 +4,21 @@
       <label>TopicId:</label>
       <app-topic-selectbox [readOnly]="readOnly" [(topicId)]="entity.TopicId"></app-topic-selectbox>
     </div> -->
-    <div class="field">
-      <label>TopicName:</label>
-      <dx-text-box [readOnly]="readOnly" [(value)]="entity.TopicName">
+    <div class="field mt-2">
+      <!-- <label>:</label> -->
+      <dx-text-box label="Topic Name" [readOnly]="readOnly" [(value)]="entity.TopicName">
         <dx-validator>
           <dxi-validation-rule type="required" message="Data Required"></dxi-validation-rule>
         </dx-validator>
       </dx-text-box>
     </div>
-    <div class="field">
-      <label>Note:</label>
-      <dx-text-area [readOnly]="readOnly" [maxHeight]="400" [autoResizeEnabled]="true" [(value)]="entity.Note">
+    <div class="field mt-2">
+      <!-- <label>Note:</label> -->
+      <dx-text-area label="Note" [readOnly]="readOnly" [maxHeight]="400" [autoResizeEnabled]="true" [(value)]="entity.Note">
       </dx-text-area>
+    </div>
+    <div class="field mt-2">
+      <dx-select-box label="Parent Topic" [dataSource]="listParent" displayExpr="TopicName" valueExpr="TopicId" placeholder="Choose a parent topic" [readOnly]="readOnly" [(value)]="entity.IdCha"></dx-select-box>
     </div>
     <!-- <div class="field">
       <label>Hiển thị:</label>
