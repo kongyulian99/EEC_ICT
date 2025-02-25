@@ -39,7 +39,7 @@ export class GiamsatComponent implements OnInit {
       }
     });
 
-    for (this.nam; this.nam > 2023 ; this.nam--) {
+    for (this.nam; this.nam > 2025 ; this.nam--) {
       this.listYear.push(this.nam);
     }
   }
