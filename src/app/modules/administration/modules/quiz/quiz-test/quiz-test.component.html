@@ -50,7 +50,7 @@
       </div>
       <div class="col-3" style="border-left: solid 1px #ddd;">
         <div class="grid-container">
-          <div class="grid-item" [ngClass]="{active: questionIndex == i, answered: checkAnswered(i)}" *ngFor="let question of item.ListCauHoi; index as i;" (click)="handleSelectQuestion(i)">
+          <div class="grid-item" [ngClass]="{active: questionIndex == i, answered: checkAnswered(i) && questionIndex !== i}" *ngFor="let question of item.ListCauHoi; index as i;" (click)="handleSelectQuestion(i)">
             {{i+1}}
             <!-- <span *ngIf="checkAnswered(i)" class="dx-icon-check icon" style="color: blue;"></span> -->
           </div>

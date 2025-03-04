@@ -163,7 +163,7 @@ export class QuizTestComponent implements OnInit {
     if(this.item.ListCauHoi[i].QuestionType == QuestionType.FILL_IN_BLANK) {
       return this.item.ListCauHoi[i].Choices.some(o => o.Answer.length > 0);
     } else {
-      debugger;
+      return this.item.ListCauHoi[i].Choices.some(o => o.IsCorrect == true);
     }
   }
 }
