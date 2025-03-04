@@ -15,7 +15,7 @@
   <ng-container body>
     <div class="card-wrapper" *ngFor="let item of items; index as i">
       <div class="title">
-        <h4>{{i + 1}}. <a routerLink="/administration/quiz/test/{{item.IdDeThi}}">{{item.TenDeThi}}</a></h4>
+        <h4>{{ (pageIndex-1)*pageSize + i + 1}}. <a routerLink="/administration/quiz/test/{{item.IdDeThi}}">{{item.TenDeThi}}</a></h4>
         <div class="actions">
           <a class="dx-icon-edit" routerLink="/administration/quiz/prepare/{{item.IdDeThi}}"></a>
           <a class="dx-icon-close" href="javascript:void(0)" (click)="handleDelete(item)"></a>

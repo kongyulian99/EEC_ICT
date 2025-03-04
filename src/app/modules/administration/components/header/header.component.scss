@@ -325,3 +325,10 @@ $topnav-background-color: #243B55;
     transform: rotateZ(0);
   }
 }
+
+.link {
+  &:hover {
+    color: red;
+    font-weight: bold;
+  }
+}
