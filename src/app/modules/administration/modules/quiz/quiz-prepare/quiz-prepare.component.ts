@@ -103,7 +103,6 @@ export class QuizPrepareComponent implements OnInit {
   }
 
   handleChangeQuestion(event, i) {
-    // debugger;
     // const id = this.item.ListCauHoi.findIndex(o => o == question);
     this.item.ListCauHoi[i] = event;
     // question = event;

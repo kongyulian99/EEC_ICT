@@ -19,19 +19,27 @@
   </div>
 
   <div class="row mx-1 mt-3">
-    <div class="col-4">
-      <div class="mt-3">
-        <dx-select-box label="Question type" [readOnly]="!question?.IsEdit" [dataSource]="questionTypes" displayExpr="Name" valueExpr="Id"
-          [(value)]="question.QuestionType" (onValueChanged)="handleChangeQuestionType($event)">
-        </dx-select-box>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-8">
+          <div class="mt-3">
+            <dx-select-box label="Question type" [readOnly]="!question?.IsEdit" [dataSource]="questionTypes" displayExpr="Name" valueExpr="Id"
+              [(value)]="question.QuestionType" (onValueChanged)="handleChangeQuestionType($event)">
+            </dx-select-box>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="mt-3">
+            <dx-number-box label="Weight" [readOnly]="!question?.IsEdit" [(value)]="question.TrongSo"></dx-number-box>
+          </div>
+        </div>
+        <div class="col-8 mt-1">
+          <app-topic-selectbox [readOnly]="!question?.IsEdit" [(topicId)]="question.TopicId" (topicIdChange)="handleChangeTopicId($event)"></app-topic-selectbox>
+        </div>
       </div>
     </div>
-    <div class="col-2">
-      <div class="mt-3">
-        <dx-number-box label="Weight" [readOnly]="!question?.IsEdit" [(value)]="question.TrongSo"></dx-number-box>
-      </div>
-    </div>
-    <div  *ngIf="question.QuestionType==enum_QuestionType.MULTIPLE_CHOICE" class="col-6">
+
+    <div *ngIf="question.QuestionType==enum_QuestionType.MULTIPLE_CHOICE" class="col-6">
       <div class="field mt-3 mb-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
         <div class="label">Answers</div>
         <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">

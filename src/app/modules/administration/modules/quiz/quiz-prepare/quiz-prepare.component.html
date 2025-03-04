@@ -2,15 +2,15 @@
   <ng-container buttons>
     <dx-button class="mr-1" [icon]="dxButtonConfig.add_icon" [type]="dxButtonConfig.add_type" text="Add question"
       (click)="addQuestion()"></dx-button>
-    <dx-button [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type" text="Save"
-      (click)="save()"></dx-button>
+    <dx-button [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type" text="Save" (click)="save()">
+    </dx-button>
   </ng-container>
 
   <ng-container body>
     <div class="row mx-1 mt-2">
       <div class="col-6">
         <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
-         <dx-text-area [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area>
+        <dx-text-area [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area>
       </div>
       <div class="col-3">
         <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
@@ -34,7 +34,8 @@
       </div>
     </div> -->
     <div class="field" *ngFor="let question of item.ListCauHoi; index as i;">
-      <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)" (onExit)="handleExitEdit(question, i)" (onDelete)="handleDeleteQuestion($event)"></app-multiple-choice-question>
+      <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)"
+        (onExit)="handleExitEdit(question, i)" (onDelete)="handleDeleteQuestion($event)"></app-multiple-choice-question>
     </div>
 
 

@@ -1,5 +1,21 @@
-<dx-select-box [readOnly]="readOnly" placeholder="Select a topic" [dataSource]="items" valueExpr="TopicId" displayExpr="TopicName" [(value)]="topicId" (onValueChanged)="handleChangeTopic($event)">
+<!-- <dx-select-box [readOnly]="readOnly" placeholder="Select a topic" [dataSource]="items" valueExpr="TopicId" displayExpr="TopicName" [(value)]="topicId" (onValueChanged)="handleChangeTopic($event)">
   <dx-validator>
     <dxi-validation-rule type="required" message="Data required"></dxi-validation-rule>
   </dx-validator>
-</dx-select-box>
+</dx-select-box> -->
+
+<!-- <dx-tree-view label="Topic" [dataSource]="items" dataStructure="plain" keyExpr="TopicId" displayExpr="TopicName"
+  parentIdExpr="IdCha">
+</dx-tree-view> -->
+
+<!-- <dx-dropdown-box></dx-dropdown-box> -->
+
+<dx-drop-down-box label="Topic" [readOnly]="readOnly" [(opened)]="isDropdownOpen" [dataSource]="items" [(value)]="topicId"
+  displayExpr="TopicName" valueExpr="TopicId" [showClearButton]="true" (onValueChanged)="syncTreeViewSelection($event)"
+  (openedChange)="onDropDownOpened($event)">
+  <div *dxTemplate="let data of 'content'">
+    <dx-tree-view [dataSource]="items" dataStructure="plain" displayExpr="TopicName" keyExpr="TopicId"
+      parentIdExpr="IdCha" (onItemClick)="onSelectionChanged($event)" (onContentReady)="$event.component.selectItem(topicId)" (onItemSelectionChanged)="treeView_Changed($event)">
+    </dx-tree-view>
+  </div>
+</dx-drop-down-box>

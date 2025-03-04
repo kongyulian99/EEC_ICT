@@ -35,6 +35,8 @@ export class QuizTestComponent implements OnInit {
 
   enum_QuestionType = QuestionType;
 
+  questionIndex = 0;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private dMDethiService: DMDethiService,
@@ -56,6 +58,7 @@ export class QuizTestComponent implements OnInit {
   //   katex.renderAll();
   // }
 
+  question: any;
   loadData() {
     this.dMDethiService
       .selectOneForTest(this.item.IdDeThi)
@@ -70,6 +73,7 @@ export class QuizTestComponent implements OnInit {
               Choices: JSON.parse(element.Choices),
             };
           });
+          this.question = this.item.ListCauHoi[this.questionIndex];
           // this.loadQuestions();
         }
       });
@@ -141,5 +145,25 @@ export class QuizTestComponent implements OnInit {
 
   parseChoices(choiceJsonString) {
     return JSON.parse(choiceJsonString);
+  }
+
+  handleSelectQuestion(i) {
+    this.question = this.item?.ListCauHoi[i];
+    this.questionIndex = i;
+  }
+
+  handleNextQuestion() {
+    this.questionIndex ++;
+    this.questionIndex = this.questionIndex % this.item?.ListCauHoi.length;
+    this.question = this.item?.ListCauHoi[this.questionIndex];
+  }
+
+  checkAnswered(i) {
+    // debugger;
+    if(this.item.ListCauHoi[i].QuestionType == QuestionType.FILL_IN_BLANK) {
+      return this.item.ListCauHoi[i].Choices.some(o => o.Answer.length > 0);
+    } else {
+      debugger;
+    }
   }
 }

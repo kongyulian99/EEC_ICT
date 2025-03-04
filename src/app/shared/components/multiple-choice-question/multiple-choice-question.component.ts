@@ -10,8 +10,8 @@ import { DMCauhoiService } from '../../services/dm-cauhoi.service';
 })
 export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   @Input() index;
-  @Input() question: any = {};
-  @Output() questionChange = new EventEmitter();
+  @Input() question: any;
+  @Output() questionChange = new EventEmitter<any>();
   @Output() onExit = new EventEmitter();
   @Output() onDelete = new EventEmitter();
 
@@ -48,6 +48,7 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   }
 
   handleSave() {
+    // debugger;
     this.question.IsEdit = false;
     this.questionChange.emit(
       {
@@ -110,5 +111,9 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges {
   handleDeleteFillInBlankAnswer(id) {
     // const index = this.choices.findIndex(o => o.Id == id);
     this.choices = this.choices.filter(o => o.Id != id);
+  }
+
+  handleChangeTopicId(event) {
+    this.question.TopicId = event;
   }
 }

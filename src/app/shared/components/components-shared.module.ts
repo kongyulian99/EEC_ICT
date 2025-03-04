@@ -1,4 +1,24 @@
-import { DxButtonModule, DxTextBoxModule, DxTextAreaModule, DxSelectBoxModule, DxToolbarModule, DxScrollViewModule, DxPopupModule, DxTreeViewModule, DxDropDownBoxModule, DxDateBoxModule, DxValidatorModule, DxValidationGroupModule, DxDataGridModule, DxTagBoxModule, DxTreeListModule, DxLoadPanelModule, DxCheckBoxModule, DxRadioGroupModule, DxNumberBoxModule } from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxTextBoxModule,
+  DxTextAreaModule,
+  DxSelectBoxModule,
+  DxToolbarModule,
+  DxScrollViewModule,
+  DxPopupModule,
+  DxTreeViewModule,
+  DxDateBoxModule,
+  DxValidatorModule,
+  DxValidationGroupModule,
+  DxDataGridModule,
+  DxTagBoxModule,
+  DxTreeListModule,
+  DxLoadPanelModule,
+  DxCheckBoxModule,
+  DxRadioGroupModule,
+  DxNumberBoxModule,
+  DxDropDownBoxModule,
+} from 'devextreme-angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +38,6 @@ import { RouterModule } from '@angular/router';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
 import { FillingQuestionComponent } from './filling-question/filling-question.component';
 
-
 @NgModule({
   declarations: [
     PaginatorComponent,
@@ -30,7 +49,7 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     CustomCkEditorComponent,
     ViewCkeditorComponent,
     MultipleChoiceQuestionComponent,
-    FillingQuestionComponent
+    FillingQuestionComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +57,7 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     RouterModule,
     HttpClientModule,
     NgbPaginationModule,
-        // Dev
+    // Dev
     DxButtonModule,
     DxTextBoxModule,
     DxTextAreaModule,
@@ -74,7 +93,7 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     GenericPageComponent,
     CustomCkEditorComponent,
     ViewCkeditorComponent,
-    MultipleChoiceQuestionComponent
-  ]
+    MultipleChoiceQuestionComponent,
+  ],
 })
-export class ComponentsSharedModule { }
+export class ComponentsSharedModule {}

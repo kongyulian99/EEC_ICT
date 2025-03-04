@@ -50,7 +50,7 @@ export class FormTopicComponent implements OnInit, OnChanges {
 
   async validationAsync(){
     if(this.state == 'insert') {
-      const value$ = this.service.checkDuplicate(this.entity.MaTopic)
+      const value$ = this.service.checkDuplicate(this.entity.TopicId)
       let value!: any;
       value = await lastValueFrom(value$);
       return value.Data==1;
