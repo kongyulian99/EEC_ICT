@@ -24,9 +24,10 @@ export class GiamsatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
     this.user = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
+    for (let i=this.nam; i > 2020 ; i--) {
+      this.listYear.push(this.nam);
+    }
     this.testResultService.selectMaxScoreByUser(this.user.UserId, this.nam).subscribe((res: any) => {
       if(res.Status.Code === 1) {
         this.items = res.Data;
@@ -38,10 +39,6 @@ export class GiamsatComponent implements OnInit {
         this.itemsAvg = res.Data;
       }
     });
-
-    for (this.nam; this.nam > 2025 ; this.nam--) {
-      this.listYear.push(this.nam);
-    }
   }
 }
 

@@ -1,0 +1,56 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .flex-item {
+    flex: 1 100px 100px;
+    /* Co giãn nhưng không nhỏ hơn 200px */
+    // background: lightgreen;
+    padding: 0px;
+    text-align: center;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, .25fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Grid Items */
+.grid-item {
+  background: #ccc;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  // font-size: 1.5rem;
+  border-radius: 5px;
+  width: auto;
+  height: 30px;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  user-select: none;
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    background-color: lightblue;
+  }
+
+  .icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.active {
+  background-color: blue !important;
+}
+
+.answered {
+  background-color: lightgreen !important;
+}

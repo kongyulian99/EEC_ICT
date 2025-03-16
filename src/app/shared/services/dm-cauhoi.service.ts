@@ -25,6 +25,19 @@ export class DMCauhoiService extends BaseService {
         .pipe(catchError(this.handleError))
     );
   }
+
+  selectAllForTest(pageSize: number, pageIndex: number, filter: string, topicId: number) {
+    return (
+      this.http
+        // tslint:disable-next-line:max-line-length
+        .get<ResponseData>(
+          `${SystemConstants.API_URL}/api/dm-cauhoi/SelectAllForTest?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}&topicId=${topicId}`,
+          { headers: this.httpOptions }
+        )
+        .pipe(catchError(this.handleError))
+    );
+  }
+
   selectOne(maCauhoi: string) {
     return (
       this.http
