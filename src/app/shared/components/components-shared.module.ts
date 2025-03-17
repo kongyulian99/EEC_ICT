@@ -76,7 +76,6 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     DxValidatorModule,
     DxValidationGroupModule,
     DxTagBoxModule,
-    DxValidationGroupModule,
     DxTreeListModule,
     DxLoadPanelModule,
     DxCheckBoxModule,

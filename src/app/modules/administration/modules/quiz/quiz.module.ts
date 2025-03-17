@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz.component';
-import { DxButtonModule, DxCheckBoxModule, DxDateBoxModule, DxNumberBoxModule, DxPopupModule, DxRadioGroupModule, DxScrollViewModule, DxSelectBoxComponent, DxSelectBoxModule, DxTextAreaModule, DxTextBoxModule, DxToolbarModule } from 'devextreme-angular';
+import { DxButtonModule, DxCheckBoxModule, DxDateBoxModule, DxNumberBoxModule, DxPopupModule, DxRadioGroupModule, DxScrollViewModule, DxSelectBoxComponent, DxSelectBoxModule, DxTextAreaModule, DxTextBoxModule, DxToolbarModule, DxValidationGroupModule, DxValidatorModule } from 'devextreme-angular';
 import { ComponentsSharedModule } from 'src/app/shared';
 import { QuizPrepareComponent } from './quiz-prepare/quiz-prepare.component';
 import { QuizTestComponent } from './quiz-test/quiz-test.component';
@@ -30,7 +30,9 @@ import { QuizListComponent } from './quiz-list/quiz-list.component';
     DxCheckBoxModule,
     DxDateBoxModule,
     DxNumberBoxModule,
-    ComponentsSharedModule
+    ComponentsSharedModule,
+    DxValidationGroupModule,
+    DxValidatorModule
   ]
 })
 export class QuizModule { }

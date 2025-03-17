@@ -30,7 +30,11 @@
         </div>
         <div class="col-4">
           <div class="mt-3">
-            <dx-number-box label="Weight" [readOnly]="!question?.IsEdit" [(value)]="question.TrongSo"></dx-number-box>
+            <dx-number-box label="Weight" [readOnly]="!question?.IsEdit" [(value)]="question.TrongSo">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Yêu cầu thông tin!"></dxi-validation-rule>
+              </dx-validator>
+            </dx-number-box>
           </div>
         </div>
         <div class="col-8 mt-1">
