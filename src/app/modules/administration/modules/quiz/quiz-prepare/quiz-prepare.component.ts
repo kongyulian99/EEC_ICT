@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DxValidationGroupComponent } from 'devextreme-angular';
 import { finalize } from 'rxjs';
 import { NotificationService, SystemConstants } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
@@ -12,6 +13,7 @@ import { DMDethiService } from 'src/app/shared/services/dm-dethi.service';
   styleUrls: ['./quiz-prepare.component.scss']
 })
 export class QuizPrepareComponent implements OnInit {
+  @ViewChild('validationEntity', {static: false}) validationEntity!: DxValidationGroupComponent;
   loading = false;
   user: any = {};
   dxButtonConfig = dxButtonConfig;
@@ -60,7 +62,15 @@ export class QuizPrepareComponent implements OnInit {
   // }
 
   save() {
-    // debugger;
+    // debugger
+    if (!this.validationEntity.instance.validate().isValid) {
+      this.notificationService.showError('Thông tin nhập không hợp lệ!');
+      return;
+    }
+    if(this.item?.ListCauHoi.some(o => o.TopicId <= 0)) {
+      this.notificationService.showError("Chưa chọn topic cho 1 số câu hỏi");
+      return;
+    }
     this.dMDethiService.update(this.item).subscribe((res: any) => {
       if(res.Status.Code == 1) {
         this.notificationService.showSuccess("Save succeed!");

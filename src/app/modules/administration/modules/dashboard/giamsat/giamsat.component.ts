@@ -50,6 +50,9 @@ export class GiamsatComponent implements OnInit {
   }
 
   loadData() {
+    for (let i=this.nam; i > 2020 ; i--) {
+      this.listYear.push(this.nam);
+    }
     this.testResultService.selectMaxScoreByUser(this.user.UserId, this.nam).subscribe((res: any) => {
       if (res.Status.Code === 1) {
         this.items = res.Data;
@@ -61,6 +64,7 @@ export class GiamsatComponent implements OnInit {
         this.itemsAvg = res.Data;
       }
     });
+<<<<<<< HEAD
     this.loadDataByTopic();
   }
 
@@ -70,6 +74,8 @@ export class GiamsatComponent implements OnInit {
         this.topicScore = res.Data;
       }
     });
+=======
+>>>>>>> 4dc973d438f955c4a77be8de3b624e254d20fff2
   }
 }
 

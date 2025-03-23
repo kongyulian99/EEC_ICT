@@ -7,59 +7,37 @@
   </ng-container>
 
   <ng-container body>
-    <div class="row mx-1 mt-2">
-      <div class="col-6">
-        <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
-        <dx-text-area [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area>
-      </div>
-      <div class="col-3">
-        <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
-        <dx-date-box label="Date" [(value)]="item.Ngay"></dx-date-box>
-      </div>
-      <div class="col-3">
-        <dx-number-box label="Time" [(value)]="item.ThoiGianLamBai" [step]="0"></dx-number-box>
-      </div>
-    </div>
-    <div class="row mx-1 mt-2">
-      <div class="col-12">
-        <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
-        <dx-text-area label="Note" [(value)]="item.GhiChu"></dx-text-area>
-      </div>
-    </div>
-
-    <!-- <div class="row mt-2">
-      <div class="col-12 field">
-        <div class="label">Note</div>
-        <app-custom-ckeditor [(Content)]="item.GhiChu"></app-custom-ckeditor>
-      </div>
-    </div> -->
-    <div class="field" *ngFor="let question of item.ListCauHoi; index as i;">
-      <app-multiple-choice-question [index]="i" [question]="question" (questionChange)="handleChangeQuestion($event, i)"
-        (onExit)="handleExitEdit(question, i)" (onDelete)="handleDeleteQuestion($event)"></app-multiple-choice-question>
-    </div>
-
-
-    <!-- <div class="row mx-1 mt-4" *ngFor="let question of item.ListCauHoi; index as i">
-      <div class="col-6">
-        <div class="field">
-          <div class="label">Quiz: {{i + 1}}</div>
-          <app-custom-ckeditor [(Content)]="question.Question"></app-custom-ckeditor>
+    <dx-validation-group #validationEntity>
+      <div class="row mx-1 mt-2">
+        <div class="col-6">
+          <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
+          <dx-text-area [autoResizeEnabled]="true" label="Test name" [(value)]="item.TenDeThi"></dx-text-area>
         </div>
+        <div class="col-3">
+          <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
+          <dx-date-box label="Date" [(value)]="item.Ngay"></dx-date-box>
+        </div>
+        <div class="col-3">
+          <dx-number-box label="Time" [(value)]="item.ThoiGianLamBai" [step]="0"></dx-number-box>
+        </div>
+      </div>
+      <div class="row mx-1 mt-2">
+        <div class="col-12">
+          <!-- <div class="label">Test name: {{item.TenDeThi}}</div> -->
+          <dx-text-area label="Note" [(value)]="item.GhiChu"></dx-text-area>
+        </div>
+      </div>
 
-        <div class="field mt-2">
+      <!-- <div class="row mt-2">
+        <div class="col-12 field">
           <div class="label">Note</div>
-          <app-custom-ckeditor [(Content)]="question.Note"></app-custom-ckeditor>
+          <app-custom-ckeditor [(Content)]="item.GhiChu"></app-custom-ckeditor>
         </div>
+      </div> -->
+      <div class="field" *ngFor="let question of item.ListCauHoi; index as i;">
+        <app-multiple-choice-question [index]="i" [(question)]="item.ListCauHoi[i]" (questionChange)="handleChangeQuestion($event, i)"
+          (onExit)="handleExitEdit(question, i)" (onDelete)="handleDeleteQuestion($event)"></app-multiple-choice-question>
       </div>
-      <div class="col-6 field">
-        <div class="label">Answers</div>
-        <div class="answers p-2" style="background-color: #fff;">
-          <div *ngFor="let choice of question.ChoiceList" class="d-flex">
-            <dx-check-box [(value)]="choice.IsCorrect"></dx-check-box>
-            <app-custom-ckeditor class="flex-grow-1" [(Content)]="choice.Answer"></app-custom-ckeditor>
-          </div>
-        </div>
-      </div>
-    </div> -->
+    </dx-validation-group>
   </ng-container>
 </app-generic-page>
