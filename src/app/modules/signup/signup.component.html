@@ -1,1 +1,54 @@
-<p>signup works!</p>
+<dx-validation-group #validationGroup>
+  <div class="signup-wrapper">
+    <div class="row m-2">
+      <div class="col-12">
+        <h4 class="text-center">Register</h4>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-12">
+        <dx-text-box label="Username" [(value)]="item.UserName"></dx-text-box>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-12">
+        <dx-text-box label="Password" mode="password" [(value)]="item.Password"></dx-text-box>
+      </div>
+    </div>
+
+    <div class="row m-2">
+      <div class="col-12">
+        <dx-date-box label="Date of birth" [(value)]="item.BirthDay">
+          <dx-validator>
+            <dxi-validation-rule type="required" message="Date of birth is rrequired!">
+            </dxi-validation-rule>
+          </dx-validator>
+        </dx-date-box>
+      </div>
+    </div>
+
+    <div class="row m-2">
+      <div class="col-12">
+        <dx-text-box label="Email" [(value)]="item.Email">
+          <dx-validator>
+            <dxi-validation-rule type="required" message="Email is required!">
+            </dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+    </div>
+
+    <div class="row m-2">
+      <div class="col-12">
+        <dx-text-box label="Phone" [(value)]="item.PhoneNumber"></dx-text-box>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-center">
+        <dx-button text="Signup" icon="group" type="default" (onClick)="signup()"></dx-button>
+      </div>
+    </div>
+  </div>
+
+</dx-validation-group>

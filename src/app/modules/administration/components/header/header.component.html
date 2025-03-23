@@ -11,7 +11,7 @@
     <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/administration/categories/topic" routerLinkActive="active">Topic</a>
     <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/quiz/test" routerLinkActive="active">Test</a>
     <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/topic-training" routerLinkActive="active">Topic training</a>
-    <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/quiz/list" routerLinkActive="active">Prepare data</a>
+    <a *ngIf="user.UserName == 'admin'" class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/quiz/list" routerLinkActive="active">Prepare data</a>
   </div>
 
   <div>

@@ -2,6 +2,7 @@ import { SignupRoutingModule } from './signup-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SignupComponent } from './signup.component';
+import { DxButtonModule, DxDateBoxModule, DxTextBoxModule, DxValidationGroupModule, DxValidatorModule } from 'devextreme-angular';
 
 
 
@@ -11,7 +12,12 @@ import { SignupComponent } from './signup.component';
   ],
   imports: [
     CommonModule,
-    SignupRoutingModule
+    SignupRoutingModule,
+    DxTextBoxModule,
+    DxButtonModule,
+    DxValidatorModule,
+    DxValidationGroupModule,
+    DxDateBoxModule
   ]
 })
 export class SignupModule { }
