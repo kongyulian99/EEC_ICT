@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SystemConstants } from 'src/app/shared';
+import { ResponseData } from 'src/app/shared/models';
+import { DMTopicService } from 'src/app/shared/services/dm-topic.service';
 import { TestResultService } from 'src/app/shared/services/test-result.service';
 
 @Component({
@@ -11,37 +13,63 @@ import { TestResultService } from 'src/app/shared/services/test-result.service';
 
 
 export class GiamsatComponent implements OnInit {
-  listYear=[];
+  listYear = [];
   items = [];
   itemsAvg = [];
+  topicScore = [];
+  topicId = 0;
   user: any;
   nam: any = new Date().getFullYear();
 
-  columns = ['IdDeThi','AverageScore'];
+  listParent = [];
+
+  // columns = ['IdDeThi','AverageScore'];
 
   constructor(
-    private testResultService: TestResultService
+    private testResultService: TestResultService,
+    private dMtopicService: DMTopicService
   ) { }
 
   ngOnInit(): void {
-
-
     this.user = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
+
+    for (let i = new Date().getFullYear(); i > 2020; i--) {
+      this.listYear.push(i);
+    }
+
+    this.dMtopicService.selectAll(0, 0, '').subscribe(
+      (response: ResponseData) => {
+        if (response.Status.Code == 1) {
+          this.listParent = response.Data.filter(o => o.IdCha <= 0);
+          this.topicId = this.listParent[0].TopicId;
+        } 
+      },
+    );
+
+    this.loadData();
+  }
+
+  loadData() {
     this.testResultService.selectMaxScoreByUser(this.user.UserId, this.nam).subscribe((res: any) => {
-      if(res.Status.Code === 1) {
+      if (res.Status.Code === 1) {
         this.items = res.Data;
       }
     });
 
-    this.testResultService.selectAvgScoreByUser(this.user.UserId, this.nam).subscribe((res: any)=> {
-      if(res.Status.Code ===1) {
+    this.testResultService.selectAvgScoreByUser(this.user.UserId, this.nam).subscribe((res: any) => {
+      if (res.Status.Code === 1) {
         this.itemsAvg = res.Data;
       }
     });
+    this.loadDataByTopic();
+  }
 
-    for (this.nam; this.nam > 2025 ; this.nam--) {
-      this.listYear.push(this.nam);
-    }
+  loadDataByTopic() {
+    this.testResultService.selectScoreByTopic(this.user.UserId, this.topicId).subscribe((res: any) => {
+      if (res.Status.Code === 1) {
+        this.topicScore = res.Data;
+      }
+    });
   }
 }
 
