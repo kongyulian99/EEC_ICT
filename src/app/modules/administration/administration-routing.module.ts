@@ -38,6 +38,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'topic-training',
+        loadChildren: () =>
+          import('./modules/topic-training/topic-training.module').then(
+            (m) => m.TopicTrainingModule
+          ),
+      },
+      {
         path: 'user-info',
         loadChildren: () =>
           import('./modules/user-info/user-info.module').then(

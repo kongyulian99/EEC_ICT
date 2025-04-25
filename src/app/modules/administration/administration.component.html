@@ -4,8 +4,10 @@
     <router-outlet></router-outlet>
 </section> -->
 
-<app-sidebar [collapsed]="collapedSideBar" (collapsedEvent)="receiveCollapsed($event)"></app-sidebar>
-<section [ngClass]="{ collapsed: collapedSideBar }" class="main-container">
-  <app-header (onToggle)="collapedSideBar = !collapedSideBar"></app-header>
-  <router-outlet></router-outlet>
-</section>
+<!-- <app-sidebar [collapsed]="collapedSideBar" (collapsedEvent)="receiveCollapsed($event)"></app-sidebar> -->
+<!-- <section [ngClass]="{ collapsed: collapedSideBar }" class="main-container">
+
+</section> -->
+
+<app-header (onToggle)="collapedSideBar = !collapedSideBar"></app-header>
+<router-outlet></router-outlet>
