@@ -276,19 +276,19 @@ export class UsersComponent implements OnInit {
     }
   }
   delete(id: any,name: string){
-    this.notificationService.showConfirmation("Bạn có chắc chắn muốn xóa '"+name+"'?",()=>{
+    this.notificationService.showConfirmation("Are you sure you want to delete '"+name+"'?",()=>{
       this.userService.delete(id).subscribe({
         next: (response: ResponseData)=>{
           if(response.Status.Code == 1){
             this.listData = this.listData.filter(o=>o.Id!=id);
             this.focusKey = this.listData.length>0 ? this.listData[0].Id : this.focusKey;
-            this.notificationService.showSuccess("Đã xóa thành công '"+name+"'!");
+            this.notificationService.showSuccess("Successfully deleted '"+name+"'!");
           } else {
-            this.notificationService.showError('Không thành công!');
+            this.notificationService.showError('Operation failed!');
           }
         },
         error: _=>{
-          this.notificationService.showError('Lỗi hệ thống!')
+          this.notificationService.showError('System error!')
         }
       })
     })

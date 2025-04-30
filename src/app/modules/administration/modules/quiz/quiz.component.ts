@@ -90,10 +90,10 @@ export class QuizComponent implements OnInit {
   }
 
   handleDelete(item) {
-    this.notificationService.showConfirmation("Are you sure to delete this test?", () => {
+    this.notificationService.showConfirmation("Are you sure you want to delete this test?", () => {
       this.dMDethiService.delete(item.IdDeThi).subscribe((res: any) => {
         if(res.Status.Code == 1) {
-          this.notificationService.showSuccess("Delete test succeed!");
+          this.notificationService.showSuccess("Test deleted successfully!");
           this.items = this.items.filter(o => o.IdDeThi != item.IdDeThi);
         } else {
           this.notificationService.showError("Delete failed!");

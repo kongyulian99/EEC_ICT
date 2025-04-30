@@ -97,13 +97,13 @@ export class RolesComponent implements OnInit {
           }
           this.totalRows = response.Pagination.TotalRows;
         } else {
-          this.notificationService.showError('Dữ liệu tải lỗi!');
+          this.notificationService.showError('Data loading failed!');
           this.totalRows = 0;
         }
         this.loading = false;
       },
       error: _=>{
-        this.notificationService.showError('Hệ thống xảy ra lỗi!');
+        this.notificationService.showError('System error!');
         this.totalRows=0;
         this.loading = false;
       }
@@ -167,13 +167,9 @@ export class RolesComponent implements OnInit {
     this.state = 'detail';
   }
   save(){
-    // if(!this.detail.validationEntity.instance.validate().isValid){
-    //   this.notificationService.showError('Thông tin nhập không hợp lệ!');
-    //   return;
-    // }
     const check = this.detail.validationEntity.instance.validate();
     if(!check.isValid || this.detail.existName){
-      this.notificationService.showError('Thông tin nhập không hợp lệ!');
+      this.notificationService.showError('Invalid input information!');
       return;
     }
     const body = clone(this.detail.entity);
@@ -181,59 +177,54 @@ export class RolesComponent implements OnInit {
       this.roleService.insert(body).subscribe({
         next: (response: ResponseData)=>{
           if(response.Status.Code == 1){
-            this.notificationService.showSuccess('Thêm nhóm quyền thành công!');
+            this.notificationService.showSuccess('Role group added successfully!');
             this.detail.entity.Id = response.Data;
             this.listData.unshift(this.detail.entity);
             this.allData.unshift(this.detail.entity);
             this.focusKey = response.Data;
-            // setTimeout(() => {
-            //   this.detail.entity = {};
-            //   this.state = 'insert';
-            //   this.detail.validationEntity.instance.reset();
-            // }, 100);
             this.totalRows++;
           } else {
-            this.notificationService.showError('Không thành công!');
+            this.notificationService.showError('Operation failed!');
           }
         },
         error: _=>{
-            this.notificationService.showError('Lỗi hệ thống!');
+          this.notificationService.showError('System error!');
         }
       })
     } else {
       this.roleService.update(body).subscribe({
         next: (response: ResponseData)=>{
           if(response.Status.Code == 1){
-            this.notificationService.showSuccess('Cập nhật thành công!');
+            this.notificationService.showSuccess('Update successful!');
             const index1 = this.listData.findIndex(o=>o.Id== response.Data)
             this.listData[index1]=this.detail.entity;
             const index2 = this.allData.findIndex(o=>o.Id== response.Data)
             this.allData[index2]=this.detail.entity;
             this.state = 'detail';
           } else {
-            this.notificationService.showError('Không thành công!');
+            this.notificationService.showError('Operation failed!');
           }
         },
         error: _=>{
-            this.notificationService.showError('Lỗi hệ thống!');
+            this.notificationService.showError('System error!');
         }
       })
     }
   }
   delete(id: number,name: string){
-    this.notificationService.showConfirmation("Bạn có chắc chắn muốn xóa nhóm quyền '"+name+"'?",()=>{
+    this.notificationService.showConfirmation("Are you sure you want to delete role group '"+name+"'?",()=>{
       this.roleService.delete([id]).subscribe({
         next: (response: ResponseData)=>{
           if(response.Status.Code == 1){
             this.listData = this.listData.filter(o=>o.Id!=id);
             this.allData = this.allData.filter(o=>o.Id!=id);
-            this.notificationService.showSuccess("Đã xóa thành công nhóm quyền '"+name+"'!");
+            this.notificationService.showSuccess("Successfully deleted role group '"+name+"'!");
           } else {
-            this.notificationService.showError('Không thành công!');
+            this.notificationService.showError('Operation failed!');
           }
         },
         error: _=>{
-          this.notificationService.showError('Lỗi hệ thống!')
+          this.notificationService.showError('System error!')
         }
       })
     })

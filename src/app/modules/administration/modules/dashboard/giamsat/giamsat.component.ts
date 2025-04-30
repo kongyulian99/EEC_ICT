@@ -10,8 +10,6 @@ import { TestResultService } from 'src/app/shared/services/test-result.service';
   styleUrls: ['./giamsat.component.scss']
 })
 
-
-
 export class GiamsatComponent implements OnInit {
   listYear = [];
   items = [];
@@ -33,6 +31,7 @@ export class GiamsatComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
 
+    // Initialize years list only once
     for (let i = new Date().getFullYear(); i > 2020; i--) {
       this.listYear.push(i);
     }
@@ -50,9 +49,7 @@ export class GiamsatComponent implements OnInit {
   }
 
   loadData() {
-    for (let i=this.nam; i > 2020 ; i--) {
-      this.listYear.push(this.nam);
-    }
+    // Remove the redundant year addition
     this.testResultService.selectMaxScoreByUser(this.user.UserId, this.nam).subscribe((res: any) => {
       if (res.Status.Code === 1) {
         this.items = res.Data;
@@ -64,7 +61,6 @@ export class GiamsatComponent implements OnInit {
         this.itemsAvg = res.Data;
       }
     });
-<<<<<<< HEAD
     this.loadDataByTopic();
   }
 
@@ -74,8 +70,6 @@ export class GiamsatComponent implements OnInit {
         this.topicScore = res.Data;
       }
     });
-=======
->>>>>>> 4dc973d438f955c4a77be8de3b624e254d20fff2
   }
 }
 

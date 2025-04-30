@@ -110,7 +110,7 @@ export class FunctionsComponent implements OnInit {
       },
       error:(e: any)=>{
         // console.log(e);
-        this.notificationService.showError('Lỗi hệ thống!');
+        this.notificationService.showError('System error!');
       }
     })
 
@@ -139,12 +139,12 @@ export class FunctionsComponent implements OnInit {
             this.state = 'detail';
           }
         } else {
-          this.notificationService.showError('Dữ liệu tải lỗi!');
+          this.notificationService.showError('Data loading failed!');
         }
         this.loading = false;
       },
       error: ()=>{
-        this.notificationService.showError('Lỗi hệ thống!');
+        this.notificationService.showError('System error!');
         this.loading = false;
       }
     });
@@ -169,7 +169,7 @@ export class FunctionsComponent implements OnInit {
   save(){
     const check = this.detail.validationEntity.instance.validate();
     if(!check.isValid || this.detail.existFunctionId){
-      this.notificationService.showError('Thông tin nhập không hợp lệ!');
+      this.notificationService.showError('Invalid input information!');
       return;
     }
     const body = clone(this.detail.entity);
@@ -179,7 +179,7 @@ export class FunctionsComponent implements OnInit {
       this.functionService.insert(body).subscribe({
         next: (response: ResponseData)=>{
         if(response.Status.Code == 1){
-          this.notificationService.showSuccess('Thêm mới thành công!');
+          this.notificationService.showSuccess('Successfully added new!');
           // this.detail.entity.Id = response.Data;
           let data: any[] = clone(this.allData)
           data.push(this.detail.entity);
@@ -193,18 +193,18 @@ export class FunctionsComponent implements OnInit {
           // }, 100);
           this.focusKey = response.Data;
         } else {
-          this.notificationService.showError('Không thành công!');
+          this.notificationService.showError('Operation failed!');
         }
         },
         error: _=>{
-            this.notificationService.showError('Lỗi hệ thống!');
+            this.notificationService.showError('System error!');
         }
       })
     } else {
       this.functionService.update(body).subscribe({
         next:(response: ResponseData)=>{
           if(response.Status.Code == 1){
-            this.notificationService.showSuccess('Cập nhật thành công!');
+            this.notificationService.showSuccess('Successfully updated!');
             const index = this.allData.findIndex(o=>o.Id== response.Data);
             let data: any[] = clone(this.allData);
             data[index]=this.detail.entity;
@@ -212,11 +212,11 @@ export class FunctionsComponent implements OnInit {
             this.allData = clone(data);
             this.state = 'detail';
           } else {
-            this.notificationService.showError('Không thành công!');
+            this.notificationService.showError('Operation failed!');
           }
         },
         error: _=>{
-          this.notificationService.showError('Lỗi hệ thống!')
+          this.notificationService.showError('System error!')
         }
       })
     }
@@ -224,19 +224,19 @@ export class FunctionsComponent implements OnInit {
   // getDataTree(list: any[]){
   // }
   delete(id: string,name: string){
-    this.notificationService.showConfirmation("Bạn có chắc chắn muốn xóa '"+name+"'?",()=>{
+    this.notificationService.showConfirmation("Are you sure you want to delete '"+name+"'?",()=>{
       this.functionService.delete([id]).subscribe({
         next: (response: ResponseData)=>{
           if(response.Status.Code == 1){
             this.allData = this.allData.filter(o=>o.Id!=id);
             this.focusKey = this.allData.length>0 ? this.allData[0].Id : this.focusKey;
-            this.notificationService.showSuccess("Đã xóa thành công '"+name+"'!");
+            this.notificationService.showSuccess("Successfully deleted '"+name+"'!");
           } else {
-            this.notificationService.showError('Không thành công!');
+            this.notificationService.showError('Operation failed!');
           }
         },
         error: _=>{
-          this.notificationService.showError('Lỗi hệ thống!')
+          this.notificationService.showError('System error!')
         }
       })
     })

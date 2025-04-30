@@ -12,37 +12,37 @@
               <label>Tên đăng nhập:</label>
               <dx-text-box [readOnly]="readOnly" [(value)]="entity.UserName">
                 <dx-validator *ngIf="state!='detail'">
-                  <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
-                  <dxi-validation-rule type="async" message="Tên đăng nhập đã tồn tại!" [ignoreEmptyValue]="true"
+                  <dxi-validation-rule type="required" message="Required information"></dxi-validation-rule>
+                  <dxi-validation-rule type="async" message="Username already exists!" [ignoreEmptyValue]="true"
                     [validationCallback]="validationAsync"></dxi-validation-rule>
                 </dx-validator>
               </dx-text-box>
             </div>
             <div class="field" *ngIf="state=='insert'">
-              <label>Mật khẩu:</label>
+              <label>Password:</label>
               <dx-text-box mode="password" [(value)]="entity.Password">
                 <dx-validator>
-                  <dxi-validation-rule type="required" message="Yêu cầu đặt mật khẩu!"></dxi-validation-rule>
+                  <dxi-validation-rule type="required" message="Password required!"></dxi-validation-rule>
                 </dx-validator>
               </dx-text-box>
               <dx-text-box mode="password">
                 <dx-validator>
-                  <dxi-validation-rule type="required" message="Yêu cầu xác nhận mật khẩu!"></dxi-validation-rule>
+                  <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                   <dxi-validation-rule type="compare" [comparisonTarget]="passwordComparison"
-                    message="Mật khẩu không khớp!"></dxi-validation-rule>
+                    message="Passwords are not aligned!"></dxi-validation-rule>
                 </dx-validator>
               </dx-text-box>
             </div>
             <div class="field">
-              <label>Tên đầy đủ:</label>
+              <label>Full name:</label>
               <dx-text-box [readOnly]="readOnly" [(value)]="entity.FullName">
                 <dx-validator>
-                  <dxi-validation-rule type="required" message="Yêu cầu thông tin"></dxi-validation-rule>
+                  <dxi-validation-rule type="required" message="Required information"></dxi-validation-rule>
                 </dx-validator>
               </dx-text-box>
             </div>
             <div class="field">
-              <label>Giới tính:</label>
+              <label>Gender:</label>
               <dx-radio-group [readOnly]="readOnly" [dataSource]="itemsGender" valueExpr="value" displayExpr="text"
                 layout="horizontal" [(value)]="entity.Gender">
                 <!-- <dx-validator>
@@ -53,7 +53,7 @@
             <div class="field">
               <dx-check-box [readOnly]="readOnly" [(value)]="entity.Status">
               </dx-check-box>
-              <label class="labelCheckbox">Kích hoạt</label>
+              <label class="labelCheckbox">Activate</label>
             </div>
           </dx-validation-group>
           <div *ngSwitchCase="1">

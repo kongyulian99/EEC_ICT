@@ -13,7 +13,7 @@
             locateInMenu="never"
         >
             <div *dxTemplate>
-                <dx-button text="Thêm mới" [icon]="dxButtonConfig.add_icon" [type]="dxButtonConfig.add_type" (click)="add()"></dx-button>
+                <dx-button text="Add new" [icon]="dxButtonConfig.add_icon" [type]="dxButtonConfig.add_type" (click)="add()"></dx-button>
             </div>
         </dxi-item>
     </dx-toolbar>
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="d-flex flex-direction-row align-items-center">
-                            <label for="" class="mr-1">Nhóm</label>
+                            <label for="" class="mr-1">Group</label>
                            <dx-select-box [(value)]="filterRole" class="flex-grow-1" [dataSource]="allRolesAddTatCa" displayExpr="Name" valueExpr="Id" (onValueChanged)="handleChangeFilterRole()"></dx-select-box>
                         </div>
                     </div>
@@ -74,8 +74,8 @@
                 <dxo-header-filter [visible]="false"></dxo-header-filter>
 
                 <dxi-column cellTemplate="cellIndex" caption="TT" [width]="50" alignment="center" cssClass="vertical-middle"> </dxi-column>
-                <dxi-column cellTemplate="cellUserName" caption="Tên đăng nhập" [width]="200" alignment="center" cssClass="vertical-middle"></dxi-column>
-                <dxi-column cellTemplate="cellFullName" caption="Tên đầy đủ" alignment="center" cssClass="vertical-middle"></dxi-column>
+                <dxi-column cellTemplate="cellUserName" caption="Username" [width]="200" alignment="center" cssClass="vertical-middle"></dxi-column>
+                <dxi-column cellTemplate="cellFullName" caption="Full name" alignment="center" cssClass="vertical-middle"></dxi-column>
                 <!-- <dxi-column dataField="TenDonVi" caption="Tên đơn vị" alignment="center" cssClass="vertical-middle"></dxi-column> -->
                 <dxi-column cellTemplate="cellAction" [width]="90" alignment="center" [showInColumnChooser]="false" cssClass="vertical-middle"></dxi-column>
 

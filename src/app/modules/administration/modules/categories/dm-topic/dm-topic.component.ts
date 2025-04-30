@@ -74,13 +74,13 @@ export class DMtopicComponent implements OnInit {
           }
           this.totalRows = response.Pagination.TotalRows;
         } else {
-          this.notificationService.showError('Dữ liệu tải lỗi!');
+          this.notificationService.showError('Data loading error!');
           this.totalRows = 0;
         }
         this.loading = false;
       },
       (_: any) => {
-        this.notificationService.showError('Hệ thống xảy ra lỗi!');
+        this.notificationService.showError('System error!');
         this.totalRows = 0;
         this.loading = false;
       }
@@ -181,23 +181,19 @@ export class DMtopicComponent implements OnInit {
   }
   save() {
     if (!this.detail.validationEntity.instance.validate().isValid) {
-      this.notificationService.showError('Thông tin nhập không hợp lệ!');
+      this.notificationService.showError('Invalid input information!');
       return;
     }
     const body = clone(this.detail.entity);
 
     if (this.state == 'insert') {
-      //
       this.dMtopicService.insert(body).subscribe(
         (response: ResponseData) => {
           if (response.Status.Code == 1) {
-            this.notificationService.showSuccess(
-              'Add a question successfully!'
-            );
-            // this.loadData();
+            this.notificationService.showSuccess('Topic added successfully!');
             this.router.navigate(['categories/dm-topic']).then(() => this.getInitial());
           } else {
-            this.notificationService.showError('Error!' + response.Status.Message);
+            this.notificationService.showError('Error: ' + response.Status.Message);
           }
         },
         (_: any) => {
@@ -208,10 +204,10 @@ export class DMtopicComponent implements OnInit {
       this.dMtopicService.update(body).subscribe(
         (response: ResponseData) => {
           if (response.Status.Code == 1) {
-            this.notificationService.showSuccess('Update successfully!');
+            this.notificationService.showSuccess('Topic updated successfully!');
             this.router.navigate(['categories/dm-topic']).then(() => this.getInitial());
           } else {
-            this.notificationService.showError('Error!' + response.Status.Message);
+            this.notificationService.showError('Error: ' + response.Status.Message);
           }
         },
         (_: any) => {
@@ -222,23 +218,22 @@ export class DMtopicComponent implements OnInit {
   }
   delete(id: any, name: string) {
     this.notificationService.showConfirmation(
-      "Do you want to delete question '" + name + "'?",
+      "Are you sure you want to delete topic '" + name + "'?",
       () => {
           this.dMtopicService.delete(id).subscribe(
             (response: ResponseData) => {
               if (response.Status.Code == 1) {
                 this.allData = this.allData.filter((o) => o.TopicId != id);
                 this.totalRows = this.allData.length;
-                // this.paging();
                 this.notificationService.showSuccess(
-                  "Đã xóa thành công question '" + name + "'!"
+                  "Successfully deleted topic '" + name + "'!"
                 );
               } else {
-                this.notificationService.showError('Xoá question không thành công!' + response.Status.Message);
+                this.notificationService.showError('Failed to delete topic: ' + response.Status.Message);
               }
             },
             (_: any) => {
-              this.notificationService.showError('Lỗi hệ thống!');
+              this.notificationService.showError('System error!');
             }
           );
         if (this.allData.length <= 0) {
