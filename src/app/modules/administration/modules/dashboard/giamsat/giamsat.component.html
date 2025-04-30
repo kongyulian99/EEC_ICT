@@ -1,3 +1,104 @@
+<div class="container-fluid p-3">
+  <!-- Year Selection -->
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <dx-select-box 
+            label="Year" 
+            [dataSource]="listYear" 
+            [(value)]="nam" 
+            placeholder="Year" 
+            [searchEnabled]="true" 
+            (onValueChanged)="loadData()">
+          </dx-select-box>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row 1 -->
+  <div class="row mb-4">
+    <!-- Max Scores Chart -->
+    <div class="col-md-6 mb-3">
+      <div class="card h-100">
+        <div class="card-header" style="background-color: #6C63FF; color: white;">
+          <h5 class="card-title mb-0">Highest Score</h5>
+        </div>
+        <div class="card-body">
+          <dx-chart id="maxScoreChart" [dataSource]="items" height="400">
+            <dxo-legend [visible]="false"></dxo-legend>
+            <dxi-series type="bar" valueField="MaxScore" argumentField="TenDeThi" color="#6C63FF"></dxi-series>
+            <dxo-argument-axis [tickInterval]="10">
+              <dxo-label>
+                <dxo-format type="decimal"></dxo-format>
+              </dxo-label>
+            </dxo-argument-axis>
+          </dx-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- Average Score Chart -->
+    <div class="col-md-6 mb-3">
+      <div class="card h-100">
+        <div class="card-header" style="background-color: #FF6584; color: white;">
+          <h5 class="card-title mb-0">Average Score</h5>
+        </div>
+        <div class="card-body">
+          <dx-chart id="avgScoreChart" [dataSource]="itemsAvg" height="400">
+            <dxo-legend [visible]="false"></dxo-legend>
+            <dxi-series type="bar" valueField="AverageScore" argumentField="TenDeThi" color="#FF6584"></dxi-series>
+            <dxo-argument-axis [tickInterval]="10">
+              <dxo-label>
+                <dxo-format type="decimal"></dxo-format>
+              </dxo-label>
+            </dxo-argument-axis>
+          </dx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Selection -->
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <dx-select-box 
+            label="Topic" 
+            [dataSource]="listParent" 
+            displayExpr="TopicName" 
+            valueExpr="TopicId" 
+            placeholder="Choose a topic" 
+            [(value)]="topicId" 
+            (onValueChanged)="loadDataByTopic()">
+          </dx-select-box>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Scores Chart -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header" style="background-color: #00BFA6; color: white;">
+          <h5 class="card-title mb-0">Topic Score</h5>
+        </div>
+        <div class="card-body">
+          <dx-chart id="topicScoreChart" [dataSource]="topicScore" height="400">
+            <dxo-legend [visible]="false"></dxo-legend>
+            <dxi-series type="bar" valueField="AverageScore" argumentField="TopicName" [barWidth]="40" color="#00BFA6"></dxi-series>
+            <dxo-argument-axis [tickInterval]="10">
+              <dxo-label [staggeringSpacing]="5">
+                <dxo-format type="decimal"></dxo-format>
+              </dxo-label>
+            </dxo-argument-axis>
+          </dx-chart>
+        </div>
+      </div>
+    </div>
 <div class="row mx-1 mt-2">
   <div class="col-3">
     <dx-select-box label="Năm" [dataSource]="listYear" [(value)]="nam" placeholder="Choose the year: " [searchEnabled]="true" (onValueChanged)="loadData()">
@@ -6,7 +107,7 @@
 </div>
 
 
-<div class="row mx-1">
+,<div class="row mx-1">
   <div class="col-12">
     <dx-scroll-view class="view-card-body" style="height: calc(100vh - 50px);">
       <dx-chart id="chart" title="Max scores" [dataSource]="items">
@@ -21,6 +122,7 @@
     </dx-scroll-view>
   </div>
 </div>
+
 
 
 
@@ -39,6 +141,7 @@
     </dx-scroll-view>
   </div>
 </div>
+
 
 <div class="row mx-1 mt-2">
   <div class="col-3">

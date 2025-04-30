@@ -165,7 +165,7 @@ export class FormFunctionDetailComponent implements OnInit {
   
   // Command 
   removeCommands(id: number) {
-    this.notificationService.showConfirmation('Bạn chắc chắn muốn xóa quyền này?',
+    this.notificationService.showConfirmation('Are you sure you want to delete this permission?',
       () => this.deleteCommandsConfirm(id));
   }
 
@@ -175,12 +175,12 @@ export class FormFunctionDetailComponent implements OnInit {
         if (response.Status.Code == 1) {
           this.listCommands = this.listCommands.filter(o=>o.Id != id);
           this.onRemoveCommand.emit({Id: id});
-          this.notificationService.showSuccess('Xóa thành công');
+          this.notificationService.showSuccess('Successfully deleted');
         } else {
         }
       }, 
       error: () => {
-        this.notificationService.showError('Không thành công!');
+        this.notificationService.showError('Operation failed!');
       }
     });
   }

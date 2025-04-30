@@ -205,7 +205,7 @@ export class FormUserDetailComponent implements OnInit {
 
   // Role
   removeRoles(id: number) {
-    this.notificationService.showConfirmation('Bạn chắc chắn muốn xóa quyền này?',
+    this.notificationService.showConfirmation('Are you sure you want to delete this permission?',
       () => this.deleteRolesConfirm(id));
   }
 
@@ -215,12 +215,12 @@ export class FormUserDetailComponent implements OnInit {
         if (response.Status.Code == 1) {
           this.listRoles = this.listRoles.filter(o=>o.Id != id);
           this.onRemoveRole.emit({Id: id});
-          this.notificationService.showSuccess('Xóa thành công');
+          this.notificationService.showSuccess('Successfully deleted');
         } else {
         }
       },
       error: () => {
-        this.notificationService.showError('Không thành công!');
+        this.notificationService.showError('Operation failed!');
       }
     });
   }

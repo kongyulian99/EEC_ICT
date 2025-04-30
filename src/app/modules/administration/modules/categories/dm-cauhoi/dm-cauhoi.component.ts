@@ -85,13 +85,13 @@ export class DMcauhoiComponent implements OnInit {
           }
           this.totalRows = response.Pagination.TotalRows;
         } else {
-          this.notificationService.showError('Dữ liệu tải lỗi!');
+          this.notificationService.showError('Data loading error!');
           this.totalRows = 0;
         }
         this.loading = false;
       },
       (_: any) => {
-        this.notificationService.showError('Hệ thống xảy ra lỗi!');
+        this.notificationService.showError('System error!');
         this.totalRows = 0;
         this.loading = false;
       }
@@ -192,29 +192,25 @@ export class DMcauhoiComponent implements OnInit {
   }
   save() {
     if (!this.detail.validationEntity.instance.validate().isValid) {
-      this.notificationService.showError('Thông tin nhập không hợp lệ!');
+      this.notificationService.showError('Invalid input information!');
       return;
     }
 
     if(this.detail.entity.ChoiceList.length < 4) {
-      this.notificationService.showError("One question must have more than 4 choices!");
+      this.notificationService.showError("A question must have at least 4 choices!");
       return;
     }
 
     const body = clone(this.detail.entity);
 
     if (this.state == 'insert') {
-      //
       this.dMcauhoiService.insert(body).subscribe(
         (response: ResponseData) => {
           if (response.Status.Code == 1) {
-            this.notificationService.showSuccess(
-              'Add a question successfully!'
-            );
-            // this.loadData();
+            this.notificationService.showSuccess('Question added successfully!');
             this.router.navigate(['categories/dm-cauhoi']).then(() => this.getInitial());
           } else {
-            this.notificationService.showError('Error!' + response.Status.Message);
+            this.notificationService.showError('Error: ' + response.Status.Message);
           }
         },
         (_: any) => {
@@ -222,22 +218,17 @@ export class DMcauhoiComponent implements OnInit {
         }
       );
     } else {
-      // debugger;
       this.dMcauhoiService.update(body).subscribe(
         (response: ResponseData) => {
           if (response.Status.Code == 1) {
-            this.notificationService.showSuccess('Update successfully!');
-            // const index1 = this.listData.findIndex(
-            //   (o) => o.Macauhoi == response.Data
-            // );
-            // this.listData[index1] = this.detail.entity;
+            this.notificationService.showSuccess('Question updated successfully!');
             const index2 = this.allData.findIndex(
               (o) => o.Macauhoi == response.Data
             );
             this.allData[index2] = this.detail.entity;
             this.state = 'detail';
           } else {
-            this.notificationService.showError('Error!' + response.Status.Message);
+            this.notificationService.showError('Error: ' + response.Status.Message);
           }
         },
         (_: any) => {
@@ -248,23 +239,22 @@ export class DMcauhoiComponent implements OnInit {
   }
   delete(id: any, name: string) {
     this.notificationService.showConfirmation(
-      "Do you want to delete question '" + name + "'?",
+      "Are you sure you want to delete question '" + name + "'?",
       () => {
           this.dMcauhoiService.delete(id).subscribe(
             (response: ResponseData) => {
               if (response.Status.Code == 1) {
                 this.allData = this.allData.filter((o) => o.QuestionId != id);
                 this.totalRows = this.allData.length;
-                // this.paging();
                 this.notificationService.showSuccess(
-                  "Đã xóa thành công question '" + name + "'!"
+                  "Successfully deleted question '" + name + "'!"
                 );
               } else {
-                this.notificationService.showError('Xoá question không thành công!' + response.Status.Message);
+                this.notificationService.showError('Failed to delete question: ' + response.Status.Message);
               }
             },
             (_: any) => {
-              this.notificationService.showError('Lỗi hệ thống!');
+              this.notificationService.showError('System error!');
             }
           );
         if (this.allData.length <= 0) {

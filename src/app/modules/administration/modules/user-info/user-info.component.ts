@@ -13,7 +13,7 @@ export class UserInfoComponent implements OnInit {
   title: string = 'User information';
 
 
-  allGender = [{ label: 'Nam', value: true}, { label: 'Nữ', value: false}]
+  allGender = [{ label: 'Male', value: false}, { label: 'Female', value: false}, {label: 'Prefer not to say', value: false}]
   fullName = '';
   addRess = '';
   birthDay :any = new Date(1980, 1, 1);

@@ -28,7 +28,7 @@ export class ModalChangePasswordComponent implements OnInit {
   onPasswordChange(){
     const check = this.validationEntity.instance.validate();
     if(!check.isValid){
-      this.notificationService.showError('Information invalid!');
+      this.notificationService.showError('Invalid input information!');
       return;
     }
     this.userService.updatePasword(this.user.UserId, this.newPassword, this.oldPassword).subscribe({
