@@ -38,4 +38,15 @@ export class TestResultService extends BaseService {
         .pipe(catchError(this.handleError))
     );
   }
+  selectScoreByTopic(userId, TopicId) {
+    return(
+      this.http
+        .get<ResponseData>(
+          `${SystemConstants.API_URL}/api/QuestionResults/getAverageScoreByTopic?userId=${userId}&TopicId=${TopicId}`,
+          {headers: this.httpOptions}
+        )
+        .pipe(catchError(this.handleError))
+    );
+    
+  }
 }
