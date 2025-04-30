@@ -99,6 +99,72 @@
         </div>
       </div>
     </div>
+<div class="row mx-1 mt-2">
+  <div class="col-3">
+    <dx-select-box label="Năm" [dataSource]="listYear" [(value)]="nam" placeholder="Choose the year: " [searchEnabled]="true" (onValueChanged)="loadData()">
+    </dx-select-box>
+  </div>
+</div>
+
+
+,<div class="row mx-1">
+  <div class="col-12">
+    <dx-scroll-view class="view-card-body" style="height: calc(100vh - 50px);">
+      <dx-chart id="chart" title="Max scores" [dataSource]="items">
+        <dxo-legend [visible]="false"></dxo-legend>
+        <dxi-series type="bar" valueField="MaxScore" argumentField="TenDeThi"></dxi-series>
+        <dxo-argument-axis [tickInterval]="10">
+          <dxo-label>
+            <dxo-format type="decimal"></dxo-format>
+          </dxo-label>
+        </dxo-argument-axis>
+      </dx-chart>
+    </dx-scroll-view>
+  </div>
+</div>
+
+
+
+
+<div class="row mx-1">
+  <div class="col-12">
+    <dx-scroll-view class="view-card-body" style="height: calc(100vh - 50px);">
+      <dx-chart id="chart" title="Average Score" [dataSource]="itemsAvg">
+        <dxo-legend [visible]="false"></dxo-legend>
+        <dxi-series type="bar" valueField="AverageScore" argumentField="TenDeThi"></dxi-series>
+        <dxo-argument-axis [tickInterval]="10">
+          <dxo-label>
+            <dxo-format type="decimal"></dxo-format>
+          </dxo-label>
+        </dxo-argument-axis>
+      </dx-chart>
+    </dx-scroll-view>
+  </div>
+</div>
+
+
+<div class="row mx-1 mt-2">
+  <div class="col-3">
+    <!-- <dx-select-box label="Topic" [dataSource]="" [(value)]="TopicId" placeholder="Choose the topic: " [searchEnabled]="true" (onValueChanged)="loadData()">
+    </dx-select-box> -->
+    <dx-select-box label="Parent Topic" [dataSource]="listParent" displayExpr="TopicName" valueExpr="TopicId" placeholder="Choose a topic" [(value)]="topicId" (onValueChanged)="loadDataByTopic()"></dx-select-box>
+  </div>
+</div>
+
+
+<div class="row mx-1">
+  <div class="col-12">
+    <dx-scroll-view class="view-card-body" style="height: calc(100vh - 50px);">
+      <dx-chart id="chart" title="Topic Scores" [dataSource]="topicScore">
+        <dxo-legend [visible]="false"></dxo-legend>
+        <dxi-series type="bar" valueField="AverageScore" argumentField="TopicName" [barWidth]="40"></dxi-series>
+        <dxo-argument-axis [tickInterval]="10">
+          <dxo-label [staggeringSpacing]="5">
+            <dxo-format type="decimal"></dxo-format>
+          </dxo-label>
+        </dxo-argument-axis>
+      </dx-chart>
+    </dx-scroll-view>
   </div>
 </div>
 
