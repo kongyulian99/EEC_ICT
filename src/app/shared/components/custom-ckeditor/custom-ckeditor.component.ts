@@ -62,7 +62,7 @@ import {
 } from 'ckeditor5';
 
 import translations from './vi.js';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-custom-ckeditor',
   templateUrl: './custom-ckeditor.component.html',
@@ -184,7 +184,7 @@ export class CustomCkEditorComponent {
       },
       simpleUpload: {
         // The URL that the images are uploaded to.
-        uploadUrl: `https://eecictapi.azurewebsites.net/api/files/ckeditor-images`,
+        uploadUrl: `${environment.apiUrl}/api/files/ckeditor-images`,
       },
       image: {
         toolbar: [

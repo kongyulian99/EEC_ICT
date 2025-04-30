@@ -31,7 +31,7 @@ export class ModalChangePasswordComponent implements OnInit {
       this.notificationService.showError('Invalid input information!');
       return;
     }
-    this.userService.updatePasword(this.user.Id, this.newPassword, this.oldPassword).subscribe({
+    this.userService.updatePasword(this.user.UserId, this.newPassword, this.oldPassword).subscribe({
       next: (response:ResponseData) => {
         if(response.Status.Code == 1){
           this.notificationService.showSuccess('Password changed successfully!');

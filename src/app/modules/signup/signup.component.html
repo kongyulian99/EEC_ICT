@@ -2,7 +2,7 @@
   <div class="signup-wrapper">
     <div class="row m-2">
       <div class="col-12">
-        <h4 class="text-center">Register</h4>
+        <h3 class="text-center font-weight-bold">Register</h3>
       </div>
     </div>
     <div class="row m-2">
@@ -13,6 +13,12 @@
     <div class="row m-2">
       <div class="col-12">
         <dx-text-box label="Password" mode="password" [(value)]="item.Password"></dx-text-box>
+      </div>
+    </div>
+
+    <div class="row m-2">
+      <div class="col-12">
+        <dx-text-box label="Confirm Password" mode="password" [(value)]="item.ConfirmPassword"></dx-text-box>
       </div>
     </div>
 
@@ -33,6 +39,8 @@
           <dx-validator>
             <dxi-validation-rule type="required" message="Email is required!">
             </dxi-validation-rule>
+            <dxi-validation-rule type="email" message="Email is not valid!">
+            </dxi-validation-rule>
           </dx-validator>
         </dx-text-box>
       </div>
@@ -47,8 +55,8 @@
     <div class="row">
       <div class="col-12 text-center">
         <dx-button text="Signup" icon="group" type="default" (onClick)="signup()"></dx-button>
+        <dx-button class="ml-2" text="Cancel" [type]="dxButtonConfig.cancel_type" [icon]="dxButtonConfig.cancel_icon" (onClick)="cancel()"></dx-button>
       </div>
     </div>
   </div>
-
 </dx-validation-group>

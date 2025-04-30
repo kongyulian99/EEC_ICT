@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ResponseData } from '../models';
 import { SystemConstants } from '../constants';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root', // ADDED providedIn root here.
 })
@@ -19,7 +20,7 @@ export class TestResultService extends BaseService {
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${SystemConstants.API_URL}/api/TestResults/getMaxScoreByUser?userId=${userId}&nam=${nam}`,
+          `${environment.apiUrl}/api/TestResults/getMaxScoreByUser?userId=${userId}&nam=${nam}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))
@@ -31,7 +32,7 @@ export class TestResultService extends BaseService {
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${SystemConstants.API_URL}/api/TestResults/getAverageScoreByUser?userId=${userId}&nam=${nam}`,
+          `${environment.apiUrl}/api/TestResults/getAverageScoreByUser?userId=${userId}&nam=${nam}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))

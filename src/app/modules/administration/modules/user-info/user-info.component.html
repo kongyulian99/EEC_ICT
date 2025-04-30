@@ -7,19 +7,19 @@
                 </div>
             </div>
         </dxi-item>
-        <!-- <dxi-item  
-            location="after" 
-            widget="dxButton" 
-            locateInMenu="never" 
-        > 
+        <!-- <dxi-item
+            location="after"
+            widget="dxButton"
+            locateInMenu="never"
+        >
             <div appPermission appFunction="USER" appCommand="CREATE" *dxTemplate>
                 <dx-button text="Thêm mới" [icon]="dxButtonConfig.add_icon" [type]="dxButtonConfig.add_type" (click)="add()"></dx-button>
-            </div> 
+            </div>
         </dxi-item> -->
     </dx-toolbar>
 </div>
 <!-- <div class="view-card-body">
-    
+
 </div> -->
 <div style="width: 600px; margin: 20px auto; min-height: calc(100vh - 120px);">
     <div style="height: 600px; background-color: white; padding: 8px;">
@@ -30,7 +30,7 @@
                         <label for="">Full Name (<span style="color: red;">*</span>)</label>
                         <dx-text-box [(value)]="fullName">
                             <dx-validator>
-                                <dxi-validation-rule type="required" message="Yêu cầu thông tin họ và tên"></dxi-validation-rule>
+                                <dxi-validation-rule type="required" message="Full name is required"></dxi-validation-rule>
                             </dx-validator>
                         </dx-text-box>
                     </div>
@@ -65,8 +65,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="my-2">
-                        <label for="">Email</label>
-                        <dx-text-box [(value)]="email"></dx-text-box>
+                        <!-- <label for="">Email</label> -->
+                        <dx-text-box label="Email" [(value)]="email"></dx-text-box>
                     </div>
                 </div>
             </div>
@@ -79,15 +79,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <dx-button text="Lưu" [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type"
+                <div class="col-12 text-right">
+                    <dx-button text="Save" [icon]="dxButtonConfig.save_icon" [type]="dxButtonConfig.save_type"
                         [useSubmitBehavior]="true">
+                    </dx-button>
+                    <dx-button style="margin-left: 10px;" text="Cancel" [icon]="dxButtonConfig.cancel_icon" [type]="dxButtonConfig.cancel_type"
+                        (click)="onCancel()">
                     </dx-button>
                 </div>
             </div>
         </form>
-        
-        
+
+
     </div>
-    
+
 </div>
