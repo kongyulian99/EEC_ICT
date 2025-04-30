@@ -42,11 +42,11 @@ export class TestResultService extends BaseService {
     return(
       this.http
         .get<ResponseData>(
-          `${SystemConstants.API_URL}/api/QuestionResults/getAverageScoreByTopic?userId=${userId}&TopicId=${TopicId}`,
+          `${environment.apiUrl}/api/QuestionResults/getAverageScoreByTopic?userId=${userId}&TopicId=${TopicId}`,
           {headers: this.httpOptions}
         )
         .pipe(catchError(this.handleError))
     );
-    
+
   }
 }

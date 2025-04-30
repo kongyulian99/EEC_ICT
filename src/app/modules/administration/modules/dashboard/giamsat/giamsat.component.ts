@@ -42,7 +42,7 @@ export class GiamsatComponent implements OnInit {
         if (response.Status.Code == 1) {
           this.listParent = response.Data.filter(o => o.IdCha <= 0);
           this.topicId = this.listParent[0].TopicId;
-        } 
+        }
       },
     );
 
@@ -64,7 +64,6 @@ export class GiamsatComponent implements OnInit {
         this.itemsAvg = res.Data;
       }
     });
-<<<<<<< HEAD
     this.loadDataByTopic();
   }
 
@@ -74,8 +73,6 @@ export class GiamsatComponent implements OnInit {
         this.topicScore = res.Data;
       }
     });
-=======
->>>>>>> 4dc973d438f955c4a77be8de3b624e254d20fff2
   }
 }
 
