@@ -28,13 +28,13 @@ export class ModalChangePasswordComponent implements OnInit {
   onPasswordChange(){
     const check = this.validationEntity.instance.validate();
     if(!check.isValid){
-      this.notificationService.showError('Thông tin nhập không hợp lệ!');
+      this.notificationService.showError('Information invalid!');
       return;
     }
-    this.userService.updatePasword(this.user.Id, this.newPassword, this.oldPassword).subscribe({
+    this.userService.updatePasword(this.user.UserId, this.newPassword, this.oldPassword).subscribe({
       next: (response:ResponseData) => {
         if(response.Status.Code == 1){
-          this.notificationService.showSuccess('Thay đổi mật khẩu thành công!');
+          this.notificationService.showSuccess('Password changed successfully!');
           this.activeModal.close();
         } else {
           this.notificationService.showError(response.Status.Message);

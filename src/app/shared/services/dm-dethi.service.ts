@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { BaseService } from './base.service';
 import { ResponseData } from '../models';
 import { SystemConstants } from '../constants';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root', // ADDED providedIn root here.
 })
@@ -19,7 +20,7 @@ export class DMDethiService extends BaseService {
       this.http
         // tslint:disable-next-line:max-line-length
         .get<ResponseData>(
-          `${SystemConstants.API_URL}/api/dm-dethi/SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
+          `${environment.apiUrl}/api/dm-dethi/SelectAll?pageindex=${pageIndex.toString()}&pagesize=${pageSize.toString()}&filter=${filter}`,
           { headers: this.httpOptions }
         )
         .pipe(catchError(this.handleError))
@@ -29,7 +30,7 @@ export class DMDethiService extends BaseService {
     return (
       this.http
         // tslint:disable-next-line:max-line-length
-        .get<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/selectone/${maDethi}`, {
+        .get<ResponseData>(`${environment.apiUrl}/api/dm-dethi/selectone/${maDethi}`, {
           headers: this.httpOptions,
         })
         .pipe(catchError(this.handleError))
@@ -40,7 +41,7 @@ export class DMDethiService extends BaseService {
     return (
       this.http
         // tslint:disable-next-line:max-line-length
-        .get<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/selectonefortest/${maDethi}`, {
+        .get<ResponseData>(`${environment.apiUrl}/api/dm-dethi/selectonefortest/${maDethi}`, {
           headers: this.httpOptions,
         })
         .pipe(catchError(this.handleError))
@@ -49,14 +50,14 @@ export class DMDethiService extends BaseService {
 
   insert(entity: any) {
     return this.http
-      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/insert`, entity, {
+      .post<ResponseData>(`${environment.apiUrl}/api/dm-dethi/insert`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   update(entity: any) {
     return this.http
-      .put<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/update`, entity, {
+      .put<ResponseData>(`${environment.apiUrl}/api/dm-dethi/update`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
@@ -64,7 +65,7 @@ export class DMDethiService extends BaseService {
 
   submit(entity: any) {
     return this.http
-      .put<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/submit`, entity, {
+      .put<ResponseData>(`${environment.apiUrl}/api/dm-dethi/submit`, entity, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
@@ -72,14 +73,14 @@ export class DMDethiService extends BaseService {
 
   delete(maDethi: string) {
     return this.http
-      .delete<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/delete/${maDethi}`, {
+      .delete<ResponseData>(`${environment.apiUrl}/api/dm-dethi/delete/${maDethi}`, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
   }
   checkDuplicate(ma: string) {
     return this.http
-      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/checkDuplicate?ma=${ma}`, {
+      .post<ResponseData>(`${environment.apiUrl}/api/dm-dethi/checkDuplicate?ma=${ma}`, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));
@@ -87,7 +88,7 @@ export class DMDethiService extends BaseService {
 
   checkCorrect(listRequest: any, userId: string) {
     return this.http
-      .post<ResponseData>(`${SystemConstants.API_URL}/api/dm-dethi/checkCorrect?userId=${userId}`, listRequest, {
+      .post<ResponseData>(`${environment.apiUrl}/api/dm-dethi/checkCorrect?userId=${userId}`, listRequest, {
         headers: this.httpOptions,
       })
       .pipe(catchError(this.handleError));

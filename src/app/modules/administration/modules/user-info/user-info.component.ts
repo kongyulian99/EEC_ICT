@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService, SystemConstants, UserService, fixTimezoneToJSON } from 'src/app/shared';
 import { dxButtonConfig } from 'src/app/shared/config';
@@ -9,7 +10,7 @@ import { dxButtonConfig } from 'src/app/shared/config';
 })
 export class UserInfoComponent implements OnInit {
   user: any = {};
-  title: string = 'Thông tin người dùng';
+  title: string = 'User information';
 
 
   allGender = [{ label: 'Nam', value: true}, { label: 'Nữ', value: false}]
@@ -23,7 +24,8 @@ export class UserInfoComponent implements OnInit {
   dxButtonConfig = dxButtonConfig;
   constructor(
     private usersService: UserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
     ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class UserInfoComponent implements OnInit {
 
 
   loadDetail  () {
-    this.usersService.selectOne(this.user.Id)
+    this.usersService.selectOne(this.user.UserId)
       .subscribe(
         (res: any) => {
           if (res.Status.Code === 1) {
@@ -41,7 +43,7 @@ export class UserInfoComponent implements OnInit {
             this.fullName = FullName;
             this.addRess = Address;
             this.birthDay = BirthDay;
-          
+
             if (BirthDay instanceof Date) {
               if (BirthDay.getFullYear() < 1910) this.birthDay = null;
               else { this.birthDay = BirthDay}
@@ -63,7 +65,7 @@ export class UserInfoComponent implements OnInit {
     event.preventDefault();
 
     this.usersService.updateCommonInfo({
-      Id: this.user.Id,
+      UserId: this.user.UserId,
       FullName: this.fullName,
       Address: this.addRess,
       BirthDay: this.birthDay ? fixTimezoneToJSON(this.birthDay) : fixTimezoneToJSON(new Date(1900, 1, 1)),
@@ -74,12 +76,13 @@ export class UserInfoComponent implements OnInit {
       .subscribe(
         (res: any) => {
           if (res.Status.Code === 1) {
-            this.notificationService.showSuccess('Lưu thông tin thành công');
+            this.notificationService.showSuccess('Save successfully');
           }
         }
       )
-
-
   }
 
+  onCancel() {
+    this.location.back();
+  }
 }

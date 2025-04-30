@@ -7,6 +7,7 @@ import { BaseService } from './base.service';
 import { SystemConstants } from '../constants/systems.constant';
 import { User } from '../interfaces/user.interface';
 import { ResponseData } from '../models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root' // ADDED providedIn root here.
@@ -26,13 +27,13 @@ export class AuthenService extends BaseService {
       UserName: username,
       Password: password
     };
-    return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/users/login`, body, { headers: this.httpOptions })
+    return this.http.post<ResponseData>(`${environment.apiUrl}/api/users/login`, body, { headers: this.httpOptions })
       .pipe(catchError(this.handleError));
   }
 
   refreshToken(refresh: string) {
     return this.http
-    .post<ResponseData>(`${SystemConstants.API_URL}/api/refreshtoken/refresh?refreshToken=${refresh}`,
+    .post<ResponseData>(`${environment.apiUrl}/api/refreshtoken/refresh?refreshToken=${refresh}`,
       // { headers: this.httpOptions }).pipe(catchError(this.handleError));
       { headers: this.httpOptions }).pipe(map((response: ResponseData)=>{
         if(response.Status.Code == -1){
@@ -55,7 +56,7 @@ export class AuthenService extends BaseService {
 
   logout() {
     const refreshToken = this.user.refresh_token + SystemConstants.KEY_SECRET;
-    return this.http.post<ResponseData>(`${SystemConstants.API_URL}/api/users/logout/${refreshToken}`,
+    return this.http.post<ResponseData>(`${environment.apiUrl}/api/users/logout/${refreshToken}`,
       { headers: this.httpOptions })
       .pipe(catchError(this.handleError));
   }
