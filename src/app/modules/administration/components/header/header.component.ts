@@ -89,4 +89,8 @@ listThongBaoChuaXem:any = [];
   toggleCollapseSidebar() {
     this.onToggle.emit();
   }
+
+  isActive(path: string): boolean {
+    return this.router.url.includes(path);
+  }
 }

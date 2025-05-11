@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TopicTrainingRoutingModule } from './topic-training-routing.module';
 import { TopicTrainingListComponent } from './topic-training-list/topic-training-list.component';
 import { TopicCardComponent } from './topic-training-list/topic-card/topic-card.component';
-import { DxButtonModule, DxCheckBoxModule } from 'devextreme-angular';
+import { DxButtonModule, DxCheckBoxModule, DxTreeViewModule, DxTreeListModule, DxScrollViewModule } from 'devextreme-angular';
 import { ComponentsSharedModule } from 'src/app/shared';
 
 
@@ -18,7 +18,10 @@ import { ComponentsSharedModule } from 'src/app/shared';
     TopicTrainingRoutingModule,
     DxButtonModule,
     ComponentsSharedModule,
-    DxCheckBoxModule
+    DxCheckBoxModule,
+    DxTreeViewModule,
+    DxTreeListModule,
+    DxScrollViewModule
   ]
 })
 export class TopicTrainingModule { }

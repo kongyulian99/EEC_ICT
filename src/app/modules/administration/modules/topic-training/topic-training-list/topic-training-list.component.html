@@ -1,61 +1,89 @@
-<div class="row">
+<div class="row mx-1">
   <div class="col-12">
-    <dx-button [icon]="dxButtonConfig.back_icon" [type]="dxButtonConfig.back_type" (onClick)="handleBackToParent()"></dx-button>
+    <!-- <dx-button [icon]="dxButtonConfig.back_icon" [type]="dxButtonConfig.back_type" (onClick)="handleBackToParent()">
+    </dx-button> -->
   </div>
 </div>
-<div *ngIf="listIdCha.length <= 1" class="flex-container">
+<!-- <div class="flex-container">
   <div *ngFor="let topic of getListTopic()" class="flex-item">
     <app-topic-card [topic]="topic" (click)="handleOpenTopic(topic)"></app-topic-card>
   </div>
-</div>
+</div> -->
 
-<ng-container *ngIf="listIdCha.length > 1">
-  <div class="row" style="max-height: 100%!important;">
-    <div class="col-9">
-      <div class="row mx-1 mt-4">
-        <div class="col-12 d-flex align-items-center d-flex" style="justify-content: space-between;">
-          <h5 class="label" style="font-weight: bold;">#{{questionIndex + 1}}:</h5>
-          <dx-button text="Answer & Next" icon="chevronright" (onClick)="handleNextQuestion()"></dx-button>
-          <!-- <app-custom-ckeditor [(Content)]="question.Question"></app-custom-ckeditor> -->
-        </div>
-      </div>
-      <div class="row mx-2 mt-1">
-        <app-view-ckeditor class="flex-grow-1" [data]="question?.Question"></app-view-ckeditor>
-      </div>
-      <div class="row mx-2 mt-2">
-        <div class="col-12">
-          <div *ngIf="question?.QuestionType==enum_QuestionType.MULTIPLE_CHOICE" class="field mt-3 mb-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
-            <div class="label">Answers</div>
-            <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
-              <div *ngFor="let choice of question.Choices" class="d-flex mb-2" style="margin: 5px 0px; border-bottom: solid 1px #eee;">
-                <dx-check-box class="mr-1" [(value)]="choice.IsCorrect"></dx-check-box>
-                <app-custom-ckeditor *ngIf="question?.IsEdit" class="flex-grow-1" [(Content)]="choice.Answer">
-                </app-custom-ckeditor>
-                <app-view-ckeditor *ngIf="!question?.IsEdit" class="flex-grow-1" [data]="choice.Answer"></app-view-ckeditor>
+<div class="row mx-1">
+  <div class="col-3" style="border-right: solid 1px #ddd;">
+    <h5 class="my-1" style="font-weight: bold; text-align: center;">Select a topic</h5>
+    <dx-scroll-view style="height: calc(100vh - 100px);">
+      <dx-tree-view dataStructure="plain" [dataSource]="listTopic" displayExpr="TopicName" keyExpr="TopicId"
+        parentIdExpr="IdCha" (onItemClick)="onItemClick($event)">
+      </dx-tree-view>
+    </dx-scroll-view>
+  </div>
+  <div class="col-9">
+    <div class="row" style="max-height: 100%!important;">
+      <div class="col-9">
+        <dx-scroll-view style="height: calc(100vh - 100px);">
+          <div *ngIf="question" class="row mx-1 mt-4">
+            <div class="col-12 d-flex align-items-center d-flex" style="justify-content: space-between;">
+              <h5 class="label" style="font-weight: bold;">#{{questionIndex + 1}}:</h5>
+              <div>
+                <dx-button text="Submit" icon="chevronright" (onClick)="handleSubmit()"></dx-button>
+                <dx-button class="ml-2" text="Next" icon="chevronright"
+                  (onClick)="handleNextQuestion()"></dx-button>
+              </div>
+              <!-- <app-custom-ckeditor [(Content)]="question.Question"></app-custom-ckeditor> -->
+            </div>
+          </div>
+          <div class="row mx-2 mt-1">
+            <app-view-ckeditor class="flex-grow-1" [data]="question?.Question"></app-view-ckeditor>
+          </div>
+          <div class="row mx-2 mt-2">
+            <div class="col-12">
+              <div *ngIf="question?.QuestionType==enum_QuestionType.MULTIPLE_CHOICE" class="field mt-3 mb-3"
+                style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
+                <div class="label">Answers</div>
+                <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
+                  <div *ngFor="let choice of question.Choices" class="d-flex mb-2"
+                    style="margin: 5px 0px; border-bottom: solid 1px #eee;">
+                    <dx-check-box class="mr-1" [(value)]="choice.IsCorrect"></dx-check-box>
+                    <app-custom-ckeditor *ngIf="question?.IsEdit" class="flex-grow-1" [(Content)]="choice.Answer">
+                    </app-custom-ckeditor>
+                    <app-view-ckeditor *ngIf="!question?.IsEdit" class="flex-grow-1" [data]="choice.Answer">
+                    </app-view-ckeditor>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="question?.QuestionType==enum_QuestionType.FILL_IN_BLANK" class="field mt-3 mb-3"
+                style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
+                <div class="label">Answers</div>
+                <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
+                  <div *ngFor="let choice of question.Choices; index as i;" class="d-flex align-items-center mb-2"
+                    style="margin: 5px 0px;">
+                    <span class="mr-1" style="font-weight: bold;">{{i+1}}</span>
+                    <app-custom-ckeditor class="flex-grow-1" [(Content)]="choice.Answer">
+                    </app-custom-ckeditor>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div  *ngIf="question?.QuestionType==enum_QuestionType.FILL_IN_BLANK" class="field mt-3 mb-3" style="border: solid 1px #ccc; border-radius: 5px; padding: 5px;">
-            <div class="label">Answers</div>
-            <div class="answers p-2" style="background-color: #fff; margin: 5px 0px;">
-              <div *ngFor="let choice of question.Choices; index as i;" class="d-flex align-items-center mb-2"
-                style="margin: 5px 0px;">
-                <span class="mr-1" style="font-weight: bold;">{{i+1}}</span>
-                <app-custom-ckeditor class="flex-grow-1" [(Content)]="choice.Answer">
-                </app-custom-ckeditor>
-              </div>
-            </div>
+        </dx-scroll-view>
+      </div>
+      <div class="col-3" style="border-left: solid 1px #ddd;">
+        <div class="grid-container">
+          <div class="grid-item"
+            [ngClass]="{active: questionIndex == i, answered: checkAnswered(i) && questionIndex !== i}"
+            *ngFor="let question of listCauHoi; index as i;" (click)="handleSelectQuestion(i)">
+            {{i+1}}
+            <!-- <span *ngIf="checkAnswered(i)" class="dx-icon-check icon" style="color: blue;"></span> -->
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-3" style="border-left: solid 1px #ddd;">
-      <div class="grid-container">
-        <div class="grid-item" [ngClass]="{active: questionIndex == i, answered: checkAnswered(i) && questionIndex !== i}" *ngFor="let question of listCauHoi; index as i;" (click)="handleSelectQuestion(i)">
-          {{i+1}}
-          <!-- <span *ngIf="checkAnswered(i)" class="dx-icon-check icon" style="color: blue;"></span> -->
-        </div>
+        <!-- <div class="row m x-1">
+          <div class="col-12 text-right">
+            <dx-button text="Submit" (onClick)="handleSubmit()"></dx-button>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>
-</ng-container>
+</div>

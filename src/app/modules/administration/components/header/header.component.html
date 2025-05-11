@@ -7,11 +7,11 @@
   </button> -->
 
   <div class="menu" style="text-transform: uppercase; color: white;">
-    <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/administration/dashboard" routerLinkActive="active">Dashboard</a>
-    <a *ngIf="user.UserName == 'admin'" class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/administration/categories/topic" routerLinkActive="active">Topic</a>
-    <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/quiz/test" routerLinkActive="active">Test</a>
-    <a class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/topic-training" routerLinkActive="active">Topic training</a>
-    <a *ngIf="user.UserName == 'admin'" class="link mx-2" style="color: white;" href="javascript:void(0)" routerLink="/quiz/list" routerLinkActive="active">Prepare data</a>
+    <a class="link mx-2" [ngClass]="{active: isActive('/administration/dashboard')}"  style="color: white;" href="javascript:void(0)" routerLink="/administration/dashboard" routerLinkActive="active">Dashboard</a>
+    <a *ngIf="user.UserName == 'admin'" class="link mx-2" [ngClass]="{active: isActive('/administration/categories/topic')}" style="color: white;" href="javascript:void(0)" routerLink="/administration/categories/topic" routerLinkActive="active">Topic</a>
+    <a class="link mx-2" [ngClass]="{active: isActive('/quiz/test')}" style="color: white;" href="javascript:void(0)" routerLink="/quiz/test" routerLinkActive="active">Test</a>
+    <a class="link mx-2" [ngClass]="{active: isActive('/topic-training')}" style="color: white;" href="javascript:void(0)" routerLink="/topic-training" routerLinkActive="active">Topic training</a>
+    <a *ngIf="user.UserName == 'admin'" class="link mx-2" [ngClass]="{active: isActive('/quiz/list')}" style="color: white;" href="javascript:void(0)" routerLink="/quiz/list" routerLinkActive="active">Prepare data</a>
   </div>
 
   <div>

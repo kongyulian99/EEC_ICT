@@ -37,6 +37,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RouterModule } from '@angular/router';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
 import { FillingQuestionComponent } from './filling-question/filling-question.component';
+import { DropdownTopicComponent } from './dropdown-topic/dropdown-topic.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     ViewCkeditorComponent,
     MultipleChoiceQuestionComponent,
     FillingQuestionComponent,
+    DropdownTopicComponent,
   ],
   imports: [
     CommonModule,
@@ -93,6 +95,7 @@ import { FillingQuestionComponent } from './filling-question/filling-question.co
     CustomCkEditorComponent,
     ViewCkeditorComponent,
     MultipleChoiceQuestionComponent,
+    DropdownTopicComponent,
   ],
 })
 export class ComponentsSharedModule {}

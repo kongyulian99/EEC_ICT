@@ -15,7 +15,7 @@ export class TopicTrainingListComponent implements OnInit {
   // listTopicForHienThi = [];
   idCha = 0;
   dxButtonConfig = dxButtonConfig;
-  listIdCha = [];
+  // listIdCha = [];
   listCauHoi = [];
 
   constructor(
@@ -25,10 +25,12 @@ export class TopicTrainingListComponent implements OnInit {
     private dmCauHoiService: DMCauhoiService
   ) {}
 
+  // topicId: any;
   ngOnInit(): void {
     this.dMTopicService.selectAll(0, 0, '').subscribe((res: any) => {
       if (res.Status.Code == 1) {
         this.listTopic = res.Data;
+        // this.topicId = this.listTopic[0].TopicId;
       }
     });
   }
@@ -45,24 +47,37 @@ export class TopicTrainingListComponent implements OnInit {
   questionIndex = 0;
   enum_QuestionType = QuestionType;
   handleOpenTopic(topic) {
-    if (this.listIdCha.length < 1) {
-      this.listIdCha.push(topic.TopicId);
-      this.idCha = topic.TopicId;
-    } else {
-      this.dmCauHoiService.selectAllForTest(0, 0, '', topic.TopicId).subscribe((res: any) => {
-        if(res.Status.Code === 1) {
-          this.listIdCha.push(topic.TopicId);
-          this.idCha = topic.TopicId;
-          this.listCauHoi = res.Data.map((element) => {
-            return {
-              ...element,
-              Choices: JSON.parse(element.Choices),
-            };
-          });
-          this.question = this.listCauHoi.length > 0 ? this.listCauHoi[0] : {};
-        }
-      })
-    }
+    // if (this.listIdCha.length < 1) {
+    //   this.listIdCha.push(topic.TopicId);
+    //   this.idCha = topic.TopicId;
+    // } else {
+    //   this.dmCauHoiService.selectAllForTest(0, 0, '', topic.TopicId).subscribe((res: any) => {
+    //     if(res.Status.Code === 1) {
+    //       this.listIdCha.push(topic.TopicId);
+    //       this.idCha = topic.TopicId;
+    //       this.listCauHoi = res.Data.map((element) => {
+    //         return {
+    //           ...element,
+    //           Choices: JSON.parse(element.Choices),
+    //         };
+    //       });
+    //       this.question = this.listCauHoi.length > 0 ? this.listCauHoi[0] : {};
+    //     }
+    //   })
+    // }
+    this.dmCauHoiService.selectAllForTest(0, 0, '', topic.TopicId).subscribe((res: any) => {
+      if(res.Status.Code === 1) {
+        // this.listIdCha.push(topic.TopicId);
+        // this.idCha = topic.TopicId;
+        this.listCauHoi = res.Data.map((element) => {
+          return {
+            ...element,
+            Choices: JSON.parse(element.Choices),
+          };
+        });
+        this.question = this.listCauHoi.length > 0 ? this.listCauHoi[0] : null;
+      }
+    })
   }
 
   checkAnswered(i) {
@@ -78,7 +93,7 @@ export class TopicTrainingListComponent implements OnInit {
     this.questionIndex = i;
   }
 
-  question: any = {};
+  question: any = null;
   handleNextQuestion() {
     this.questionIndex ++;
     this.questionIndex = this.questionIndex % this.listCauHoi.length;
@@ -89,8 +104,18 @@ export class TopicTrainingListComponent implements OnInit {
     return this.listTopic.filter((o) => o.IdCha == this.idCha);
   }
 
-  handleBackToParent() {
-    this.listIdCha.pop();
-    this.idCha = this.listIdCha.length > 0 ? this.listIdCha[0] : 0;
+  // handleBackToParent() {
+  //   // this.listIdCha.pop();
+  //   // this.idCha = this.listIdCha.length > 0 ? this.listIdCha[0] : 0;
+  // }
+
+  handleSubmit() {
+    console.log(this.listCauHoi);
+  }
+
+  onItemClick(e) {
+    // console.log(e);
+    // debugger;
+    this.handleOpenTopic(e.itemData);
   }
 }
